@@ -1,0 +1,12 @@
+<table class="table table-striped">
+
+    <thead>
+        <tr>
+            <th ng-repeat="field in fields"  >{{field|translate}}</th>
+        </tr>
+    </thead>
+
+    <tr ng-repeat="entry in data">
+        <td ng-repeat="field in fields"  >{{resolve(entry,field)}}</td>
+    </tr>
+</table>

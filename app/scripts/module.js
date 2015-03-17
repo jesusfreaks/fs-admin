@@ -1,0 +1,20 @@
+'use strict';
+
+var components = angular.module('fsAdmin.components', []);
+angular.componentFactory.moduleDecorator(components);
+
+var app = angular.module('fsAdmin', [
+    'kennethlynne.componentFactory',
+    'fsAdmin.components',
+    'ngAnimate',
+    'ajoslin.promise-tracker',
+    'cgBusy',
+    'chieffancypants.loadingBar',
+    'ui.router',
+    'ui.bootstrap',
+    'ngResource',
+    'ngSanitize',
+    'fsAdmin.rest',
+    'pascalprecht.translate'
+]);
+angular.componentFactory.moduleDecorator(app);
