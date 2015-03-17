@@ -1,9 +1,9 @@
+/**
+ * deal with translated entities data
+ */
 'use strict';
-
 angular.module('fsAdmin.components')
     .controller('bstableComponentCtrl', function ($scope, $element,$translate) {
-        $scope.text = 'this is the navbar component';
-        console.log('cntrl');
 
         $scope.resolve = function (entry, name) {
             var scope = $scope.$new();
