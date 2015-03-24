@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fsAdmin.components')
-    .controller('navbarComponentCtrl', function ($scope, $element, $translate,PossibleLanguages) {
+    .controller('navbarComponentCtrl', function ($rootScope,$scope, $element, $translate, PossibleLanguages) {
         $scope.text = 'this is the navbar component';
 
         $scope.languages = PossibleLanguages;

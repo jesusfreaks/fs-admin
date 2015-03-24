@@ -25,7 +25,28 @@ angular.module('fsAdmin')
     .factory('APIBaseUrl', function (Config) {
         return (Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + Config.API.path);
     })
-    .constant('PossibleLanguages',['de_DE', 'en_EN']);
+    .constant('PossibleLanguages',['de_DE', 'en_EN'])
+
+    .constant('FieldDefinitions',{
+        location:{
+            commonProperties: {
+                'code': {
+                    type: "text", maxLength: 3, required: true
+                }
+            },
+            translatableProperties: {
+                name: {
+                    type: 'text', required: true, maxLength: 120
+                },
+                description: {
+                    type: 'textarea', required: true, maxLength: 600
+                },
+                tags: {
+                    type: 'tags'
+                }
+            }
+        }
+    });
 
 angular.module('fsAdmin').config(function ($translateProvider, PossibleLanguages) {
 
@@ -36,4 +57,5 @@ angular.module('fsAdmin').config(function ($translateProvider, PossibleLanguages
     $translateProvider.determinePreferredLanguage();
     $translateProvider.registerAvailableLanguageKeys(PossibleLanguages, {'de*': 'de_DE', 'en*': 'en_EN'});
 });
+
 

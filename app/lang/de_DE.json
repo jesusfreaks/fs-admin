@@ -8,6 +8,17 @@
     "data.code":"Code",
     "data.translations.de.name":"Name",
     "data.translations.de.preview":"Preview",
-    "data.translations.de.description":"Beschreibung"
+    "data.translations.de.description":"Beschreibung",
+
+    "app.general.edit":"Bearbeiten",
+    "app.general.create":"Erstellen",
+    "app.general.save":"Speichern",
+    "app.general.ok":"Ok",
+    "app.general.cancel":"Abbrechen",
+
+    "location.name":"Name",
+    "location.code":"Kürzel",
+    "location.description":"Beschreibung",
+    "location.tags":"Kategorien"
 
 }

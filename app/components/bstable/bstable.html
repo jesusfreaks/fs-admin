@@ -3,11 +3,19 @@
     <thead>
         <tr>
             <th ng-repeat="field in fields"  >{{field|translate}}</th>
+            <th ng-if="editable"></th>
         </tr>
+
     </thead>
 
-    <tr ng-repeat="entry in data">
-        <td ng-repeat="field in fields"  >{{resolve(entry,field)}}</td>
-    </tr>
+    <tbody>
+        <tr ng-repeat="entry in data">
+            <td ng-repeat="field in fields"  >{{resolve(entry,field)}}</td>
+            <td ng-if="editable">
+                <button class="btn btn-default " ng-click="edit($index)">{{'app.general.edit'|translate}}</button>
+            </td>
+        </tr>
+    </tbody>
+
 
 </table>

@@ -1,5 +1,6 @@
 'use strict';
 
+angular.module('fsAdmin.filters', []);
 var components = angular.module('fsAdmin.components', []);
 angular.componentFactory.moduleDecorator(components);
 
@@ -15,6 +16,8 @@ var app = angular.module('fsAdmin', [
     'ngResource',
     'ngSanitize',
     'fsAdmin.rest',
-    'pascalprecht.translate'
+    'fsAdmin.filters',
+    'pascalprecht.translate',
+    'ngTagsInput'
 ]);
 angular.componentFactory.moduleDecorator(app);

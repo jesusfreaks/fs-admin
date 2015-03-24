@@ -1,0 +1,41 @@
+<div class="form-group generic-input" ng-repeat="def in definitions">
+
+    <label class="col-sm-4">
+
+        <span class="pull-right">{{ ($parent.data.prefix +'.' + def.name) |translate}} <span ng-if="def.required">*</span></span>
+    </label>
+
+    <div class="col-sm-8">
+
+    <span ng-if="def.type=='text'">
+
+        <input ng-if="def.translatable" type="text"
+               ng-model="instance.data.translations[(false|langRef)][def.name]"
+               ng-maxlength="def.maxLength">
+
+        <input ng-if="!def.translatable" type="text"
+               ng-model="instance.data[def.name]"
+               ng-maxlength="def.maxLength">
+    </span>
+
+    <span ng-if="def.type=='textarea'">
+        <textarea ng-if="def.translatable"
+                  ng-model="instance.data.translations[(false|langRef)][def.name]"
+                  ng-required="def.required"
+                  ng-maxlength="def.maxLength"></textarea>
+
+        <textarea ng-if="!def.translatable"
+                  ng-model="instance.data[def.name]"
+                  ng-required="def.required"
+                  ng-maxlength="def.maxLength"></textarea>
+    </span>
+
+    <span ng-if="def.type=='tags'">
+            <tags-input class="" ng-if="def.translatable"
+                        ng-model="instance.data.translations[(false|langRef)][def.name]"></tags-input>
+
+            <tags-input class="" ng-if="!def.translatable"
+                        ng-model="instance.data[def.name]"></tags-input>
+    </span>
+    </div>
+</div>
