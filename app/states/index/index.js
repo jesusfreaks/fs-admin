@@ -5,14 +5,17 @@ angular.module('fsAdmin')
         $stateProvider.state('index', {
             url: '/',
             templateUrl: 'states/index/main-view.html',
+            onEnter: function (initRo, LoginService) {
+                LoginService.authenticate(initRo);
+            },
             resolve:{
-                initResource : function(RestClient,APIBaseUrl){
+                initRo : function(RestClient,APIBaseUrl){
 
                     console.log('apiBase',APIBaseUrl);
                    return RestClient.load(APIBaseUrl);
                 }
             },
-            controller: function ($scope,initResource) {
+            controller: function ($scope,initRo) {
 
             }
         });

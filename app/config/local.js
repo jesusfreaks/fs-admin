@@ -2,9 +2,9 @@
 angular._localConfig = {
     environment: 'development', //show debug messages
     API: {
-        protocol: 'https',
-        host: 'dev-fs-rest-service.herokuapp.com',
-        port:443,
+        protocol: 'http',
+        host: 'localhost',
+        port:8080,
         useMocks: true,
         fakeDelay: 800
     }

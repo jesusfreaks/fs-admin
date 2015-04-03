@@ -21,27 +21,27 @@ angular.module('fsAdmin.rest', ['ngResource'])
             methods = ['GET','POST'];
 
         function tidyUri(url){
+            return url;
+            /*
             return url.replace(/http.*?:80\//,APIBaseUrl).replace(/http:\/\/.*([/])+/g,function(v){
                 console.log('v',v);
             });
+            */
         }
 
-        function _call(url, uriParams, object, method) {
-            var deferred = $q.defer(),
-                headers = {
-                    'Content-Type': 'application/json'
-                },
-                uri = tidyUri(url);
+        function _call(url, method, params) {
+
+            var deferred = $q.defer();
 
             var request = {
-                method:method,
-                url : uri,
-                params : uriParams,
-                headers: headers
+                method: method,
+                url : url,
+                headers: {'Content-Type': 'application/json'}
             };
-            if(object){
-                request.data = object;
-            }
+
+            angular.extend(request, params);
+
+            console.log(request);
 
             $http(request).then(function(result){
                 console.log('result ',result);
@@ -77,13 +77,13 @@ angular.module('fsAdmin.rest', ['ngResource'])
 
         function getInvoker(url,method){
             return function(){
-                return _call(url,arguments[0],arguments[0],method);
+                return _call(url,method,arguments[0],arguments[0]);
             }
         }
 
         var svc = {
             load: function (url, params) {
-                return _call(url, params, undefined, 'GET');
+                return _call(url, 'GET', params);
             }
         };
         return svc;

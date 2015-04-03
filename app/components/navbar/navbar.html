@@ -14,7 +14,7 @@
                 <li ui-sref-active="active">
                     <a ui-sref="index">Home</a>
                 </li>
-                <li ui-sref-active="active">
+                <li ui-sref-active="active" ng-show="authenticated">
                     <a ui-sref="index.locations.list">{{'app.general.locations'|translate}}</a>
                 </li>
             </ul>
@@ -32,6 +32,8 @@
 
                     </ul>
                 </li>
+                <li ng-show="!authenticated"><a ui-sref="index.login">Login</a></li>
+                <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
             </ul>
         </nav>
     </div>
