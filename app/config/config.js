@@ -18,6 +18,9 @@ angular.module('fsAdmin')
             return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
         })
     })
+    .config(function ($httpProvider) {
+        $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+    })
     .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
     .factory('BaseUrl', function (Config) {
         return (Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + '/');

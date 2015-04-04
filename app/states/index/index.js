@@ -15,8 +15,13 @@ angular.module('fsAdmin')
                    return RestClient.load(APIBaseUrl);
                 }
             },
-            controller: function ($scope,initRo) {
-
+            views : {
+                navbar: {
+                    templateUrl: 'components/navbar/navbar.html'
+                },
+                content : {
+                    templateUrl: 'states/index/index.html'
+                }
             }
         });
     });

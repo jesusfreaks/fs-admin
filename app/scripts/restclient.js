@@ -36,6 +36,7 @@ angular.module('fsAdmin.rest', ['ngResource'])
             var request = {
                 method: method,
                 url : url,
+                withCredentials: true,
                 headers: {'Content-Type': 'application/json'}
             };
 

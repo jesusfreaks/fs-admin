@@ -3,27 +3,30 @@
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
         $stateProvider.state('index.login', {
-            url: '/login',
-            templateUrl: 'states/index/login/login.html',
-            controllerAs: 'vm',
-            controller: function ($state, LoginService, initRo) {
+            url: 'login',
+            views : {
+                'content@' : {
+                    templateUrl: 'states/index/login/login.html',
+                    controllerAs: 'vm',
+                    controller: function ($state, LoginService, initRo) {
 
-                var vm = this;
+                        var vm = this;
 
-                vm.credentials = {};
-                vm.login = function() {
-                    LoginService.authenticate(initRo, vm.credentials, function() {
-                        if ($rootScope.authenticated) {
-                            vm.error = false;
-                            $state.go('index');
-                        } else {
-                            vm.error = true;
-                        }
-                    });
-                };
+                        vm.credentials = {};
+                        vm.login = function() {
+                            LoginService.authenticate(initRo, vm.credentials).then(function(authenticated) {
+                                if (authenticated) {
+                                    vm.error = false;
+                                    $state.go('index');
+                                } else {
+                                    vm.error = true;
+                                }
+                            });
+                        };
 
-                return vm;
-
+                        return vm;
+                    }
+                }
             }
         });
     }).factory('LoginService', function ($rootScope) {
@@ -36,14 +39,17 @@ angular.module('fsAdmin')
                 + btoa(credentials.username + ":" + credentials.password)
                 } : {};
 
-                initRo.$$getUser({headers: headers}).then(function (response) {
+                return initRo.$$getUser({headers: headers}).then(function (response) {
                     if (response.name) {
                         $rootScope.authenticated = true;
                     } else {
                         $rootScope.authenticated = false;
                     }
+
+                    return $rootScope.authenticated;
                 }, function () {
                     $rootScope.authenticated = false;
+                    return $rootScope.authenticated;
                 });
             }
 
