@@ -2,9 +2,9 @@
 
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
-        $stateProvider.state('root.login', {
-            url: '/login',
-            templateUrl: 'states/login/login.html',
+        $stateProvider.state('index.login', {
+            url: 'login',
+            templateUrl: 'states/index/login/login.html',
             controllerAs: 'vm',
             controller: function ($state, LoginService, initRo) {
 
@@ -15,7 +15,7 @@ angular.module('fsAdmin')
                     LoginService.authenticate(initRo, vm.credentials).then(function(authenticated) {
                         if (authenticated) {
                             vm.error = false;
-                            $state.go('root.index');
+                            $state.go('index');
                         } else {
                             vm.error = true;
                         }
@@ -38,13 +38,16 @@ angular.module('fsAdmin')
                 return initRo.$$getUser({headers: headers}).then(function (response) {
                     if (response.name) {
                         $rootScope.authenticated = true;
+                        $rootScope.principal = response.principal;
                     } else {
                         $rootScope.authenticated = false;
+                        delete $rootScope.principal;
                     }
 
                     return $rootScope.authenticated;
                 }, function () {
                     $rootScope.authenticated = false;
+                    delete $rootScope.principal;
                     return $rootScope.authenticated;
                 });
             }
