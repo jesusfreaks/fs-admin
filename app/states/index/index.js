@@ -5,8 +5,8 @@ angular.module('fsAdmin')
         $stateProvider.state('index', {
             url: '/',
             templateUrl: 'states/index/index.html',
-            onEnter: function (initRo, LoginService) {
-                LoginService.authenticate(initRo);
+            onEnter: function (initRo, UserServiceFactory) {
+                UserServiceFactory.create(initRo).authenticate();
             },
             resolve:{
                 initRo : function(RestClient,APIBaseUrl){

@@ -6,13 +6,16 @@ angular.module('fsAdmin')
             url: 'login',
             templateUrl: 'states/index/login/login.html',
             controllerAs: 'vm',
-            controller: function ($state, LoginService, initRo) {
+            controller: function ($state, UserServiceFactory, initRo) {
 
                 var vm = this;
 
                 vm.credentials = {};
                 vm.login = function() {
-                    LoginService.authenticate(initRo, vm.credentials).then(function(authenticated) {
+
+                    var userService = UserServiceFactory.create(initRo);
+
+                    userService.authenticate(vm.credentials).then(function(authenticated) {
                         if (authenticated) {
                             vm.error = false;
                             $state.go('index');
@@ -25,31 +28,57 @@ angular.module('fsAdmin')
                 return vm;
             }
         });
-    }).factory('LoginService', function ($rootScope) {
+    }).factory('UserServiceFactory', function ($rootScope) {
 
-        return {
+        var UserService = function(initRo) {
 
-            authenticate : function(initRo, credentials) {
+            this.authenticate = function(credentials) {
 
                 var headers = credentials ? {Authorization : "Basic "
                 + btoa(credentials.username + ":" + credentials.password)
                 } : {};
 
+                console.log("AUTHENTICATE", credentials);
+
                 return initRo.$$getUser({headers: headers}).then(function (response) {
+
                     if (response.name) {
-                        $rootScope.authenticated = true;
                         $rootScope.principal = response.principal;
+                        return true;
                     } else {
-                        $rootScope.authenticated = false;
                         delete $rootScope.principal;
+                        return false;
                     }
 
-                    return $rootScope.authenticated;
                 }, function () {
-                    $rootScope.authenticated = false;
                     delete $rootScope.principal;
-                    return $rootScope.authenticated;
+                    return false;
                 });
+            };
+
+            this.getPrincipal = function () {
+                return $rootScope.principal;
+            };
+
+            this.logout = function () {
+                console.log("Logging out ...");
+                delete $rootScope.principal;
+                return initRo.$$postLogout();
+            };
+        };
+
+
+        var instance = null;
+
+        return {
+
+            create : function (initRo) {
+                instance = new UserService(initRo);
+                return instance;
+            },
+
+            getInstance : function () {
+                return instance;
             }
 
         }

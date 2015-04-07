@@ -29,8 +29,8 @@
 
                     </ul>
                 </li>
-                <li ng-show="!authenticated"><a ui-sref="index.login">Login</a></li>
-                <li ng-show="authenticated"><a href="" ng-click="logout()">Logout</a></li>
+                <li ng-show="!getPrincipal().enabled"><a ui-sref="index.login">Login</a></li>
+                <li ng-show="getPrincipal().enabled"><a href="" ng-click="logout()">Logout</a></li>
             </ul>
         </nav>
     </div>

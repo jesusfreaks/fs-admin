@@ -42,10 +42,9 @@ angular.module('fsAdmin.rest', ['ngResource'])
 
             angular.extend(request, params);
 
-            console.log(request);
+            console.log("REQUEST", request);
 
             $http(request).then(function(result){
-                console.log('result ',result);
                 wrapActions(result.data);
                 deferred.resolve(result.data);
             },function(error){

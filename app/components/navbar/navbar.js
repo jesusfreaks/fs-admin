@@ -1,9 +1,7 @@
 'use strict';
 
 angular.module('fsAdmin.components')
-    .controller('navbarComponentCtrl', function ($rootScope,$scope, $element, $translate, PossibleLanguages) {
-
-        console.log("NAVBAR");
+    .controller('navbarComponentCtrl', function ($scope, $element, $translate, PossibleLanguages) {
 
         $scope.text = 'this is the navbar component';
 
@@ -11,16 +9,27 @@ angular.module('fsAdmin.components')
         $scope.changeLanguage = function(key){
             $translate.use(key);
         };
-
-        $rootScope.logout = function () {
-            console.log("LOGOUT");
-            $rootScope.authenticated = false;
-            initRo.$$logout();
-        }
-
     })
-    .component('navbar', function () {
+    .component('navbar', function (UserServiceFactory) {
         return {
-            controller: 'navbarComponentCtrl'
+            controller: 'navbarComponentCtrl',
+            link : function (scope) {
+
+                scope.getPrincipal = function () {
+
+                    var userService = UserServiceFactory.getInstance();
+
+                    if (userService !== null) {
+                        return userService.getPrincipal();
+                    }
+
+                    return null;
+                };
+
+                scope.logout = function () {
+                    UserServiceFactory.getInstance().logout();
+                };
+
+            }
         };
     });
