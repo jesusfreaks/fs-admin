@@ -2,6 +2,7 @@
     "app.general.language":"Sprache",
     "app.general.location":"Ort",
     "app.general.locations":"Veranstaltungsorte",
+    "app.general.events":"Veranstaltungen",
     "de_DE":"Deutsch",
     "en_EN":"Englisch",
 
@@ -24,8 +25,10 @@
     "location.preview":"Intro",
 
     "location.save.success":"Gespeichert",
+    "location.update.success":"Geändert",
     "location.deleted.success":"Gelöscht",
-    "login.success":"ANmeldung erfolgreich",
+
+    "login.success":"Anmeldung erfolgreich",
     "msg.error":"Es ist ein Fehler aufgetreten"
 
 }
