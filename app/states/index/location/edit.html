@@ -1,20 +1,36 @@
 <form name="editLocation" class="form-horizontal" ng-submit="editLocation.$valid?save():false">
-<div class="row">
-    <div class="col-md-offset-4 col-md-4">
-        <h1>{{'app.general.location'|translate}}: {{instance.data.code}}</h1>
-        <generic-input-component
-            instance="instance"
-            instance-type="location"
-            fields="['name','description','code','tags']">
-        </generic-input-component>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-4">
+            <h1>{{'app.general.location'|translate}}: {{instance.data.code}} {{'de_DE'|translate}}</h1>
+            <generic-input
+                instance="instance"
+                instance-type="location"
+                fields="['name','preview','description','code','tags']"
+                language="de_DE">
+            </generic-input>
+        </div>
+
+        <div class="col-md-4">
+            <h1>{{'app.general.location'|translate}}: {{instance.data.code}} {{'en_EN'|translate}}</h1>
+            <generic-input
+                instance="instance"
+                instance-type="location"
+                fields="['name','preview','description','','tags']"
+                language="en_EN">
+            </generic-input>
+        </div>
+
     </div>
 
-</div>
-
-<div class="form-group">
-    <div class="col-md-offset-5 col-md-4">
-        <button type="submit" class="btn btn-default {{editLocation.$valid?'':'disabled'}}" >{{'app.general.save'|translate}}</button>
-        <button type="text" class="btn btn-default">{{'app.general.cancel'|translate}}</button>
+    <div class="form-group">
+        <div class="col-md-offset-5 col-md-4">
+            <button type="submit" class="btn btn-default {{editLocation.$valid?'':'disabled'}}">
+                {{'app.general.save'|translate}}
+            </button>
+            <button type="reset" class="btn btn-default">{{'app.general.cancel'|translate}}</button>
+            <button ng-if="instance.$$deleteSelf" type="button" class="btn btn-default" ng-click="delete()">
+                {{'app.general.delete'|translate}}
+            </button>
+        </div>
     </div>
-</div>
 </form>

@@ -34,15 +34,18 @@ angular.module('fsAdmin')
         location:{
             commonProperties: {
                 'code': {
-                    type: "text", maxLength: 3, required: true
+                    type: 'text', maxLength: 3, required: true
                 }
             },
             translatableProperties: {
                 name: {
+                    type: 'text', required: true, maxLength: 80
+                },
+                preview: {
                     type: 'text', required: true, maxLength: 120
                 },
                 description: {
-                    type: 'textarea', required: true, maxLength: 600
+                    type: 'textarea', required: true, maxLength: 2600
                 },
                 tags: {
                     type: 'tags'

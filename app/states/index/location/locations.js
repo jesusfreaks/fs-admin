@@ -7,13 +7,13 @@
 'use strict';
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
-        $stateProvider.state('index.locations',{
-            url:'locations/',
-            template:'<div ui-view></div>',
+        $stateProvider.state('index.locations', {
+            url: 'locations/',
+            template: '<div ui-view></div>',
             abstract: true,
-            resolve:{
-                locations:function(initRo){
-                    console.log('initRessource',initRo);
+            resolve: {
+                locations: function (initRo) {
+                    console.log('initRessource', initRo);
                     return initRo.$$getLocations();
                 }
             }
@@ -37,13 +37,54 @@ angular.module('fsAdmin')
         $stateProvider.state('index.locations.update', {
             url: 'update/:idx',
             templateUrl: 'states/index/location/edit.html',
-            controller: function ($scope, locations, $stateParams) {
+            controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper) {
+
+                // locate entity to edit
                 $scope.instance = locations[$stateParams.idx];
-                $scope.save=function(){
-                    $scope.instance.$$postSelf();
+                if (!$scope.instance) {
+                    $state.go('^.list');
+                }
+
+                $scope.save = function () {
+
+                    // nasty directive does not allow angular to run $parsers
+                    angular.forEach($scope.instance.data.translations, function (trans) {
+                        if (trans.tags && trans.tags[0] && trans.tags[0].text) { // revert the nasty tag input format
+                            trans.tags = trans.tags.map(function (tag) {
+                                return tag.text;
+                            });
+                        }
+                    });
+
+                    var call;
+                    if (angular.isFunction($scope.instance.$$putSelf)) {
+                        call = $scope.instance.$$putSelf($scope.instance).then(function () {
+                            $state.go('^.list');
+                        });
+                    } else { // must be a new object
+                        call = initRo.$$postLocations($scope.instance).then(function (data) {
+                            locations.push(data);
+                            $state.go('^.list');
+                        });
+                    }
+
+                    Helper.messages('location.update.success', call);
+                };
+
+                $scope.delete = function () {
+                    var call = $scope.instance.$$deleteSelf().then(function () {
+                        // updated locations list
+                        angular.forEach(locations, function (location, idx) {
+                            if (location._links.self === $scope.instance._links.self) {
+                                locations.splice(idx, 1);
+                            }
+                        });
+                        $state.go('^.list');
+                    });
+
+                    Helper.messages('location.deleted.success', call);
                 };
             }
-
         });
     });
 

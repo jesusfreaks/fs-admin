@@ -18,7 +18,7 @@ angular.module('fsAdmin.rest', ['ngResource'])
 
         var linkField = '_links',
             urlProperty ='href',
-            methods = ['GET','POST','PUT'];
+            methods = ['GET','POST','PUT','DELETE'];
 
         function tidyUri(url){
             return url;

@@ -4,6 +4,7 @@
  * Created by Benjamin Jacob on 24.03.15.
  * <p/>
  */
+'use strict';
 angular.module('fsAdmin.filters').filter('langRef',function($translate){
     return function(key){
         if(!key){
@@ -11,5 +12,5 @@ angular.module('fsAdmin.filters').filter('langRef',function($translate){
         }
         key = key.substring(0,2).toLowerCase();
         return key;
-    }
+    };
 });

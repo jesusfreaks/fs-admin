@@ -6,7 +6,7 @@ angular.module('fsAdmin')
             url: 'login',
             templateUrl: 'states/index/login/login.html',
             controllerAs: 'vm',
-            controller: function ($state, UserServiceFactory, initRo) {
+            controller: function ($state, UserServiceFactory, initRo,MessagesService) {
 
                 var vm = this;
 
@@ -18,10 +18,13 @@ angular.module('fsAdmin')
                     userService.authenticate(vm.credentials).then(function(authenticated) {
                         if (authenticated) {
                             vm.error = false;
+                            MessagesService.success('login.success');
                             $state.go('index');
                         } else {
                             vm.error = true;
                         }
+                    },function(err){
+                        MessagesService.addRestError('msg.error',err);
                     });
                 };
 

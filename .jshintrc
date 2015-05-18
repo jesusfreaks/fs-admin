@@ -18,7 +18,7 @@
     "maxparams": 7,
     "maxdepth": 5,
     "maxcomplexity": 12,
-    "maxlen": 80,
+    "maxlen": false,
     "strict": true,
     "trailing": true,
     "smarttabs": true,

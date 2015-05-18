@@ -15,10 +15,17 @@
     "app.general.save":"Speichern",
     "app.general.ok":"Ok",
     "app.general.cancel":"Abbrechen",
+    "app.general.delete":"Löschen",
 
     "location.name":"Name",
     "location.code":"Kürzel",
     "location.description":"Beschreibung",
-    "location.tags":"Kategorien"
+    "location.tags":"Kategorien",
+    "location.preview":"Intro",
+
+    "location.save.success":"Gespeichert",
+    "location.deleted.success":"Gelöscht",
+    "login.success":"ANmeldung erfolgreich",
+    "msg.error":"Es ist ein Fehler aufgetreten"
 
 }
