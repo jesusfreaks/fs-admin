@@ -6,6 +6,6 @@
     <p>Username is {{principal.username}}</p>
     <p>Roles {{principal.authorities}}</p>
 </div>
-<div  ng-show="!authenticated">
+<div  ng-show="!principal.enabled">
     <p>You are not logged in.</p>
 </div>
