@@ -29,19 +29,20 @@ angular.module('fsAdmin.components')
         angular.forEach($scope.fields,function(name){
             angular.forEach(definitions,function(instance){
                if(name === instance.name){
-                   $scope.definitions.push(instance)
+                   $scope.definitions.push(instance);
                }
             });
-        })
+        });
     })
 
     .component('genericInput', function () {
-    return {
-        scope: {
-            instance: '=',
-            instanceType:'@',
-            fields: '='
-        },
-        controller: 'genericInputComponentCtrl'
-    };
+        return {
+            scope: {
+                instance: '=',
+                instanceType:'@',
+                fields: '=',
+                language: '@'
+            },
+            controller: 'genericInputComponentCtrl'
+        };
 });

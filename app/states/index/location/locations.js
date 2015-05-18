@@ -4,6 +4,7 @@
  * Created by Benjamin Jacob on 16.03.15.
  * <p/>
  */
+'use strict';
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
         $stateProvider.state('index.locations',{
@@ -11,9 +12,9 @@ angular.module('fsAdmin')
             template:'<div ui-view></div>',
             abstract: true,
             resolve:{
-                locations:function(initResource){
-                    console.log('initREsource',initResource);
-                    return initResource.$$getLocations();
+                locations:function(initRo){
+                    console.log('initRessource',initRo);
+                    return initRo.$$getLocations();
                 }
             }
         });
@@ -29,7 +30,7 @@ angular.module('fsAdmin')
                     var defaults = {};
                     $scope.locations.push(defaults);
                     $state.go('index.locations.update', {idx: $scope.locations.length - 1});
-                }
+                };
             }
         });
 
@@ -42,7 +43,7 @@ angular.module('fsAdmin')
 
                 $scope.save=function(){
                     console.log('not yet implemented');
-                }
+                };
             }
 
         });
