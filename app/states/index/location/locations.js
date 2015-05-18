@@ -38,11 +38,9 @@ angular.module('fsAdmin')
             url: 'update/:idx',
             templateUrl: 'states/index/location/edit.html',
             controller: function ($scope, locations, $stateParams) {
-                console.log('Yeah here am ', locations[$stateParams.idx]);
                 $scope.instance = locations[$stateParams.idx];
-
                 $scope.save=function(){
-                    console.log('not yet implemented');
+                    $scope.instance.$$postSelf();
                 };
             }
 

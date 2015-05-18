@@ -18,7 +18,7 @@ angular.module('fsAdmin.rest', ['ngResource'])
 
         var linkField = '_links',
             urlProperty ='href',
-            methods = ['GET','POST'];
+            methods = ['GET','POST','PUT'];
 
         function tidyUri(url){
             return url;
@@ -42,7 +42,7 @@ angular.module('fsAdmin.rest', ['ngResource'])
 
             angular.extend(request, params);
 
-            console.log("REQUEST", request);
+            console.log('REQUEST', request);
 
             $http(request).then(function(result){
                 wrapActions(result.data);
@@ -70,15 +70,15 @@ angular.module('fsAdmin.rest', ['ngResource'])
                     angular.forEach(methods,function(method){
                         var actionName = '$$'+ method.toLowerCase() + name.substring(0,1).toUpperCase() + name.substring(1);
                         instance[actionName] = getInvoker(field[urlProperty], method);
-                    })
-                })
+                    });
+                });
             }
         }
 
         function getInvoker(url,method){
             return function(){
                 return _call(url,method,arguments[0],arguments[0]);
-            }
+            };
         }
 
         var svc = {
