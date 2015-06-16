@@ -40,6 +40,8 @@ angular.module('fsAdmin.rest', ['ngResource'])
                 headers: {'Content-Type': 'application/json'}
             };
 
+            // TODO POST und PUT braucht field 'data' für den message body!
+
             angular.extend(request, params);
 
             console.log('REQUEST', request);

@@ -24,7 +24,6 @@ angular.module('fsAdmin')
             templateUrl: 'states/index/location/list.html',
             controller: function ($scope, locations, $state) {
                 $scope.locations = locations;
-                console.log('locations', locations);
 
                 $scope.create = function () {
                     var defaults = {};
@@ -47,14 +46,17 @@ angular.module('fsAdmin')
 
                 $scope.save = function () {
 
+                    var translations = [$scope.instance.de, $scope.instance.en];
+
                     // nasty directive does not allow angular to run $parsers
-                    angular.forEach($scope.instance.data.translations, function (trans) {
+                    angular.forEach(translations, function (trans) {
                         if (trans.tags && trans.tags[0] && trans.tags[0].text) { // revert the nasty tag input format
                             trans.tags = trans.tags.map(function (tag) {
                                 return tag.text;
                             });
                         }
                     });
+
 
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {

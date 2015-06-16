@@ -1,7 +1,7 @@
 <form name="editLocation" class="form-horizontal" ng-submit="editLocation.$valid?save():false">
     <div class="row">
         <div class="col-md-offset-2 col-md-4">
-            <h1>{{'app.general.location'|translate}}: {{instance.data.code}} {{'de_DE'|translate}}</h1>
+            <h1>{{'app.general.location'|translate}}: {{instance.code}} {{'de_DE'|translate}}</h1>
             <generic-input
                 instance="instance"
                 instance-type="location"
@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-md-4">
-            <h1>{{'app.general.location'|translate}}: {{instance.data.code}} {{'en_EN'|translate}}</h1>
+            <h1>{{'app.general.location'|translate}}: {{instance.code}} {{'en_EN'|translate}}</h1>
             <generic-input
                 instance="instance"
                 instance-type="location"

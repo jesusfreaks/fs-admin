@@ -19,6 +19,7 @@ angular.module('fsAdmin.components').directive('genericInput', function ($transl
             scope.language = attrs.language;
             console.log('defining', scope.lang);
             console.log('translate', scope.language, 'as ', langRefFilter(scope.language), scope.lang);
+
             var definitions = [];
 
             angular.forEach(FieldDefinitions[scope.instanceType].commonProperties, function (definition, name) {
@@ -33,8 +34,7 @@ angular.module('fsAdmin.components').directive('genericInput', function ($transl
                     }
                 });
 
-            scope.data = {};
-            scope.data.prefix = scope.instanceType;
+            scope.prefix = scope.instanceType;
 
             // sort depending on fields order given to directive
             scope.definitions = [];
