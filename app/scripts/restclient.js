@@ -7,7 +7,6 @@
 'use strict';
 angular.module('fsAdmin.rest', ['ngResource'])
 
-
     .config(['$resourceProvider', function ($resourceProvider) {
         // Don't strip trailing slashes from calculated URLs
         $resourceProvider.defaults.stripTrailingSlashes = false;
@@ -17,17 +16,8 @@ angular.module('fsAdmin.rest', ['ngResource'])
     .factory('RestClient', function RestClient($q, $log, $resource, APIBaseUrl, $http) {
 
         var linkField = '_links',
-            urlProperty ='href',
-            methods = ['GET','POST','PUT','DELETE'];
-
-        function tidyUri(url){
-            return url;
-            /*
-            return url.replace(/http.*?:80\//,APIBaseUrl).replace(/http:\/\/.*([/])+/g,function(v){
-                console.log('v',v);
-            });
-            */
-        }
+            urlProperty = 'href',
+            methods = ['GET', 'POST', 'PUT', 'DELETE'];
 
         function _call(url, method, params) {
 
@@ -35,58 +25,55 @@ angular.module('fsAdmin.rest', ['ngResource'])
 
             var request = {
                 method: method,
-                url : url,
+                url: url,
                 withCredentials: true,
                 headers: {'Content-Type': 'application/json'}
             };
 
-            // TODO POST und PUT braucht field 'data' für den message body!
-
             angular.extend(request, params);
 
-            console.log('REQUEST', request);
+            $log.debug('REQUEST', request);
 
-            $http(request).then(function(result){
+            $http(request).then(function (result) {
                 wrapActions(result.data);
                 deferred.resolve(result.data);
-            },function(error){
+            }, function (error) {
                 $log.error(error);
                 deferred.reject(error);
             });
             return deferred.promise;
         }
 
-         function wrapActions(resource){
-            if(angular.isArray(resource)){
-                angular.forEach(resource,function(res){
+        function wrapActions(resource) {
+            if (angular.isArray(resource)) {
+                angular.forEach(resource, function (res) {
                     wrapLinks(res);
                 });
-            }else{
+            } else {
                 wrapLinks(resource);
             }
         }
 
-        function wrapLinks(instance){
-            if(instance[linkField]){
-                angular.forEach(instance[linkField],function(field, name){
-                    angular.forEach(methods,function(method){
-                        var actionName = '$$'+ method.toLowerCase() + name.substring(0,1).toUpperCase() + name.substring(1);
+        function wrapLinks(instance) {
+            if (instance[linkField]) {
+                angular.forEach(instance[linkField], function (field, name) {
+                    angular.forEach(methods, function (method) {
+                        var actionName = '$$' + method.toLowerCase() + name.substring(0, 1).toUpperCase() + name.substring(1);
                         instance[actionName] = getInvoker(field[urlProperty], method);
                     });
                 });
             }
         }
 
-        function getInvoker(url,method){
-            return function(){
-                return _call(url,method,arguments[0],arguments[0]);
+        function getInvoker(url, method) {
+            return function () {
+                return _call(url, method, arguments[0]);
             };
         }
 
-        var svc = {
+        return {
             load: function (url, params) {
                 return _call(url, 'GET', params);
             }
         };
-        return svc;
     });

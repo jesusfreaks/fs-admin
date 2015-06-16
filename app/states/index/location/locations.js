@@ -60,7 +60,7 @@ angular.module('fsAdmin')
 
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
-                        call = $scope.instance.$$putSelf($scope.instance).then(function () {
+                        call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
                             $state.go('^.list');
                         });
                     } else { // must be a new object
