@@ -1,34 +1,42 @@
 <div class="form-group generic-input" ng-repeat="def in definitions">
 
-    <label class="col-sm-4">
+    <div class="col-sm-12">
 
-        <span ng-if="def.type!=='empty'" class="pull-right">{{ ($parent.prefix +'.' + def.name) |translate}} <span ng-if="def.required">*</span></span>
-    </label>
-
-
-    <div class="col-sm-8">
+        <label for="{{(language|langRef)}}_{{def.name}}" ng-if="def.type!=='empty'">{{ ($parent.prefix +'.' + def.name) |translate}} <span ng-if="def.required">*</span></label>
 
         <span ng-if="def.type=='text'">
 
             <input ng-if="def.translatable" type="text"
+                   id="{{(language|langRef)}}_{{def.name}}"
+                   ng-required="def.required"
                    ng-model="instance[(language|langRef)][def.name]"
-                   ng-maxlength="def.maxLength">
+                   ng-maxlength="def.maxLength"
+                    class="form-control">
 
             <input ng-if="!def.translatable" type="text"
+                   id="{{(language|langRef)}}_{{def.name}}"
+                   ng-required="def.required"
                    ng-model="instance[def.name]"
-                   ng-maxlength="def.maxLength">
+                   ng-maxlength="def.maxLength"
+                   class="form-control">
         </span>
 
         <span ng-if="def.type=='textarea'">
             <textarea ng-if="def.translatable"
+                      id="{{(language|langRef)}}_{{def.name}}"
                       ng-model="instance[(language|langRef)][def.name]"
                       ng-required="def.required"
-                      ng-maxlength="def.maxLength"></textarea>
+                      ng-maxlength="def.maxLength"
+                      rows="10"
+                      class="form-control"></textarea>
 
             <textarea ng-if="!def.translatable"
+                      id="{{(language|langRef)}}_{{def.name}}"
                       ng-model="instance[def.name]"
                       ng-required="def.required"
-                      ng-maxlength="def.maxLength"></textarea>
+                      ng-maxlength="def.maxLength"
+                      rows="10"
+                      class="form-control"></textarea>
         </span>
 
         <span ng-if="def.type=='tags'">
@@ -42,41 +50,4 @@
         <span ng-if="def.type=='epmty'">
         </span>
     </div>
-
-    <!--<div class="col-sm-8" ng-init="instance.data.translations[(language|langRef)].lang=(language|langRef)">-->
-
-        <!--<span ng-if="def.type=='text'">-->
-
-            <!--<input ng-if="def.translatable" type="text"-->
-                   <!--ng-model="instance.data.translations[(language|langRef)][def.name]"-->
-                   <!--ng-maxlength="def.maxLength">-->
-
-            <!--<input ng-if="!def.translatable" type="text"-->
-                   <!--ng-model="instance.data[def.name]"-->
-                   <!--ng-maxlength="def.maxLength">-->
-        <!--</span>-->
-
-        <!--<span ng-if="def.type=='textarea'">-->
-            <!--<textarea ng-if="def.translatable"-->
-                      <!--ng-model="instance.data.translations[(language|langRef)][def.name]"-->
-                      <!--ng-required="def.required"-->
-                      <!--ng-maxlength="def.maxLength"></textarea>-->
-
-            <!--<textarea ng-if="!def.translatable"-->
-                      <!--ng-model="instance.data[def.name]"-->
-                      <!--ng-required="def.required"-->
-                      <!--ng-maxlength="def.maxLength"></textarea>-->
-        <!--</span>-->
-
-        <!--<span ng-if="def.type=='tags'">-->
-                <!--<tags-input class="" ng-if="def.translatable"-->
-                            <!--ng-model="instance.data.translations[(language|langRef)][def.name]" tolist="">-->
-                        <!--</tags-input>-->
-
-                <!--<tags-input class="" ng-if="!def.translatable"-->
-                            <!--ng-model="instance.data[def.name]"  tolist="" ></tags-input>-->
-        <!--</span>-->
-        <!--<span ng-if="def.type=='epmty'">-->
-        <!--</span>-->
-    <!--</div>-->
 </div>

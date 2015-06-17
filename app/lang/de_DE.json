@@ -18,6 +18,9 @@
     "app.general.cancel":"Abbrechen",
     "app.general.delete":"Löschen",
 
+    "app.general.confirm.delete.title" : "Wirklich löschen?",
+    "app.general.confirm.delete.text" : "endgültig löschen?",
+
     "location.name":"Name",
     "location.code":"Kürzel",
     "location.description":"Beschreibung",
@@ -29,6 +32,10 @@
     "location.deleted.success":"Gelöscht",
 
     "login.success":"Anmeldung erfolgreich",
-    "msg.error":"Es ist ein Fehler aufgetreten"
+    "msg.error":"Es ist ein Fehler aufgetreten",
+
+    "de.name" : "Name",
+    "de.preview" : "Intro",
+    "de.description" : "Beschreibung"
 
 }

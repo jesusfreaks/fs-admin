@@ -36,7 +36,7 @@ angular.module('fsAdmin')
         $stateProvider.state('index.locations.update', {
             url: 'update/:idx',
             templateUrl: 'states/index/location/edit.html',
-            controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper) {
+            controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log) {
 
                 // locate entity to edit
                 $scope.instance = locations[$stateParams.idx];
@@ -74,17 +74,32 @@ angular.module('fsAdmin')
                 };
 
                 $scope.delete = function () {
-                    var call = $scope.instance.$$deleteSelf().then(function () {
-                        // updated locations list
-                        angular.forEach(locations, function (location, idx) {
-                            if (location._links.self === $scope.instance._links.self) {
-                                locations.splice(idx, 1);
-                            }
-                        });
-                        $state.go('^.list');
+
+                    var locationName = $scope.instance.de.name;
+
+                    var modalInstance = $modal.open({
+                        templateUrl: 'views/confirm-delete.html',
+                        controller: function ($scope) {
+                            $scope.item = locationName;
+                        }
                     });
 
-                    Helper.messages('location.deleted.success', call);
+                    modalInstance.result.then(function () {
+                        var call = $scope.instance.$$deleteSelf().then(function () {
+                            // updated locations list
+                            angular.forEach(locations, function (location, idx) {
+                                if (location._links.self === $scope.instance._links.self) {
+                                    locations.splice(idx, 1);
+                                }
+                            });
+                            $state.go('^.list');
+                        });
+
+                        Helper.messages('location.deleted.success', call);
+                    }, function () {
+                        $log.info('Modal dismissed at: ' + new Date());
+                    });
+
                 };
             }
         });

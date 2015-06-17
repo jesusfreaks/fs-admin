@@ -5,7 +5,7 @@
             <generic-input
                 instance="instance"
                 instance-type="location"
-                fields="['name','preview','description','code','tags']"
+                fields="['name','preview','description','tags', 'code']"
                 language="de_DE">
             </generic-input>
         </div>
@@ -15,7 +15,7 @@
             <generic-input
                 instance="instance"
                 instance-type="location"
-                fields="['name','preview','description','','tags']"
+                fields="['name','preview','description','tags', '']"
                 language="en_EN">
             </generic-input>
         </div>
@@ -24,11 +24,11 @@
 
     <div class="form-group">
         <div class="col-md-offset-5 col-md-4">
-            <button type="submit" class="btn btn-default {{editLocation.$valid?'':'disabled'}}">
+            <button type="submit" class="btn btn-primary {{editLocation.$valid?'':'disabled'}}">
                 {{'app.general.save'|translate}}
             </button>
-            <button type="reset" class="btn btn-default">{{'app.general.cancel'|translate}}</button>
-            <button ng-if="instance.$$deleteSelf" type="button" class="btn btn-default" ng-click="delete()">
+            <a ui-sref="^.list" class="btn btn-default">{{'app.general.cancel'|translate}}</a>
+            <button ng-if="instance.$$deleteSelf" type="button" class="btn btn-danger" ng-click="delete()">
                 {{'app.general.delete'|translate}}
             </button>
         </div>
