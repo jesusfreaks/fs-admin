@@ -34,7 +34,14 @@
                     </ul>
                 </li>
                 <li ng-show="!getPrincipal().enabled"><a ui-sref="index.login">Login</a></li>
-                <li ng-show="getPrincipal().enabled"><a href="" ng-click="logout()">Logout</a></li>
+                <li ng-if="getPrincipal().enabled" class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{getPrincipal().username}} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="" ng-click="logout()">Logout</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>

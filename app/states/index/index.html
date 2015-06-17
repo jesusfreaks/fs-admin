@@ -1,11 +1,10 @@
 <div ui-view class="container"></div>
 
 
-<h1>Welcome</h1>
-<div ng-show="principal.enabled">
-    <p>Username is {{principal.username}}</p>
-    <p>Roles {{principal.authorities}}</p>
-</div>
-<div  ng-show="!principal.enabled">
-    <p>You are not logged in.</p>
+<div class="container" ng-show="!principal.enabled">
+    <div class="jumbotron">
+        <h1>Admin UI</h1>
+        <p>....</p>
+        <a ui-sref="index.login" class="btn btn-primary btn-lg">Login</a>
+    </div>
 </div>
