@@ -51,6 +51,36 @@ angular.module('fsAdmin')
                     type: 'tags'
                 }
             }
+        },
+        event:{
+            commonProperties: {
+                'author': {
+                    type: 'text', required: true, maxLength: 80
+                },
+                'start': {
+                    type: 'text', maxLength: 3
+                },
+                'end': {
+                    type: 'text', maxLength: 3
+                },
+                'eventCategory': {
+                    type: 'text', maxLength: 3, required: true
+                }
+            },
+            translatableProperties: {
+                name: {
+                    type: 'text', required: true, maxLength: 80
+                },
+                preview: {
+                    type: 'text', required: true, maxLength: 120
+                },
+                description: {
+                    type: 'textarea', required: true, maxLength: 2600
+                },
+                tags: {
+                    type: 'tags'
+                }
+            }
         }
     });
 

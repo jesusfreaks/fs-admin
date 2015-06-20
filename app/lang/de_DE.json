@@ -3,6 +3,7 @@
     "app.general.location":"Ort",
     "app.general.locations":"Veranstaltungsorte",
     "app.general.events":"Veranstaltungen",
+    "app.general.event":"Veranstaltung",
     "de_DE":"Deutsch",
     "en_EN":"Englisch",
 
@@ -26,6 +27,15 @@
     "location.description":"Beschreibung",
     "location.tags":"Kategorien",
     "location.preview":"Intro",
+
+    "event.name":"Name",
+    "event.author":"Autor",
+    "event.start":"Start",
+    "event.end":"Ende",
+    "event.eventCategory":"Kategorie",
+    "event.description":"Beschreibung",
+    "event.tags":"Tags",
+    "event.preview":"Intro",
 
     "location.save.success":"Gespeichert",
     "location.update.success":"Geändert",
