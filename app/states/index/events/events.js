@@ -24,7 +24,7 @@ angular.module('fsAdmin')
             templateUrl: 'states/index/events/list.html',
             controller: function ($scope, events, $state) {
                 $scope.events = events._embedded.eventRoList;
-
+                console.log('events',$scope.events);
                 $scope.create = function () {
                     var defaults = {};
                     $scope.events.push(defaults);

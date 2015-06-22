@@ -5,7 +5,41 @@
  * <p/>
  */
 'use strict';
-angular.module('fsAdmin.components').directive('genericInput', function ($translate, langRefFilter, FieldDefinitions) {
+angular.module('fsAdmin.components')
+    .service('CropperOpts',function(){
+        function CropperOpts(fieldName, appendToList){
+            this.dataTarget = {
+                fieldName : fieldName,
+                appendToList : appendToList
+            };
+            this.width = 320;
+            this.height = 113;
+            this.minWidth = 320;
+            this.minHeight = 113;
+            this.touchRadius = 30;
+            this.keepAspect = true;
+            this.sourceImage = undefined;
+            this.croppedImage = undefined;
+            this.bounds = {
+                top:0, left:0,right:0,bottom:0
+            };
+
+        }
+        CropperOpts.prototype.ok = function(instance){
+            // TODO: upload
+            // append image to list
+            console.log('instance',instance);
+
+        };
+        CropperOpts.prototype.cancel = function(){
+            this.sourceImage = undefined;
+            this.croppedImage = undefined;
+        };
+        return CropperOpts;
+    })
+
+
+    .directive('genericInput', function ($translate, langRefFilter, FieldDefinitions, CropperOpts) {
     return {
         templateUrl: 'components/generic-input/generic-input.html',
         restrict: 'EA',
@@ -40,15 +74,21 @@ angular.module('fsAdmin.components').directive('genericInput', function ($transl
             scope.definitions = [];
             angular.forEach(scope.fields, function (name) {
                 if(name === ''){// add an empty definition that will render as space only
-                    console.log('empty');
                     scope.definitions.push({type:'empty',name:'empty'});
                     return;
                 }
+
                 angular.forEach(definitions, function (instance) {
                     if (name === instance.name) {
                         scope.definitions.push(instance);
                     }
+                    console.log('instance',instance);
+                    if(instance.type === 'image'){
+                        instance.opts = new CropperOpts(name,instance.isList);
+
+                    }
                 });
+
             });
         }
     };

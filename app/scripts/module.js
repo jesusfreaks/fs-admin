@@ -18,6 +18,7 @@ var app = angular.module('fsAdmin', [
     'fsAdmin.rest',
     'fsAdmin.filters',
     'pascalprecht.translate',
-    'ngTagsInput'
+    'ngTagsInput',
+    'angular-img-cropper'
 ]);
 angular.componentFactory.moduleDecorator(app);

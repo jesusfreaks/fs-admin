@@ -87,7 +87,7 @@ module.exports = function (grunt) {
       options: {
         port: process.env.PORT || 9000,
         hostname: process.env.IP || 'localhost',
-        livereload: 35729
+        livereload: 35730
       },
       livereload: {
         options: {

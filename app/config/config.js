@@ -65,6 +65,10 @@ angular.module('fsAdmin')
                 },
                 'eventCategory': {
                     type: 'text', maxLength: 3, required: true
+                },
+                'images':{
+                    isList: true,
+                    type: 'image'
                 }
             },
             translatableProperties: {

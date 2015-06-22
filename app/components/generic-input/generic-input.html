@@ -49,5 +49,26 @@
         </span>
         <span ng-if="def.type=='epmty'">
         </span>
+
+        <span ng-if="def.type=='image'">
+            <img ng-if="instance[def.name]||def.isList" style="max-height:200px;" ng-repeat="url in instance[def.name]" ng-src="{{url}}">
+             <input type="file" img-cropper-fileread image="def.opts.sourceImage" ng-if="!instance[def.name]||def.isList"/>
+             <div ng-if="def.opts.sourceImage">
+
+                 <canvas width="500" height="300" id="canvas"
+                         image-cropper image="def.opts.sourceImage"
+                         cropped-image="def.opts.croppedImage"
+                         crop-width="def.opts.width"
+                         crop-height="def.opts.height"
+                         keep-aspect="def.opts.keepAspect"
+                         touch-radius="def.opts.touchRadius"
+                         crop-area-bounds="def.opts.bounds">
+                 </canvas>
+                 <div>Cropped Image (Left: {{def.opts.bounds.left}} Right: {{def.opts.bounds.right}} Top: {{def.opts.bounds.top}} Bottom: {{def.opts.bounds.bottom}})</div>
+                 <div ng-show="def.opts.croppedImage!=null"><img ng-src="{{def.opts.croppedImage}}" /></div>
+                 <a ng-click="def.opts.ok(instance)">OK</a><a ng-click="def.opts.cancel()" >cancel</a>
+            </div>
+
+        </span>
     </div>
 </div>
