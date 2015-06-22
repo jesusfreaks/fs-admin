@@ -6,11 +6,12 @@
  */
 'use strict';
 angular.module('fsAdmin.components')
-    .service('CropperOpts',function(){
-        function CropperOpts(fieldName, appendToList){
+    .service('CropperOpts',function($http){
+        function CropperOpts(fieldName, appendToList, initResource){
             this.dataTarget = {
                 fieldName : fieldName,
-                appendToList : appendToList
+                appendToList : appendToList,
+                initResource : initResource
             };
             this.width = 320;
             this.height = 113;
@@ -30,6 +31,20 @@ angular.module('fsAdmin.components')
             // append image to list
             console.log('instance',instance);
 
+            var fd = new FormData();
+            fd.append('file', this.croppedImage);
+            $http.post(this.dataTarget.initResource._links.upload.href.replace('\{\?file\}','?file=myFile'), fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            })
+            .success(function(res){
+                    console.log('upload complete',res);
+
+            })
+            .error(function(err){
+                    console.log('upload error',err);
+            });
+
         };
         CropperOpts.prototype.cancel = function(){
             this.sourceImage = undefined;
@@ -46,7 +61,8 @@ angular.module('fsAdmin.components')
         scope: {
             instance: '=',
             instanceType: '@',
-            fields: '='
+            fields: '=',
+            initResource:'='
             // language as attrs
         },
         link: function (scope, elem, attrs) {
@@ -84,8 +100,7 @@ angular.module('fsAdmin.components')
                     }
                     console.log('instance',instance);
                     if(instance.type === 'image'){
-                        instance.opts = new CropperOpts(name,instance.isList);
-
+                        instance.opts = new CropperOpts(name,instance.isList, scope.initResource);
                     }
                 });
 

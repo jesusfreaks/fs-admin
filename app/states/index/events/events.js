@@ -36,10 +36,12 @@ angular.module('fsAdmin')
         $stateProvider.state('index.events.update', {
             url: 'update/:idx',
             templateUrl: 'states/index/events/edit.html',
-            controller: function ($scope, events, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log) {
+            controller: function ($scope, events, $stateParams, initRo, $state,
+                                  MessagesService, Helper, $modal, $log) {
 
                 // locate entity to edit
                 $scope.instance = events._embedded.eventRoList[$stateParams.idx] || {};
+                $scope.initRo = initRo;
 
                 if (!$scope.instance) {
                     $state.go('^.list');

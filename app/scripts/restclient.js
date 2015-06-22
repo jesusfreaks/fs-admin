@@ -6,10 +6,14 @@
  */
 'use strict';
 angular.module('fsAdmin.rest', ['ngResource'])
+    .config(function($httpProvider){
+        $httpProvider.defaults.withCredentials = true;
+    })
 
     .config(['$resourceProvider', function ($resourceProvider) {
         // Don't strip trailing slashes from calculated URLs
         $resourceProvider.defaults.stripTrailingSlashes = false;
+
         //delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }])
 
