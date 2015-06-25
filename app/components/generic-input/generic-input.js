@@ -24,22 +24,37 @@ angular.module('fsAdmin.components')
             this.bounds = {
                 top:0, left:0,right:0,bottom:0
             };
-
         }
+
+        function dataURItoBlob(dataURI, mt) {
+            var byteString = atob(dataURI.split(',')[1]);
+            var ab = new ArrayBuffer(byteString.length);
+            var ia = new Uint8Array(ab);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+            return new Blob([ab], { type: mt });
+        }
+
         CropperOpts.prototype.ok = function(instance){
-            // TODO: upload
             // append image to list
             console.log('instance',instance);
 
             var fd = new FormData();
-            fd.append('file', this.croppedImage);
-            $http.post(this.dataTarget.initResource._links.upload.href.replace('\{\?file\}','?file=myFile'), fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined}
-            })
-            .success(function(res){
-                    console.log('upload complete',res);
+            var blob = dataURItoBlob(this.croppedImage, 'image/png'); // TODO wandelt der cropper alle Bilder nach png?
 
+            var filename = 'file.png'; // TODO wie bekomme ich den filenamen vom input field? (ist aber eigentlich auch egal)
+
+            fd.append('file', blob, filename);
+
+            $http.post(this.dataTarget.initResource._links.upload.href, fd, {
+                transformRequest: angular.identity,
+                headers: {
+                    'Content-Type': undefined}
+            })
+            .success(function(res, status, headers){
+                    console.log('upload complete',res);
+                    console.log('Here is the location of the uploaded image:', headers('Location'));
             })
             .error(function(err){
                     console.log('upload error',err);
@@ -98,7 +113,7 @@ angular.module('fsAdmin.components')
                     if (name === instance.name) {
                         scope.definitions.push(instance);
                     }
-                    console.log('instance',instance);
+                    //console.log('instance',instance);
                     if(instance.type === 'image'){
                         instance.opts = new CropperOpts(name,instance.isList, scope.initResource);
                     }
@@ -108,3 +123,4 @@ angular.module('fsAdmin.components')
         }
     };
 });
+
