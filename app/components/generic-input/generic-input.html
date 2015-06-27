@@ -70,5 +70,28 @@
             </div>
 
         </span>
+
+        <div ng-if="def.type=='datetime'">
+            <div class="dropdown">
+                <a class="dropdown-toggle" href="#" ng-attr-id="{{def.name + '_datetime'}}"
+                                                    data-toggle="dropdown"
+                                                    data-target="#">
+                    <div class="input-group">
+                        <input type="text" class="form-control" ng-model="instance[def.name]"
+                                                                format-date-time="{{def.format}}">
+                        <span class="input-group-addon">
+                            <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                    </div>
+                </a>
+                <ul class="dropdown-menu">
+                    <datetimepicker data-ng-model="instance[def.name]"
+                                    data-datetimepicker-config="
+                                        {dropdownSelector: '#' + def.name + '_datetime',
+                                         startView: def.startView || 'day',
+                                         minView: def.minView || 'minute'}" />
+                </ul>
+            </div>
+        </div>
     </div>
 </div>

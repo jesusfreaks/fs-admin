@@ -68,6 +68,23 @@ angular.module('fsAdmin.components')
         return CropperOpts;
     })
 
+    .directive('formatDateTime', function ($filter) {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModelController) {
+                ngModelController.$parsers.push(function(data) {
+                //View -> Model
+                return data;
+                });
+                ngModelController.$formatters.push(function(data) {
+                //Model -> View
+                var format = attrs.formatDateTime || "yyyy-MM-dd HH:mm";
+                return $filter('date')(data, format);
+                });
+            }
+        }
+    })
+
 
     .directive('genericInput', function ($translate, langRefFilter, FieldDefinitions, CropperOpts) {
     return {

@@ -58,10 +58,10 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 'start': {
-                    type: 'text', maxLength: 3
+                    type: 'datetime'
                 },
                 'end': {
-                    type: 'text', maxLength: 3
+                    type: 'datetime'
                 },
                 'eventCategory': {
                     type: 'text', maxLength: 3, required: true

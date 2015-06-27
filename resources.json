@@ -26,7 +26,10 @@
             "bower_components/ng-tags-input/ng-tags-input.js",
             "bower_components/angular-translate/angular-translate.js",
             "bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
-            "bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"
+            "bower_components/angular-img-cropper/dist/angular-img-cropper.min.js",
+            "bower_components/moment/moment.js",
+            "bower_components/bootstrap-sass/assets/javascripts/bootstrap.js",
+            "bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"
 
         ],
         "externalExcludeFromBuild": [
