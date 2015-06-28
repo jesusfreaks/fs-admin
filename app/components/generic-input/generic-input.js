@@ -15,35 +15,31 @@ angular.module('fsAdmin.components')
             this.data = [];
             //TODO: optimize to exec only if rendered
             console.log('init Referenced data:',this.initRo,initRo);
-            this.fetchData();
-
-        }
-
-        Referenced.prototype.fetchData = function (){
-            var self = this, fetchFn = this.initRo[this.fetchMethod];
+            var me = this, fetchFn = this.initRo[this.fetchMethod];
+            console.log('self', me);
             if(!angular.isFunction(fetchFn)){
                 return;
             }
             var prom = fetchFn();
             prom.then(function(result){
-                self.data =[];
+                me.data =[];
                 angular.forEach(result,function(elem){
 
                     var scope = $rootScope.$new();
                     scope.item = elem;
                     scope.language = langRefFilter();
-                    console.log('valueEl ',self.valueEl,'evaled',scope.$eval(self.valueEl),'againstScope',scope);
+                    //console.log('valueEl ',me.valueEl,'evaled',scope.$eval(me.valueEl),'againstScope',scope);
 
-                    self.data.push({
-                        label:scope.$eval(self.labelEl ),
+                    me.data.push({
+                        label:scope.$eval(me.labelEl ),
                         item: elem,
-                        value: scope.$eval(self.valueEl )
+                        value: scope.$eval(me.valueEl )
                     });
                     scope.$destroy();
                 });
-                console.log('self.data',self.data);
+                console.log('self.data',me.data);
             })
-        };
+        }
         return Referenced;
     })
     .service('CropperOpts',function($http){
@@ -197,6 +193,8 @@ angular.module('fsAdmin.components')
                 angular.forEach(definitions, function (instance) {
                     if (name === instance.name) {
                         scope.definitions.push(instance);
+                    }else{
+                        return;
                     }
                     // initialize image upload
                     if(instance.type === 'image'){
@@ -205,6 +203,7 @@ angular.module('fsAdmin.components')
                             instance.isList, scope.initResource);
                     }
                     if(instance.type === 'reference'){
+                        console.log('instance.type',instance.type,'for',instance.name);
                         instance.opts = new Referenced(instance.opts,scope.initResource)
                     }
                 });
