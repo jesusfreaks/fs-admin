@@ -36,6 +36,7 @@
     "event.description":"Beschreibung",
     "event.tags":"Tags",
     "event.preview":"Intro",
+    "event.images":"Bilder",
 
     "location.save.success":"Gespeichert",
     "location.update.success":"Geändert",

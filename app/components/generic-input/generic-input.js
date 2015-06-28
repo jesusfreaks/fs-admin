@@ -7,8 +7,17 @@
 'use strict';
 angular.module('fsAdmin.components')
     .service('CropperOpts',function($http){
-        function CropperOpts(fieldName, appendToList, initResource){
+
+        function remove(array, from, to) {
+            var rest = array.slice((to || from) + 1 || array.length);
+            array.length = from < 0 ? array.length + from : from;
+            return array.push.apply(array, rest);
+        };
+
+
+        function CropperOpts(instance, fieldName, appendToList, initResource){
             this.dataTarget = {
+                instance: instance,
                 fieldName : fieldName,
                 appendToList : appendToList,
                 initResource : initResource
@@ -26,6 +35,13 @@ angular.module('fsAdmin.components')
             };
         }
 
+        CropperOpts.prototype.removeImageAtIdx = function(idx){
+            console.log('removing ',idx);
+           if(angular.isArray(this.dataTarget.instance[this.dataTarget.fieldName])){
+               remove(this.dataTarget.instance[this.dataTarget.fieldName],idx);
+           }
+        };
+
         function dataURItoBlob(dataURI, mt) {
             var byteString = atob(dataURI.split(',')[1]);
             var ab = new ArrayBuffer(byteString.length);
@@ -37,6 +53,7 @@ angular.module('fsAdmin.components')
         }
 
         CropperOpts.prototype.ok = function(instance){
+            var me = this;
             // append image to list
             console.log('instance',instance);
 
@@ -55,6 +72,18 @@ angular.module('fsAdmin.components')
             .success(function(res, status, headers){
                     console.log('upload complete',res);
                     console.log('Here is the location of the uploaded image:', headers('Location'));
+                    console.log('instance',me.dataTarget.instance,'field name:', me.dataTarget.fieldName, headers('Location'));
+                    var url = headers('Location');
+                    if(me.dataTarget.appendToList===true){
+                        if(!angular.isArray(me.dataTarget.instance[me.dataTarget.fieldName])){
+                            me.dataTarget.instance[me.dataTarget.fieldName]=[];
+                        }
+                        me.dataTarget.instance[me.dataTarget.fieldName].push(url);
+                    }else{
+                        me.dataTarget.instance[me.dataTarget.fieldName] = url;
+                    }
+                    self.sourceImage = undefined;
+                    self.croppedImage = undefined;
             })
             .error(function(err){
                     console.log('upload error',err);
@@ -130,9 +159,11 @@ angular.module('fsAdmin.components')
                     if (name === instance.name) {
                         scope.definitions.push(instance);
                     }
-                    //console.log('instance',instance);
+                    // initialize image upload
                     if(instance.type === 'image'){
-                        instance.opts = new CropperOpts(name,instance.isList, scope.initResource);
+                        console.log('instance',scope.instance);
+                        instance.opts = new CropperOpts(scope.instance, instance.name,
+                            instance.isList, scope.initResource);
                     }
                 });
 

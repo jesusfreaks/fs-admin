@@ -2,7 +2,9 @@
 
     <div class="col-sm-12">
 
-        <label for="{{(language|langRef)}}_{{def.name}}" ng-if="def.type!=='empty'">{{ ($parent.prefix +'.' + def.name) |translate}} <span ng-if="def.required">*</span></label>
+        <label for="{{(language|langRef)}}_{{def.name}}" ng-if="def.type!=='empty'">{{ ($parent.prefix +'.' + def.name)
+            |translate}}
+            <span ng-if="def.required">*</span></label>
 
         <span ng-if="def.type=='text'">
 
@@ -11,7 +13,7 @@
                    ng-required="def.required"
                    ng-model="instance[(language|langRef)][def.name]"
                    ng-maxlength="def.maxLength"
-                    class="form-control">
+                   class="form-control">
 
             <input ng-if="!def.translatable" type="text"
                    id="{{(language|langRef)}}_{{def.name}}"
@@ -42,18 +44,31 @@
         <span ng-if="def.type=='tags'">
                 <tags-input class="" ng-if="def.translatable"
                             ng-model="instance[(language|langRef)][def.name]" tolist=""
-                           ></tags-input>
+                    ></tags-input>
 
                 <tags-input class="" ng-if="!def.translatable"
-                            ng-model="instance[def.name]"  tolist="" ></tags-input>
+                            ng-model="instance[def.name]" tolist=""></tags-input>
         </span>
         <span ng-if="def.type=='epmty'">
         </span>
 
         <span ng-if="def.type=='image'">
-            <img ng-if="instance[def.name]||def.isList" style="max-height:200px;" ng-repeat="url in instance[def.name]" ng-src="{{url}}">
-             <input type="file" img-cropper-fileread image="def.opts.sourceImage" ng-if="!instance[def.name]||def.isList"/>
-             <div ng-if="def.opts.sourceImage">
+            <div class="row" ng-if="instance[def.name] && def.isList">
+                <div class="col-md-4" ng-repeat="url in instance[def.name]">
+                    <img class="img-thumbnail img-responsive" ng-src="{{url}}">
+                    <a ng-click="def.opts.removeImageAtIdx($index)">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </a>
+
+
+                </div>
+            </div>
+            <img ng-if="instance[def.name] && !def.isList" style="max-height:200px;"
+                 ng-repeat="url in instance[def.name]" ng-src="{{url}}">
+
+            <input type="file" img-cropper-fileread image="def.opts.sourceImage"
+                    ng-if="!instance[def.name]||def.isList"/>
+            <div ng-if="def.opts.sourceImage">
 
                  <canvas width="500" height="300" id="canvas"
                          image-cropper image="def.opts.sourceImage"
@@ -64,21 +79,21 @@
                          touch-radius="def.opts.touchRadius"
                          crop-area-bounds="def.opts.bounds">
                  </canvas>
-                 <div>Cropped Image (Left: {{def.opts.bounds.left}} Right: {{def.opts.bounds.right}} Top: {{def.opts.bounds.top}} Bottom: {{def.opts.bounds.bottom}})</div>
-                 <div ng-show="def.opts.croppedImage!=null"><img ng-src="{{def.opts.croppedImage}}" /></div>
-                 <a ng-click="def.opts.ok(instance)">OK</a><a ng-click="def.opts.cancel()" >cancel</a>
-            </div>
+
+                 <a class="btn btn-default" ng-click="def.opts.ok(instance)">OK</a>
+                <a class="btn btn-warning" ng-click="def.opts.cancel()">cancel</a>
+             </div>
 
         </span>
 
         <div ng-if="def.type=='datetime'">
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#" ng-attr-id="{{def.name + '_datetime'}}"
-                                                    data-toggle="dropdown"
-                                                    data-target="#">
+                   data-toggle="dropdown"
+                   data-target="#">
                     <div class="input-group">
                         <input type="text" class="form-control" ng-model="instance[def.name]"
-                                                                format-date-time="{{def.format}}">
+                               format-date-time="{{def.format}}">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-calendar"></i>
                         </span>
@@ -89,7 +104,7 @@
                                     data-datetimepicker-config="
                                         {dropdownSelector: '#' + def.name + '_datetime',
                                          startView: def.startView || 'day',
-                                         minView: def.minView || 'minute'}" />
+                                         minView: def.minView || 'minute'}"/>
                 </ul>
             </div>
         </div>
