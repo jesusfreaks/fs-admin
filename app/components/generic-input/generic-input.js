@@ -82,8 +82,8 @@ angular.module('fsAdmin.components')
                     }else{
                         me.dataTarget.instance[me.dataTarget.fieldName] = url;
                     }
-                    self.sourceImage = undefined;
-                    self.croppedImage = undefined;
+                    me.sourceImage = undefined;
+                    me.croppedImage = undefined;
             })
             .error(function(err){
                     console.log('upload error',err);
