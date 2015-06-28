@@ -67,7 +67,7 @@ angular.module('fsAdmin')
                             $state.go('^.list');
                         });
                     } else { // must be a new object
-                        call = initRo.$$postEvents($scope.instance).then(function (data) {
+                        call = initRo.$$postEvents({data:$scope.instance}).then(function (data) {
                             events._embedded.eventRoList.push(data);
                             $state.go('^.list');
                         });

@@ -55,7 +55,7 @@ angular.module('fsAdmin')
         event:{
             commonProperties: {
                 'author': {
-                    type: 'text', required: true, maxLength: 80
+                    type: 'text', required: false, maxLength: 120
                 },
                 'start': {
                     type: 'datetime'
@@ -64,7 +64,10 @@ angular.module('fsAdmin')
                     type: 'datetime'
                 },
                 'eventCategory': {
-                    type: 'text', maxLength: 3, required: true
+                    type: 'text', maxLength:150, required: true
+                },
+                tags: {
+                    type: 'tags'
                 },
                 'images':{
                     isList: true,
@@ -76,13 +79,10 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'text', required: true, maxLength: 120
+                    type: 'text', required: true, maxLength: 600
                 },
                 description: {
                     type: 'textarea', required: true, maxLength: 2600
-                },
-                tags: {
-                    type: 'tags'
                 }
             }
         }
