@@ -72,6 +72,14 @@ angular.module('fsAdmin')
                 'images':{
                     isList: true,
                     type: 'image'
+                },
+                'locationRef':{
+                    type:'reference',
+                    opts:{
+                        method:'$$getLocations',
+                        label:'item[language].name',
+                        value:'item.identifier'
+                    }
                 }
             },
             translatableProperties: {

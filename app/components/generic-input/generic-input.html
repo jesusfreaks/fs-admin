@@ -86,7 +86,15 @@
 
         </span>
 
-        <div ng-if="def.type=='datetime'">
+        <div ng-if="def.type =='reference'">
+
+            {{def.opts}}
+            <span ng-repeat="item in def.opts.data">{{item.label}},</span>
+            <select ng-options="item.value as item.label for item in def.opts.data" ng-model="instance[def.name]">
+            </select>
+        </div>
+
+        <div ng-if="def.type == 'datetime'">
             <div class="dropdown">
                 <a class="dropdown-toggle" href="#" ng-attr-id="{{def.name + '_datetime'}}"
                    data-toggle="dropdown"

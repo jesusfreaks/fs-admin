@@ -6,6 +6,46 @@
  */
 'use strict';
 angular.module('fsAdmin.components')
+    .service('Referenced',function($rootScope, langRefFilter){
+        function Referenced(opts, initRo){
+            this.initRo = initRo;
+            this.fetchMethod = opts.method;
+            this.labelEl = opts.label;
+            this.valueEl = opts.value;
+            this.data = [];
+            //TODO: optimize to exec only if rendered
+            console.log('init Referenced data:',this.initRo,initRo);
+            this.fetchData();
+
+        }
+
+        Referenced.prototype.fetchData = function (){
+            var self = this, fetchFn = this.initRo[this.fetchMethod];
+            if(!angular.isFunction(fetchFn)){
+                return;
+            }
+            var prom = fetchFn();
+            prom.then(function(result){
+                self.data =[];
+                angular.forEach(result,function(elem){
+
+                    var scope = $rootScope.$new();
+                    scope.item = elem;
+                    scope.language = langRefFilter();
+                    console.log('valueEl ',self.valueEl,'evaled',scope.$eval(self.valueEl),'againstScope',scope);
+
+                    self.data.push({
+                        label:scope.$eval(self.labelEl ),
+                        item: elem,
+                        value: scope.$eval(self.valueEl )
+                    });
+                    scope.$destroy();
+                });
+                console.log('self.data',self.data);
+            })
+        };
+        return Referenced;
+    })
     .service('CropperOpts',function($http){
 
         function remove(array, from, to) {
@@ -13,7 +53,6 @@ angular.module('fsAdmin.components')
             array.length = from < 0 ? array.length + from : from;
             return array.push.apply(array, rest);
         };
-
 
         function CropperOpts(instance, fieldName, appendToList, initResource){
             this.dataTarget = {
@@ -115,7 +154,7 @@ angular.module('fsAdmin.components')
     })
 
 
-    .directive('genericInput', function ($translate, langRefFilter, FieldDefinitions, CropperOpts) {
+    .directive('genericInput', function ($translate, langRefFilter, FieldDefinitions, CropperOpts, Referenced) {
     return {
         templateUrl: 'components/generic-input/generic-input.html',
         restrict: 'EA',
@@ -164,6 +203,9 @@ angular.module('fsAdmin.components')
                         console.log('instance',scope.instance);
                         instance.opts = new CropperOpts(scope.instance, instance.name,
                             instance.isList, scope.initResource);
+                    }
+                    if(instance.type === 'reference'){
+                        instance.opts = new Referenced(instance.opts,scope.initResource)
                     }
                 });
 
