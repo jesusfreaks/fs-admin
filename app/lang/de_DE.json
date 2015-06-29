@@ -47,6 +47,14 @@
 
     "de.name" : "Name",
     "de.preview" : "Intro",
-    "de.description" : "Beschreibung"
+    "de.description" : "Beschreibung",
+
+    "event.category.null":"Bitte wählen",
+    "event.category.CONCERT":"Konzert",
+    "event.category.WORKSHOP":"Workshop",
+    "event.category.SEMINAR":"Seminar",
+    "event.category.WORSHIP":"Konzert",
+    "event.category.PRAYER":"Gebet",
+    "event.category.MISC":"Verschiedenes"
 
 }

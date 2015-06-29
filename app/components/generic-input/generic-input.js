@@ -105,9 +105,6 @@ angular.module('fsAdmin.components')
                     'Content-Type': undefined}
             })
             .success(function(res, status, headers){
-                    console.log('upload complete',res);
-                    console.log('Here is the location of the uploaded image:', headers('Location'));
-                    console.log('instance',me.dataTarget.instance,'field name:', me.dataTarget.fieldName, headers('Location'));
                     var url = headers('Location');
                     if(me.dataTarget.appendToList===true){
                         if(!angular.isArray(me.dataTarget.instance[me.dataTarget.fieldName])){
@@ -162,6 +159,21 @@ angular.module('fsAdmin.components')
             // language as attrs
         },
         link: function (scope, elem, attrs) {
+
+
+            scope.evalEl = function (item,expression){
+                console.log('run evalEl',item,expression);
+                var _scope = scope.$new();
+                _scope.item = item;
+                _scope.language = langRefFilter();
+                var result = _scope.$eval(expression);
+                console.log('resulting in ',result);
+                _scope.$destroy();
+                return result;
+            };
+
+
+
             scope.language = attrs.language;
             console.log('defining', scope.lang);
             console.log('translate', scope.language, 'as ', langRefFilter(scope.language), scope.lang);

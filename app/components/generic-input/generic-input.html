@@ -49,7 +49,7 @@
                 <tags-input class="" ng-if="!def.translatable"
                             ng-model="instance[def.name]" tolist=""></tags-input>
         </span>
-        <span ng-if="def.type=='epmty'">
+        <span ng-if="def.type=='empty'">
         </span>
 
         <span ng-if="def.type=='image'">
@@ -89,6 +89,27 @@
         <div ng-if="def.type =='reference'" class="form-group">
             <select class="form-control" ng-options="item.value as item.label for item in def.opts.data" ng-model="instance[def.name]">
             </select>
+        </div>
+        <div ng-if="def.type =='dropdown'" class="form-group">
+            <div class="dropdown ">
+                <button class="btn btn-default dropdown-toggle"
+                        type="button" id="dropdownMenu1"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="true">
+                    {{evalEl(instance[def.name], def.opts.labelEl)}}
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                    <li ng-repeat="item in def.opts.values">
+                        <a href="#" ng-click="instance[def.name]= evalEl(item, def.opts.valueEl);">
+                            {{ evalEl(item, def.opts.labelEl) }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
         </div>
 
         <div ng-if="def.type == 'datetime'">

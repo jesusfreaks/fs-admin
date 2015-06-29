@@ -64,7 +64,12 @@ angular.module('fsAdmin')
                     type: 'datetime'
                 },
                 'eventCategory': {
-                    type: 'text', maxLength:150, required: true
+                    type: 'dropdown', required: true,
+                    opts:{
+                        values:[ 'CONCERT','WORKSHOP','SEMINAR','WORSHIP','PRAYER','MISC'],
+                        labelEl:'\'event.category.\'+item|translate',
+                        valueEl:'item'
+                    }
                 },
                 tags: {
                     type: 'tags'
