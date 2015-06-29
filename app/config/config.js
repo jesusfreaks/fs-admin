@@ -96,10 +96,10 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'text', required: true, maxLength: 600
+                    type: 'text', required: true, maxLength: 500
                 },
                 description: {
-                    type: 'textarea', required: true, maxLength: 2600
+                    type: 'textarea', required: true, maxLength: 10000
                 }
             }
         },
@@ -118,10 +118,10 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'text', required: true, maxLength: 600
+                    type: 'text', required: true, maxLength: 500
                 },
                 text:{
-                    type: 'text', required: true, maxLength: 2600
+                    type: 'textarea', required: true, maxLength: 10000
                 },
                 tags: {
                     type: 'tags'
