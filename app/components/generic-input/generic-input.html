@@ -78,7 +78,7 @@
              </a>
 
             <input type="file" img-cropper-fileread image="def.opts.sourceImage"
-                    ng-if="!instance[def.name]"/>
+                    ng-if="!instance[def.name] && !def.isList || def.isList"/>
             <div ng-if="def.opts.sourceImage">
 
                  <canvas width="500" height="300" id="canvas"
@@ -97,12 +97,13 @@
 
         </span>
 
-        <div ng-if="def.type =='reference'" class="form-group">
+        <div ng-if="def.type =='reference'" >
             <select class="form-control" ng-options="item.value as item.label for item in def.opts.data" ng-model="instance[def.name]">
             </select>
         </div>
         <div ng-if="def.type =='dropdown'" class="form-group">
-            <div class="dropdown ">
+
+            <div class="dropdown">
                 <button class="btn btn-default dropdown-toggle"
                         type="button" id="dropdownMenu1"
                         data-toggle="dropdown"
@@ -119,6 +120,7 @@
                     </li>
                 </ul>
             </div>
+
 
 
         </div>

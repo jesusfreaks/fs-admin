@@ -75,9 +75,6 @@ angular.module('fsAdmin')
                         valueEl:'item'
                     }
                 },
-                tags: {
-                    type: 'tags'
-                },
                 'images':{
                     isList: true,
                     type: 'image'
@@ -100,7 +97,10 @@ angular.module('fsAdmin')
                 },
                 description: {
                     type: 'textarea', required: true, maxLength: 10000
-                }
+                },
+                tags: {
+                    type: 'tags'
+                },
             }
         },
         news:{

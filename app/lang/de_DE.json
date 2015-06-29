@@ -58,6 +58,7 @@
     "de.description" : "Beschreibung",
 
     "event.category.null":"Bitte wählen",
+    "event.category.":"Bitte wählen",
     "event.category.CONCERT":"Konzert",
     "event.category.WORKSHOP":"Workshop",
     "event.category.SEMINAR":"Seminar",
