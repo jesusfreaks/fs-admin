@@ -38,7 +38,7 @@ angular.module('fsAdmin.components')
                     scope.$destroy();
                 });
                 console.log('self.data',me.data);
-            })
+            });
         }
         return Referenced;
     })
@@ -48,7 +48,7 @@ angular.module('fsAdmin.components')
             var rest = array.slice((to || from) + 1 || array.length);
             array.length = from < 0 ? array.length + from : from;
             return array.push.apply(array, rest);
-        };
+        }
 
         function CropperOpts(instance, fieldName, appendToList, initResource){
             this.dataTarget = {
@@ -142,11 +142,11 @@ angular.module('fsAdmin.components')
                 });
                 ngModelController.$formatters.push(function(data) {
                 //Model -> View
-                var format = attrs.formatDateTime || "yyyy-MM-dd HH:mm";
+                var format = attrs.formatDateTime || 'yyyy-MM-dd HH:mm';
                 return $filter('date')(data, format);
                 });
             }
-        }
+        };
     })
 
 
@@ -204,7 +204,7 @@ angular.module('fsAdmin.components')
                     }
                     if(instance.type === 'reference'){
                         console.log('instance.type',instance.type,'for',instance.name);
-                        instance.opts = new Referenced(instance.opts,scope.initResource)
+                        instance.opts = new Referenced(instance.opts,scope.initResource);
                     }
                 });
 
