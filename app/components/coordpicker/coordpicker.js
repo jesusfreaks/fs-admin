@@ -20,6 +20,9 @@ angular.module('fsAdmin.components').directive('coordpicker', function ($q) {
             }
 
             function origImageSize(uri) {
+                // load image from url to retreive the original size
+                // this is needed later to translated coords from scaled
+                // browser image to the original size of the image
                 var deferred = $q.defer();
                 var newImg = new Image();
                 newImg.onload = function () {
@@ -82,7 +85,6 @@ angular.module('fsAdmin.components').directive('coordpicker', function ($q) {
                         document.documentElement.scrollLeft;
                     posY = e.clientY + document.body.scrollTop +
                         document.documentElement.scrollTop;
-
                 }
 
                 posX = posX - imgPos[0];
