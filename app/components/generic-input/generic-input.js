@@ -90,7 +90,7 @@ angular.module('fsAdmin.components')
         CropperOpts.prototype.ok = function(instance){
             var me = this;
             // append image to list
-            console.log('instance',instance);
+            console.log('instance', instance);
 
             var fd = new FormData();
             var blob = dataURItoBlob(this.croppedImage, 'image/png'); // TODO wandelt der cropper alle Bilder nach png?
@@ -162,12 +162,10 @@ angular.module('fsAdmin.components')
 
 
             scope.evalEl = function (item,expression){
-                console.log('run evalEl',item,expression);
                 var _scope = scope.$new();
                 _scope.item = item;
                 _scope.language = langRefFilter();
                 var result = _scope.$eval(expression);
-                console.log('resulting in ',result);
                 _scope.$destroy();
                 return result;
             };
@@ -175,9 +173,6 @@ angular.module('fsAdmin.components')
 
 
             scope.language = attrs.language;
-            console.log('defining', scope.lang);
-            console.log('translate', scope.language, 'as ', langRefFilter(scope.language), scope.lang);
-
             var definitions = [];
 
             angular.forEach(FieldDefinitions[scope.instanceType].commonProperties, function (definition, name) {
@@ -210,12 +205,10 @@ angular.module('fsAdmin.components')
                     }
                     // initialize image upload
                     if(instance.type === 'image'){
-                        console.log('instance',scope.instance);
                         instance.opts = new CropperOpts(scope.instance, instance.name,
                             instance.isList, scope.initResource);
                     }
                     if(instance.type === 'reference'){
-                        console.log('instance.type',instance.type,'for',instance.name);
                         instance.opts = new Referenced(instance.opts,scope.initResource);
                     }
                 });

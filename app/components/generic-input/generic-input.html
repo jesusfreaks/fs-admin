@@ -49,7 +49,15 @@
                 <tags-input class="" ng-if="!def.translatable"
                             ng-model="instance[def.name]" tolist=""></tags-input>
         </span>
+
+        <!-- none translateables-->
+
         <span ng-if="def.type=='empty'">
+        </span>
+
+        <span ng-if="def.type==='checkbox'">
+            <input type="checkbox" class="form-control"
+                   ng-model="instance[def.name]">
         </span>
 
         <span ng-if="def.type=='image'">

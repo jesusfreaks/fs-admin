@@ -6,7 +6,7 @@
                 instance="instance"
                 instance-type="location"
                 fields="['name','preview','description','tags']"
-                language="de_DE">
+                language="de_DE" init-resource="initRo">
             </generic-input>
         </div>
 
@@ -16,10 +16,68 @@
                 instance="instance"
                 instance-type="location"
                 fields="['name','preview','description','tags']"
-                language="en_EN">
+                language="en_EN" init-resource="initRo">
             </generic-input>
         </div>
 
+        <div class="row">
+            <div class="col-md-offset-5 col-md-6">
+                <h3 >{{ 'location.geoCoords'|translate}}
+                </h3>
+
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-2">
+                <label>{{'geoCoordinate.latitude'|translate}}</label>
+                <input class="form-control" type="text" ng-model="instance.geoCoordinate.latitude">
+
+            </div>
+            <div class="col-md-push-2 col-md-2">
+                <label>{{'geoCoordinate.latitude'|translate}}</label>
+                <input class="form-control" type="text" ng-model="instance.geoCoordinate.longitude">
+            </div>
+        </div>
+
+        <div class="form-group ">
+            <div class="col-md-push-2 col-md-8">
+                <coordpicker ng-model="instance.geoCoordinate"></coordpicker>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-push-2 col-md-2">
+                <generic-input
+                    instance="instance"
+                    instance-type="location"
+                    fields="['markOnMap']"
+                    language="en_EN"
+                    init-resource="initRo">
+                </generic-input>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-offset-5 col-md-6">
+            <h3>{{ 'location.images'|translate}}
+            </h3>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-push-2 col-md-8">
+            <generic-input
+                instance="instance"
+                instance-type="location"
+                fields="['images']"
+                language="en_EN"
+                init-resource="initRo">
+            </generic-input>
+        </div>
     </div>
 
     <div class="form-group">

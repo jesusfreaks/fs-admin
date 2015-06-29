@@ -27,6 +27,13 @@
     "location.description":"Beschreibung",
     "location.tags":"Kategorien",
     "location.preview":"Intro",
+    "location.markOnMap":"In Karte anzeigen",
+    "location.images":"Bilder",
+    "location.geoCoords":"Koordinaten",
+    "coordpicker.pick":"Koordinaten wählen",
+
+    "geoCoordinate.latitude":"Latitude",
+    "geoCoordinate.longitude":"Longitude",
 
     "event.name":"Name",
     "event.author":"Autor",
@@ -54,8 +61,9 @@
     "event.category.CONCERT":"Konzert",
     "event.category.WORKSHOP":"Workshop",
     "event.category.SEMINAR":"Seminar",
-    "event.category.WORSHIP":"Konzert",
+    "event.category.WORSHIP":"Worship",
     "event.category.PRAYER":"Gebet",
     "event.category.MISC":"Verschiedenes"
+
 
 }

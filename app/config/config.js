@@ -33,8 +33,12 @@ angular.module('fsAdmin')
     .constant('FieldDefinitions',{
         location:{
             commonProperties: {
-                'code': {
-                    type: 'text', maxLength: 3, required: true
+                'images':{
+                    isList: true,
+                    type: 'image'
+                },
+                'markOnMap':{
+                    type:'checkbox'
                 }
             },
             translatableProperties: {

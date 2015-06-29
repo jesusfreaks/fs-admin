@@ -37,7 +37,7 @@ angular.module('fsAdmin')
             url: 'update/:idx',
             templateUrl: 'states/index/location/edit.html',
             controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log) {
-
+                $scope.initRo = initRo;
                 // locate entity to edit
                 $scope.instance = locations[$stateParams.idx];
                 if (!$scope.instance) {
