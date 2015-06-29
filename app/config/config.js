@@ -16,7 +16,7 @@ angular.module('fsAdmin')
     .config(function (componentFactoryProvider) {
         componentFactoryProvider.setViewPath(function (componentSnakeName, componentName) {
             return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
-        })
+        });
     })
     .config(function ($httpProvider) {
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
