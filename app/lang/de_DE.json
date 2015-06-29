@@ -44,6 +44,7 @@
 
     "login.success":"Anmeldung erfolgreich",
     "msg.error":"Es ist ein Fehler aufgetreten",
+    "event.locationRef":"Location",
 
     "de.name" : "Name",
     "de.preview" : "Intro",
