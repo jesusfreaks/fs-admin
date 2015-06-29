@@ -72,10 +72,13 @@
                 </div>
             </div>
             <img ng-if="instance[def.name] && !def.isList" style="max-height:200px;"
-                 ng-repeat="url in instance[def.name]" ng-src="{{url}}">
+                ng-src="{{instance[def.name]}}">
+             <a ng-if="instance[def.name] && !def.isList" ng-click="def.opts.removeImageAtIdx($index)">
+                 <span class="glyphicon glyphicon-trash"></span>
+             </a>
 
             <input type="file" img-cropper-fileread image="def.opts.sourceImage"
-                    ng-if="!instance[def.name]||def.isList"/>
+                    ng-if="!instance[def.name]"/>
             <div ng-if="def.opts.sourceImage">
 
                  <canvas width="500" height="300" id="canvas"

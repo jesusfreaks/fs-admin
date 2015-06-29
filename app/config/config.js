@@ -102,6 +102,31 @@ angular.module('fsAdmin')
                     type: 'textarea', required: true, maxLength: 2600
                 }
             }
+        },
+        news:{
+            commonProperties: {
+                'image':{
+                    isList: false,
+                    type: 'image'
+                },
+                'publishDate': {
+                    type: 'datetime'
+                }
+            },
+            translatableProperties: {
+                title: {
+                    type: 'text', required: true, maxLength: 80
+                },
+                preview: {
+                    type: 'text', required: true, maxLength: 600
+                },
+                text:{
+                    type: 'text', required: true, maxLength: 2600
+                },
+                tags: {
+                    type: 'tags'
+                }
+            }
         }
     });
 

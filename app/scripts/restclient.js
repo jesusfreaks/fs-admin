@@ -53,6 +53,13 @@ angular.module('fsAdmin.rest', ['ngResource'])
                 angular.forEach(resource, function (res) {
                     wrapLinks(res);
                 });
+            } else if(angular.isDefined(resource._embedded) &&
+                Object.keys(resource._embedded) &&
+                angular.isArray(Object.keys(resource._embedded))&&
+                Object.keys(resource._embedded).length===1){ // special case where elements live under _embedded.<entityName>RoList
+
+                var elemKey = Object.keys(resource._embedded)[0];
+                wrapActions(resource._embedded[elemKey]);
             } else {
                 wrapLinks(resource);
             }

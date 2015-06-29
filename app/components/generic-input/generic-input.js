@@ -74,6 +74,8 @@ angular.module('fsAdmin.components')
             console.log('removing ',idx);
            if(angular.isArray(this.dataTarget.instance[this.dataTarget.fieldName])){
                remove(this.dataTarget.instance[this.dataTarget.fieldName],idx);
+           }else{
+               this.dataTarget.instance[this.dataTarget.fieldName] = undefined;
            }
         };
 

@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1>{{'app.general.news'|translate}}</h1>
+    </div>
+    <div class="col-md-6">
+        <button class="btn btn-default pull-right" ng-click="create()">{{'app.general.create'|translate}}</button>
+    </div>
+</div>
+
+
+<bstable-component data="news"
+                   fields="['de.title','de.preview']"
+                   translation-key=".de." editable="index.news.update">
+</bstable-component>
+
