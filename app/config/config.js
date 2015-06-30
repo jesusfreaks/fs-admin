@@ -111,6 +111,9 @@ angular.module('fsAdmin')
                 },
                 'publishDate': {
                     type: 'datetime'
+                },
+                'author': {
+                    type: 'text', maxLength: 80
                 }
             },
             translatableProperties: {
