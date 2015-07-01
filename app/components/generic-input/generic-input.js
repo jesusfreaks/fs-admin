@@ -6,6 +6,16 @@
  */
 'use strict';
 angular.module('fsAdmin.components')
+    .service('DataHelper',function(){
+        this.prepareForSave = function(instance){
+            if(instance.de) {
+                instance.de.lang = 'de';
+            }
+            if(instance.en){
+                instance.en.lang = 'en';
+            }
+        };
+    })
     .service('Referenced',function($rootScope, langRefFilter){
         function Referenced(opts, initRo){
             this.initRo = initRo;

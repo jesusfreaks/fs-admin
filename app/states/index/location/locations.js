@@ -36,7 +36,7 @@ angular.module('fsAdmin')
         $stateProvider.state('index.locations.update', {
             url: 'update/:idx',
             templateUrl: 'states/index/location/edit.html',
-            controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log) {
+            controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log, DataHelper ) {
                 $scope.initRo = initRo;
                 // locate entity to edit
                 $scope.instance = locations[$stateParams.idx];
@@ -64,7 +64,8 @@ angular.module('fsAdmin')
                             $state.go('^.list');
                         });
                     } else { // must be a new object
-                        call = initRo.$$postLocations($scope.instance).then(function (data) {
+                        DataHelper.prepareForSave($scope.instance);
+                        call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
                             locations.push(data);
                             $state.go('^.list');
                         });
