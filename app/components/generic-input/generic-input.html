@@ -63,7 +63,7 @@
         <span ng-if="def.type=='image'">
             <div class="row" ng-if="instance[def.name] && def.isList">
                 <div class="col-md-4" ng-repeat="url in instance[def.name]">
-                    <img class="img-thumbnail img-responsive" ng-src="{{url}}">
+                    <img class="img-thumbnail img-responsive" ng-src="{{apiUrl + url}}">
                     <a ng-click="def.opts.removeImageAtIdx($index)">
                         <span class="glyphicon glyphicon-trash"></span>
                     </a>

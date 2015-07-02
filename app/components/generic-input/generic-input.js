@@ -223,7 +223,7 @@ angular.module('fsAdmin.components')
     })
 
 
-    .directive('genericInput', function ($translate, langRefFilter, FieldDefinitions, CropperOpts, Referenced) {
+    .directive('genericInput', function ($translate, langRefFilter, FieldDefinitions, CropperOpts, Referenced, Config) {
     return {
         templateUrl: 'components/generic-input/generic-input.html',
         restrict: 'EA',
@@ -246,7 +246,7 @@ angular.module('fsAdmin.components')
                 return result;
             };
 
-
+            scope.apiUrl = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port;
 
             scope.language = attrs.language;
             var definitions = [];
