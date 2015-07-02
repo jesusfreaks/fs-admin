@@ -62,7 +62,7 @@ angular.module('fsAdmin')
                     type: 'text', required: false, maxLength: 120
                 },
                 'start': {
-                    type: 'datetime'
+                    type: 'datetime'//, format:'yyyy-MM-ddTHH:mm:ss' not supported anymore as we would need 4 differnt formats here to convert between inputtext (view ,model) & (timepicker model and api) values
                 },
                 'end': {
                     type: 'datetime'
@@ -100,7 +100,7 @@ angular.module('fsAdmin')
                 },
                 tags: {
                     type: 'tags'
-                },
+                }
             }
         },
         news:{

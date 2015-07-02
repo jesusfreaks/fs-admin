@@ -132,14 +132,14 @@
                    data-target="#">
                     <div class="input-group">
                         <input type="text" class="form-control" ng-model="instance[def.name]"
-                               format-date-time="{{def.format}}">
+                               format-date-time="">
                         <span class="input-group-addon">
                             <i class="glyphicon glyphicon-calendar"></i>
                         </span>
                     </div>
                 </a>
                 <ul class="dropdown-menu">
-                    <datetimepicker data-ng-model="instance[def.name]"
+                    <datetimepicker data-ng-model="instance[def.name]" datepickerformat=""
                                     data-datetimepicker-config="
                                         {dropdownSelector: '#' + def.name + '_datetime',
                                          startView: def.startView || 'day',

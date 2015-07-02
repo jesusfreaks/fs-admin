@@ -141,18 +141,82 @@ angular.module('fsAdmin.components')
         return CropperOpts;
     })
 
-    .directive('formatDateTime', function ($filter) {
+    .directive('formatDateTime', function () {
         return {
             require: 'ngModel',
             link: function(scope, element, attrs, ngModelController) {
-                ngModelController.$parsers.push(function(data) {
-                //View -> Model
-                return data;
+                ngModelController.$parsers.push(function (data) {
+                    //View -> Model
+                    var res;
+                    if(typeof data ==='string'){
+                        res = moment(data,'YYYY-MM-DD HH:mm');
+                    }else if (data !== undefined && data !== null){
+                        res = moment(data);
+                    }else{
+                        ngModelController.$setValidity('date',false);
+                        return;
+                    }
+                    var result =  res.format('YYYY-MM-DDTHH:mm');
+                    ngModelController.$setValidity('date',true);
+                    console.log('view->model ', result);
+                    return result;
                 });
-                ngModelController.$formatters.push(function(data) {
-                //Model -> View
-                var format = attrs.formatDateTime || 'yyyy-MM-dd HH:mm';
-                return $filter('date')(data, format);
+                ngModelController.$formatters.push(function (data) {
+                    //Model -> View
+                    var res;
+                    if(typeof data ==='string'){
+                        res = moment(data,'YYYY-MM-DDTHH:mm');
+                    }
+                    else if (data !== undefined && data !== null){
+                        res = moment(data);
+                    }else{
+                        return undefined;
+                    }
+                    var result =  res.format('YYYY-MM-DD HH:mm');
+                    //console.log('model->view',result);
+                    return result;
+                });
+            }
+        };
+    })
+    .directive('datepickerformat', function () {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModelController) {
+                ngModelController.$parsers.push(function (data) {
+                    //View -> Model
+                    // normally we should get a date as input here but we also support a string
+                    var res;
+                    if(typeof data ==='string'){
+                        res = moment(data,'YYYY-MM-DD HH:mm');
+                    }else if (data !== undefined && data !== null){
+                        res = moment(data);
+                    }else{
+                        // formater is undefined;
+                        return undefined;
+                    }
+                    var result =  res.format('YYYY-MM-DDTHH:mm');
+                    console.log('view->model ', result);
+                    return result;
+                });
+                ngModelController.$formatters.push(function (data) {
+                    console.log(' data input',data);
+                    //Model -> View
+                    var res;
+                    if(typeof data ==='string'){
+                        console.log('parsing a date str');
+                        res = moment(data,'YYYY-MM-DDTHH:mm');
+                    }
+                    else if(data !== undefined && data !== null ){
+                        console.log('try to parse something');
+                        res = moment(data);
+                    }else{
+                        console.log('use now ');
+                        res = moment();
+                    }
+                    var result =  res.toDate();
+                    console.log('model->view',result);
+                    return result;
                 });
             }
         };
