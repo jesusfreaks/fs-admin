@@ -32,6 +32,7 @@
         "it": false,
         "spyOn": false,
         "jasmine": false,
-        "xdescribe": false
+        "xdescribe": false,
+        "moment":false
     }
 }
