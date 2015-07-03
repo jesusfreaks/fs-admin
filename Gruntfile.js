@@ -24,6 +24,7 @@ module.exports = function (grunt) {
     if (typeof path === 'object') {
       return yeomanConfig.app + '/' + path.min;
     }
+    //if(path.indexOf('.min.js')===-1)
     path = path.replace(/(\.js|\.src.js)/, ".min.js");
     return yeomanConfig.app + '/' + path;
   });
@@ -249,7 +250,13 @@ module.exports = function (grunt) {
             src: [
               'generated/*'
             ]
-          }
+          },{
+           expand: true,
+           cwd: '<%= yeoman.app %>',
+           dest: '<%= yeoman.dist %>/',
+           src: ['bower_components/**']
+
+	}
         ]
       },
       styles: {
@@ -281,7 +288,13 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/',
         dest: '<%= yeoman.dist %>/',
         src: ['**/*', '!**/*.{scss,sass,coffee}', '!dev/**/*']
-      }
+      },
+      bowerComps: {
+	expand: true,
+	cwd: '<%= yeoman.app %>',
+	dest: '<%= yeoman.dist %>/scripts',
+	src: ['bower_components']
+}
     },
     concurrent: {
       server: [

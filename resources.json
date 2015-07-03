@@ -19,22 +19,23 @@
             "bower_components/angular-promise-tracker/promise-tracker.js",
             "bower_components/restangular/dist/restangular.js",
             "bower_components/angular-ui-router/release/angular-ui-router.js",
-            "bower_components/angular-ui-bootstrap-bower/ui-bootstrap.js",
-            "bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js",
             "bower_components/ngstorage/ngStorage.js",
             "bower_components/log/log.js",
             "bower_components/ng-tags-input/ng-tags-input.js",
             "bower_components/angular-translate/angular-translate.js",
             "bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js",
-            "bower_components/angular-img-cropper/dist/angular-img-cropper.min.js",
             "bower_components/moment/moment.js",
+            "bower_components/angular-ui-bootstrap-bower/ui-bootstrap.js",
+            "bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js",
             "bower_components/bootstrap-sass/assets/javascripts/bootstrap.js",
             "bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"
 
         ],
         "externalExcludeFromBuild": [
             "bower_components/angular-mocks/angular-mocks*.js"
+
         ],
+
         "app": [
             "scripts/deepExtend.js",
             "scripts/module.js",
@@ -48,6 +49,7 @@
         "appExcludeFromBuild": [
             "config/local.js"
         ]
+
     },
     "css": [
         "styles/**/*.css"
