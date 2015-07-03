@@ -48,6 +48,7 @@ angular.module('fsAdmin')
                     $state.go('^.list');
                 }
 
+                console.log('news',news);
                 $scope.save = function () {
 
                     var translations = [$scope.instance.de, $scope.instance.en];
@@ -90,15 +91,16 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated news list
-                            angular.forEach(news, function (item, idx) {
+                            angular.forEach(news._embedded.newsRoList, function (item, idx) {
                                 if (item._links.self === $scope.instance._links.self) {
-                                    news.splice(idx, 1);
+                                    news._embedded.newsRoList.splice(idx, 1);
                                 }
                             });
                             $state.go('^.list');
                         });
 
                         Helper.messages('news.deleted.success', call);
+
                     }, function () {
                         $log.info('Modal dismissed at: ' + new Date());
                     });

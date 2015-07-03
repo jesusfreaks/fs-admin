@@ -246,6 +246,7 @@ angular.module('fsAdmin.components')
                 return result;
             };
 
+            console.log('Config',Config);
             scope.apiUrl = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port;
 
             scope.language = attrs.language;

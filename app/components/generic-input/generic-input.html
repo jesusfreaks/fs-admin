@@ -72,7 +72,7 @@
                 </div>
             </div>
             <img ng-if="instance[def.name] && !def.isList" style="max-height:200px;"
-                ng-src="{{instance[def.name]}}">
+                ng-src="{{apiUrl + instance[def.name]}}">
              <a ng-if="instance[def.name] && !def.isList" ng-click="def.opts.removeImageAtIdx($index)">
                  <span class="glyphicon glyphicon-trash"></span>
              </a>
