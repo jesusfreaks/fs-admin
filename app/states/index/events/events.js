@@ -90,9 +90,9 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated events list
-                            angular.forEach(events, function (event, idx) {
+                            angular.forEach(events._embedded.eventRoList, function (event, idx) {
                                 if (event._links.self === $scope.instance._links.self) {
-                                    events.splice(idx, 1);
+                                    events._embedded.eventRoList.splice(idx, 1);
                                 }
                             });
                             $state.go('^.list');
