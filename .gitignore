@@ -6,3 +6,4 @@ node_modules
 test/coverage
 .grunt/
 app/bower_components
+app/config/local.js
