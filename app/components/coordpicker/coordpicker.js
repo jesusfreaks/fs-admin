@@ -97,6 +97,8 @@ angular.module('fsAdmin.components').directive('coordpicker', function ($q) {
                                 latitude: scaled[0],
                                 longitude: scaled[1]
                             };
+                        var oldvalue=ctrl.$modelValue;
+                        result.size=oldvalue.size;
                         ctrl.$setViewValue(result);
 
 

@@ -32,8 +32,9 @@
     "location.geoCoords":"Koordinaten",
     "coordpicker.pick":"Koordinaten wählen",
 
-    "geoCoordinate.latitude":"Latitude",
-    "geoCoordinate.longitude":"Longitude",
+    "geoCoordinate.latitude":"X",
+    "geoCoordinate.longitude":"Y",
+    "geoCoordinate.size":"Größe",
 
     "event.name":"Name",
     "event.author":"Autor",
