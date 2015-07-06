@@ -51,7 +51,9 @@ angular.module('fsAdmin')
                     }
                 }
                 else {
-                    $scope.instance = {};
+                    $scope.instance = {
+                        geoCoordinate : {}
+                    };
                 }
 
 
