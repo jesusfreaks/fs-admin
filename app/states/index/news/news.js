@@ -25,9 +25,7 @@ angular.module('fsAdmin')
                 $scope.news = news._embedded.newsRoList;
                 console.log('news', $scope.news);
                 $scope.create = function () {
-                    var defaults = {};
-                    $scope.news.push(defaults);
-                    $state.go('index.news.update', {idx: $scope.news.length - 1});
+                    $state.go('index.news.update');
                 };
             }
         });
@@ -37,18 +35,21 @@ angular.module('fsAdmin')
             url: 'update/:idx',
             templateUrl: 'states/index/news/edit.html',
             controller: function ($scope, news, $stateParams, initRo, $state,
-                                  MessagesService, Helper, $modal, $log) {
+                                  MessagesService, Helper, $modal, $log, DataHelper) {
 
-                // locate entity to edit
-                $scope.instance = news._embedded.newsRoList[$stateParams.idx] || {};
-                console.log('instance',$scope.instance);
                 $scope.initRo = initRo;
 
-                if (!$scope.instance) {
-                    $state.go('^.list');
+                if ($stateParams.idx) {
+                    $scope.instance = angular.copy(news._embedded.newsRoList[$stateParams.idx]);
+
+                    if (!$scope.instance) {
+                        $state.go('^.list');
+                    }
+                }
+                else {
+                    $scope.instance = {};
                 }
 
-                console.log('news',news);
                 $scope.save = function () {
 
                     var translations = [$scope.instance.de, $scope.instance.en];
@@ -68,6 +69,7 @@ angular.module('fsAdmin')
                             $state.go('^.list');
                         });
                     } else { // must be a new object
+                        DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postNews({data:$scope.instance}).then(function (data) {
                             news._embedded.newsRoList.push(data);
                             $state.go('^.list');
@@ -92,7 +94,7 @@ angular.module('fsAdmin')
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated news list
                             angular.forEach(news._embedded.newsRoList, function (item, idx) {
-                                if (item._links.self === $scope.instance._links.self) {
+                                if (item._links.self.href === $scope.instance._links.self.href) {
                                     news._embedded.newsRoList.splice(idx, 1);
                                 }
                             });

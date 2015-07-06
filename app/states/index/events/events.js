@@ -26,9 +26,7 @@ angular.module('fsAdmin')
                 $scope.events = events._embedded.eventRoList;
                 console.log('events',$scope.events);
                 $scope.create = function () {
-                    var defaults = {};
-                    $scope.events.push(defaults);
-                    $state.go('index.events.update', {idx: $scope.events.length - 1});
+                    $state.go('index.events.update');
                 };
             }
         });
@@ -37,14 +35,19 @@ angular.module('fsAdmin')
             url: 'update/:idx',
             templateUrl: 'states/index/events/edit.html',
             controller: function ($scope, events, $stateParams, initRo, $state,
-                                  MessagesService, Helper, $modal, $log) {
+                                  MessagesService, Helper, $modal, $log, DataHelper) {
 
-                // locate entity to edit
-                $scope.instance = events._embedded.eventRoList[$stateParams.idx] || {};
                 $scope.initRo = initRo;
 
-                if (!$scope.instance) {
-                    $state.go('^.list');
+                if ($stateParams.idx) {
+                    $scope.instance = angular.copy(events._embedded.eventRoList[$stateParams.idx]);
+
+                    if (!$scope.instance) {
+                        $state.go('^.list');
+                    }
+                }
+                else {
+                    $scope.instance = {};
                 }
 
                 $scope.save = function () {
@@ -67,6 +70,7 @@ angular.module('fsAdmin')
                             $state.go('^.list');
                         });
                     } else { // must be a new object
+                        DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postEvents({data:$scope.instance}).then(function (data) {
                             events._embedded.eventRoList.push(data);
                             $state.go('^.list');
@@ -91,7 +95,7 @@ angular.module('fsAdmin')
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated events list
                             angular.forEach(events._embedded.eventRoList, function (event, idx) {
-                                if (event._links.self === $scope.instance._links.self) {
+                                if (event._links.self.href === $scope.instance._links.self.href) {
                                     events._embedded.eventRoList.splice(idx, 1);
                                 }
                             });

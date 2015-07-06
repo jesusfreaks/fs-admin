@@ -72,9 +72,7 @@ angular.module('fsAdmin')
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
-                            locations.pop(); // keine Ahnung, wer hier ein leeres Element angelegt hat???
                             locations.push(data);
-                            console.log(locations);
                             $state.go('^.list');
                         });
                     }

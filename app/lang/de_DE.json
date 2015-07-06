@@ -4,6 +4,7 @@
     "app.general.locations":"Veranstaltungsorte",
     "app.general.events":"Veranstaltungen",
     "app.general.event":"Veranstaltung",
+    "app.general.news":"News",
     "de_DE":"Deutsch",
     "en_EN":"Englisch",
 
@@ -57,6 +58,7 @@
     "de.name" : "Name",
     "de.preview" : "Intro",
     "de.description" : "Beschreibung",
+    "de.title" : "Titel",
 
     "event.category.null":"Bitte wählen",
     "event.category.":"Bitte wählen",
