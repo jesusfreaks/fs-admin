@@ -13,7 +13,14 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 locations: function (initRo) {
-                    return initRo.$$getLocations();
+                    return initRo.$$getLocations().then(function (data) {
+                        if (!data._embedded) {
+                            data._embedded = {
+                                locationRoList : []
+                            };
+                        }
+                        return data;
+                    });
                 }
             }
         });
@@ -65,6 +72,7 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
+                            locations._embedded.locationRoList[$stateParams.idx] = $scope.instance;
                             $state.go('^.list');
                         });
                     } else { // must be a new object
@@ -92,11 +100,7 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated locations list
-                            angular.forEach(locations._embedded.locationRoList, function (location, idx) {
-                                if (location._links.self.href === $scope.instance._links.self.href) {
-                                    locations._embedded.locationRoList.splice(idx, 1);
-                                }
-                            });
+                            locations._embedded.locationRoList.splice($stateParams.idx, 1);
                             $state.go('^.list');
                         });
 

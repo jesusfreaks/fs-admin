@@ -13,7 +13,14 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 events: function (initRo) {
-                    return initRo.$$getEvents();
+                    return initRo.$$getEvents().then(function (data) {
+                        if (!data._embedded) {
+                            data._embedded = {
+                                eventRoList : []
+                            };
+                        }
+                        return data;
+                    });
                 }
             }
         });
@@ -65,6 +72,7 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
+                            events._embedded.eventRoList[$stateParams.idx] = $scope.instance;
                             $state.go('^.list');
                         });
                     } else { // must be a new object
@@ -92,11 +100,7 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated events list
-                            angular.forEach(events._embedded.eventRoList, function (event, idx) {
-                                if (event._links.self.href === $scope.instance._links.self.href) {
-                                    events._embedded.eventRoList.splice(idx, 1);
-                                }
-                            });
+                            events._embedded.eventRoList.splice($stateParams.idx, 1);
                             $state.go('^.list');
                         });
 

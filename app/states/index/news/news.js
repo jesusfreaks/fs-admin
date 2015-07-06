@@ -13,7 +13,14 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 news: function (initRo) {
-                    return initRo.$$getNews();
+                    return initRo.$$getNews().then(function (data) {
+                        if (!data._embedded) {
+                            data._embedded = {
+                                newsRoList : []
+                            };
+                        }
+                        return data;
+                    });
                 }
             }
         });
@@ -66,6 +73,7 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
+                            news._embedded.newsRoList[$stateParams.idx] = $scope.instance;
                             $state.go('^.list');
                         });
                     } else { // must be a new object
@@ -93,11 +101,7 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated news list
-                            angular.forEach(news._embedded.newsRoList, function (item, idx) {
-                                if (item._links.self.href === $scope.instance._links.self.href) {
-                                    news._embedded.newsRoList.splice(idx, 1);
-                                }
-                            });
+                            news._embedded.newsRoList.splice($stateParams.idx, 1);
                             $state.go('^.list');
                         });
 
