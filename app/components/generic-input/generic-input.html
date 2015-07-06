@@ -29,7 +29,7 @@
                       ng-model="instance[(language|langRef)][def.name]"
                       ng-required="def.required"
                       ng-maxlength="def.maxLength"
-                      rows="10"
+                      rows="{{def.rows?def.rows:5}}"
                       class="form-control"></textarea>
 
             <textarea ng-if="!def.translatable"
@@ -37,7 +37,7 @@
                       ng-model="instance[def.name]"
                       ng-required="def.required"
                       ng-maxlength="def.maxLength"
-                      rows="10"
+                      rows="{{def.rows?def.rows:5}}"
                       class="form-control"></textarea>
         </span>
 

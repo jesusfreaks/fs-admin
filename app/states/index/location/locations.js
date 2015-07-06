@@ -26,9 +26,7 @@ angular.module('fsAdmin')
                 $scope.locations = locations;
 
                 $scope.create = function () {
-                    var defaults = {};
-                    $scope.locations.push(defaults);
-                    $state.go('index.locations.update', {idx: $scope.locations.length - 1});
+                    $state.go('index.locations.update');
                 };
             }
         });
@@ -38,11 +36,19 @@ angular.module('fsAdmin')
             templateUrl: 'states/index/location/edit.html',
             controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log, DataHelper ) {
                 $scope.initRo = initRo;
+
                 // locate entity to edit
-                $scope.instance = locations[$stateParams.idx];
-                if (!$scope.instance) {
-                    $state.go('^.list');
+                if ($stateParams.idx) {
+                    $scope.instance = angular.copy(locations[$stateParams.idx]);
+
+                    if (!$scope.instance) {
+                        $state.go('^.list');
+                    }
                 }
+                else {
+                    $scope.instance = {};
+                }
+
 
                 $scope.save = function () {
 
@@ -66,7 +72,9 @@ angular.module('fsAdmin')
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
+                            locations.pop(); // keine Ahnung, wer hier ein leeres Element angelegt hat???
                             locations.push(data);
+                            console.log(locations);
                             $state.go('^.list');
                         });
                     }
@@ -89,7 +97,7 @@ angular.module('fsAdmin')
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated locations list
                             angular.forEach(locations, function (location, idx) {
-                                if (location._links.self === $scope.instance._links.self) {
+                                if (location._links.self.href === $scope.instance._links.self.href) {
                                     locations.splice(idx, 1);
                                 }
                             });

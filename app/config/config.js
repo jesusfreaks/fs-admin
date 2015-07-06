@@ -49,7 +49,7 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 120
                 },
                 description: {
-                    type: 'textarea', required: true, maxLength: 2600
+                    type: 'textarea', required: true, maxLength: 2600, rows: 10
                 },
                 tags: {
                     type: 'tags'
