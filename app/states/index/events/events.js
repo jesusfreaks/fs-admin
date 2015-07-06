@@ -77,7 +77,7 @@ angular.module('fsAdmin')
                         });
                     }
 
-                    Helper.messages('event.update.success', call);
+                    Helper.messages('update.success', call);
                 };
 
                 $scope.delete = function () {
@@ -102,7 +102,7 @@ angular.module('fsAdmin')
                             $state.go('^.list');
                         });
 
-                        Helper.messages('event.deleted.success', call);
+                        Helper.messages('deleted.success', call);
                     }, function () {
                         $log.info('Modal dismissed at: ' + new Date());
                     });

@@ -47,9 +47,17 @@
     "event.preview":"Intro",
     "event.images":"Bilder",
 
-    "location.save.success":"Gespeichert",
-    "location.update.success":"Geändert",
-    "location.deleted.success":"Gelöscht",
+    "news.title" : "Titel",
+    "news.preview": "Intro",
+    "news.text": "Text",
+    "news.tags": "Tags",
+    "news.author" : "Autor",
+    "news.publishDate": "Veröffentlichen am",
+    "news.image": "Bild",
+
+    "save.success":"Gespeichert",
+    "update.success":"Geändert",
+    "deleted.success":"Gelöscht",
 
     "login.success":"Anmeldung erfolgreich",
     "msg.error":"Es ist ein Fehler aufgetreten",

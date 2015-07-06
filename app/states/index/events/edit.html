@@ -42,7 +42,7 @@
             <button type="submit" class="btn btn-primary {{editEvent.$valid?'':'disabled'}}">
                 {{'app.general.save'|translate}}
             </button>
-            <button type="reset" class="btn btn-default">{{'app.general.cancel'|translate}}</button>
+            <a ui-sref="^.list" class="btn btn-default">{{'app.general.cancel'|translate}}</a>
             <button ng-if="instance.$$deleteSelf" type="button" class="btn btn-danger" ng-click="delete()">
                 {{'app.general.delete'|translate}}
             </button>

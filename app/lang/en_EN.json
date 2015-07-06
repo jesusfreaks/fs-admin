@@ -1,10 +1,10 @@
 {
-
     "app.general.language":"Language",
     "app.general.location":"Location",
     "app.general.locations":"Locations",
     "app.general.events":"Events",
     "app.general.event":"Event",
+    "app.general.news":"News",
     "de_DE":"German",
     "en_EN":"English",
 
@@ -27,7 +27,15 @@
     "location.code":"Code",
     "location.description":"Description",
     "location.tags":"Category",
-    "location.preview":"Preview",
+    "location.preview":"Intro",
+    "location.markOnMap":"Mark on map",
+    "location.images":"Images",
+    "location.geoCoords":"Coordinates",
+    "coordpicker.pick":"Pick coordinates",
+
+    "geoCoordinate.latitude":"X",
+    "geoCoordinate.longitude":"Y",
+    "geoCoordinate.size":"Size",
 
     "event.name":"Name",
     "event.author":"Author",
@@ -36,17 +44,36 @@
     "event.eventCategory":"Category",
     "event.description":"Description",
     "event.tags":"Tags",
-    "event.preview":"Preview",
+    "event.preview":"Intro",
+    "event.images":"Images",
 
-    "location.save.success":"Saved",
-    "location.update.success":"Changed",
-    "location.deleted.success":"Deleted",
+    "news.title" : "Titel",
+    "news.preview": "Intro",
+    "news.text": "Text",
+    "news.tags": "Tags",
+    "news.author" : "Author",
+    "news.publishDate": "publish on",
+    "news.image": "Image",
+
+    "save.success":"Saved",
+    "update.success":"Changed",
+    "deleted.success":"Deleted",
 
     "login.success":"Login was successful",
     "msg.error":"An error has been occurred",
+    "event.locationRef":"Location",
 
     "de.name" : "Name",
-    "de.preview" : "Preview",
-    "de.description" : "Description"
+    "de.preview" : "Intro",
+    "de.description" : "Description",
+    "de.title" : "Titel",
 
+    "event.category.null":"Choose category",
+    "event.category.":"Choose category",
+    "event.category.CONCERT":"Concert",
+    "event.category.WORKSHOP":"Workshop",
+    "event.category.SEMINAR":"Seminar",
+    "event.category.WORSHIP":"Worship",
+    "event.category.PRAYER":"Prayer",
+    "event.category.MISC":"Misc"
 }
