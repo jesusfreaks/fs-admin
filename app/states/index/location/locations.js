@@ -13,7 +13,6 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 locations: function (initRo) {
-                    console.log('initRessource', initRo);
                     return initRo.$$getLocations();
                 }
             }
@@ -23,8 +22,7 @@ angular.module('fsAdmin')
             url: 'list',
             templateUrl: 'states/index/location/list.html',
             controller: function ($scope, locations, $state) {
-                $scope.locations = locations;
-
+                $scope.locations = locations._embedded.locationRoList;
                 $scope.create = function () {
                     $state.go('index.locations.update');
                 };
@@ -39,7 +37,7 @@ angular.module('fsAdmin')
 
                 // locate entity to edit
                 if ($stateParams.idx) {
-                    $scope.instance = angular.copy(locations[$stateParams.idx]);
+                    $scope.instance = angular.copy(locations._embedded.locationRoList[$stateParams.idx]);
 
                     if (!$scope.instance) {
                         $state.go('^.list');
@@ -72,7 +70,7 @@ angular.module('fsAdmin')
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
-                            locations.push(data);
+                            locations._embedded.locationRoList.push(data);
                             $state.go('^.list');
                         });
                     }
@@ -94,9 +92,9 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated locations list
-                            angular.forEach(locations, function (location, idx) {
+                            angular.forEach(locations._embedded.locationRoList, function (location, idx) {
                                 if (location._links.self.href === $scope.instance._links.self.href) {
-                                    locations.splice(idx, 1);
+                                    locations._embedded.locationRoList.splice(idx, 1);
                                 }
                             });
                             $state.go('^.list');

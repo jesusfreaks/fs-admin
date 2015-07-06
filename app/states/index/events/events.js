@@ -13,7 +13,6 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 events: function (initRo) {
-                    console.log('initRessource', initRo);
                     return initRo.$$getEvents();
                 }
             }
@@ -24,7 +23,6 @@ angular.module('fsAdmin')
             templateUrl: 'states/index/events/list.html',
             controller: function ($scope, events, $state) {
                 $scope.events = events._embedded.eventRoList;
-                console.log('events',$scope.events);
                 $scope.create = function () {
                     $state.go('index.events.update');
                 };
