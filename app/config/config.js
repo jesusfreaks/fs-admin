@@ -82,7 +82,7 @@ angular.module('fsAdmin')
                 'locationRef':{
                     type:'reference',
                     opts:{
-                        method:'$$getLocations',
+                        method:'$$getLocationNames',
                         label:'item[language].name',
                         value:'item.identifier'
                     }
