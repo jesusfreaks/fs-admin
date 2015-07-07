@@ -13,14 +13,7 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 locations: function (initRo) {
-                    return initRo.$$getLocations().then(function (data) {
-                        if (!data._embedded) {
-                            data._embedded = {
-                                locationRoList : []
-                            };
-                        }
-                        return data;
-                    });
+                    return initRo.$$getLocations();
                 }
             }
         });
@@ -29,7 +22,7 @@ angular.module('fsAdmin')
             url: 'list',
             templateUrl: 'states/index/location/list.html',
             controller: function ($scope, locations, $state) {
-                $scope.locations = locations._embedded.locationRoList;
+                $scope.locations = locations;
                 $scope.create = function () {
                     $state.go('index.locations.update');
                 };
@@ -44,7 +37,7 @@ angular.module('fsAdmin')
 
                 // locate entity to edit
                 if ($stateParams.idx) {
-                    $scope.instance = angular.copy(locations._embedded.locationRoList[$stateParams.idx]);
+                    $scope.instance = angular.copy(locations[$stateParams.idx]);
 
                     if (!$scope.instance) {
                         $state.go('^.list');
@@ -74,13 +67,13 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
-                            locations._embedded.locationRoList[$stateParams.idx] = $scope.instance;
+                            locations[$stateParams.idx] = $scope.instance;
                             $state.go('^.list');
                         });
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
-                            locations._embedded.locationRoList.push(data);
+                            locations.push(data);
                             $state.go('^.list');
                         });
                     }
@@ -102,7 +95,7 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated locations list
-                            locations._embedded.locationRoList.splice($stateParams.idx, 1);
+                            locations.splice($stateParams.idx, 1);
                             $state.go('^.list');
                         });
 

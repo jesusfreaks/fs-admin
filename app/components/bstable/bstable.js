@@ -44,7 +44,7 @@ angular.module('fsAdmin.components')
                 };
 
                 scope.page = {
-                    size : 5,
+                    size : 25,
                     current : 1,
                     allItems : scope.data
                 };
