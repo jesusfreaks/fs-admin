@@ -1,20 +1,45 @@
-<table class="table table-striped">
+<div>
+    <div class="row">
+        <div class="col-sm-4">
+            <label for="query">{{'app.general.search.filter.label'|translate}}</label>
+            <input type="text" id="query" class="form-control" ng-model="searchTerm" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
+        </div>
+    </div>
 
-    <thead>
-        <tr>
-            <th ng-repeat="field in fields"  >{{field|translate}}</th>
-            <th ng-if="editable"></th>
-        </tr>
-    </thead>
+    <table class="table table-striped">
 
-    <tbody>
-        <tr ng-repeat="entry in data">
-            <td ng-repeat="field in fields"  >{{resolve(entry,field)}}</td>
-            <td ng-if="editable">
-                <button class="btn btn-default " ng-click="edit($index)">{{'app.general.edit'|translate}}</button>
-            </td>
-        </tr>
-    </tbody>
+        <thead>
+            <tr>
+                <th ng-repeat="field in fields">
+                    <a href="" ng-click="order(field)">{{field|translate}}
+                    <span class="glyphicon" ng-show="predicate === field" ng-class="{'glyphicon-chevron-down':desc, 'glyphicon-chevron-up':!desc}"></span>
+                    </a>
+                </th>
+                <th ng-if="editable"></th>
+            </tr>
+        </thead>
 
+        <tbody>
 
-</table>
+            <tr ng-repeat="entry in page.items">
+                <td ng-repeat="field in fields"  >{{resolve(entry,field)}}</td>
+                <td ng-if="editable">
+                    <button class="btn btn-default " ng-click="edit($index)">{{'app.general.edit'|translate}}</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+
+    <pagination ng-change="setPage(page.current)"
+                total-items="page.totalItems"
+                previous-text="&lsaquo;"
+                next-text="&rsaquo;"
+                boundary-links="false"
+                items-per-page="page.size"
+                ng-model="page.current"
+                max-size="10"
+                num-pages="page.numPages"
+                rotate="false"></pagination>
+
+</div>

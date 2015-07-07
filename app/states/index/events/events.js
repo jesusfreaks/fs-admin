@@ -13,14 +13,7 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 events: function (initRo) {
-                    return initRo.$$getEvents().then(function (data) {
-                        if (!data._embedded) {
-                            data._embedded = {
-                                eventRoList : []
-                            };
-                        }
-                        return data;
-                    });
+                    return initRo.$$getEvents();
                 }
             }
         });
@@ -29,7 +22,10 @@ angular.module('fsAdmin')
             url: 'list',
             templateUrl: 'states/index/events/list.html',
             controller: function ($scope, events, $state) {
-                $scope.events = events._embedded.eventRoList;
+                $scope.events = events;
+                $scope.query = {
+                    de : {name: ''}
+                };
                 $scope.create = function () {
                     $state.go('index.events.update');
                 };
@@ -45,7 +41,7 @@ angular.module('fsAdmin')
                 $scope.initRo = initRo;
 
                 if ($stateParams.idx) {
-                    $scope.instance = angular.copy(events._embedded.eventRoList[$stateParams.idx]);
+                    $scope.instance = angular.copy(events[$stateParams.idx]);
 
                     if (!$scope.instance) {
                         $state.go('^.list');
@@ -72,13 +68,13 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
-                            events._embedded.eventRoList[$stateParams.idx] = $scope.instance;
+                            events[$stateParams.idx] = $scope.instance;
                             $state.go('^.list');
                         });
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postEvents({data:$scope.instance}).then(function (data) {
-                            events._embedded.eventRoList.push(data);
+                            events.push(data);
                             $state.go('^.list');
                         });
                     }
@@ -100,7 +96,7 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated events list
-                            events._embedded.eventRoList.splice($stateParams.idx, 1);
+                            events.splice($stateParams.idx, 1);
                             $state.go('^.list');
                         });
 

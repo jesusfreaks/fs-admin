@@ -7,11 +7,12 @@
     </div>
 </div>
 
-
 <bstable-component data="events"
-                   fields="['de.name','de.preview','author',
+                   fields="['de.name','de.preview',
                             'start', 'end','eventCategory']"
-                   translation-key=".de." editable="index.events.update">
+                   translation-key=".de."
+                   editable="index.events.update"
+                   search-field="de.name">
 
 </bstable-component>
 

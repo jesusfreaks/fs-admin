@@ -13,14 +13,7 @@ angular.module('fsAdmin')
             abstract: true,
             resolve: {
                 news: function (initRo) {
-                    return initRo.$$getNews().then(function (data) {
-                        if (!data._embedded) {
-                            data._embedded = {
-                                newsRoList : []
-                            };
-                        }
-                        return data;
-                    });
+                    return initRo.$$getNews();
                 }
             }
         });
@@ -29,8 +22,7 @@ angular.module('fsAdmin')
             url: 'news',
             templateUrl: 'states/index/news/list.html',
             controller: function ($scope, news, $state) {
-                $scope.news = news._embedded.newsRoList;
-                console.log('news', $scope.news);
+                $scope.news = news;
                 $scope.create = function () {
                     $state.go('index.news.update');
                 };
@@ -47,7 +39,7 @@ angular.module('fsAdmin')
                 $scope.initRo = initRo;
 
                 if ($stateParams.idx) {
-                    $scope.instance = angular.copy(news._embedded.newsRoList[$stateParams.idx]);
+                    $scope.instance = angular.copy(news[$stateParams.idx]);
 
                     if (!$scope.instance) {
                         $state.go('^.list');
@@ -73,13 +65,13 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
-                            news._embedded.newsRoList[$stateParams.idx] = $scope.instance;
+                            news[$stateParams.idx] = $scope.instance;
                             $state.go('^.list');
                         });
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postNews({data:$scope.instance}).then(function (data) {
-                            news._embedded.newsRoList.push(data);
+                            news.push(data);
                             $state.go('^.list');
                         });
                     }
@@ -101,7 +93,7 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated news list
-                            news._embedded.newsRoList.splice($stateParams.idx, 1);
+                            news.splice($stateParams.idx, 1);
                             $state.go('^.list');
                         });
 

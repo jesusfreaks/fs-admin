@@ -23,6 +23,9 @@
     "app.general.confirm.delete.title" : "Wirklich löschen?",
     "app.general.confirm.delete.text" : "endgültig löschen?",
 
+    "app.general.search.filter.label" : "Suche",
+    "app.general.search.filter.placeholder" : "Suche in Namen",
+
     "location.name":"Name",
     "location.code":"Kürzel",
     "location.description":"Beschreibung",
