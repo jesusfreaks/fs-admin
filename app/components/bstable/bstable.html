@@ -11,8 +11,8 @@
         <thead>
             <tr>
                 <th ng-repeat="field in fields">
-                    <a href="" ng-click="order(field)">{{field|translate}}
-                    <span class="glyphicon" ng-show="predicate === field" ng-class="{'glyphicon-chevron-down':desc, 'glyphicon-chevron-up':!desc}"></span>
+                    <a href="" ng-click="order(field, !page.desc)">{{field|translate}}
+                     <span class="glyphicon" ng-show="page.predicate === field" ng-class="{'glyphicon-chevron-down':page.desc, 'glyphicon-chevron-up':!page.desc}"></span>
                     </a>
                 </th>
                 <th ng-if="editable"></th>
@@ -32,7 +32,7 @@
 
     </table>
 
-    <pagination ng-change="setPage(page.current)"
+    <pagination ng-change="selectPage()"
                 total-items="page.totalItems"
                 previous-text="&lsaquo;"
                 next-text="&rsaquo;"

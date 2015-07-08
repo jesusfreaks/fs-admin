@@ -34,35 +34,55 @@ angular.module('fsAdmin.components')
 
             controller: 'bstableComponentCtrl',
 
-            link : function (scope, element, attr) {
+            link : function (scope) {
 
-                scope.order = function(predicate) {
-                    scope.desc = (scope.predicate === predicate) ? !scope.desc : false;
-                    scope.predicate = predicate;
-                    scope.page.allItems = $filter('orderBy')(scope.page.allItems,predicate,scope.desc);
-                    scope.setPage(1);
-                };
-
-                scope.page = {
+                var page = {
                     size : 25,
                     current : 1,
-                    allItems : scope.data
+                    allItems : scope.data,
+                    predicate : scope.searchField,
+                    desc : false
                 };
 
-                scope.setPage = function (pageNo) {
+                var setPage = function (pageNo, page) {
 
-                    scope.page.totalItems = scope.page.allItems.length;
-                    scope.page.current = pageNo;
-                    var startIdx = (scope.page.current-1) * scope.page.size;
-                    if (startIdx <= scope.page.allItems.length) {
-                        scope.page.items = scope.page.allItems.slice(startIdx, startIdx + scope.page.size);
+                    page.totalItems = page.allItems.length;
+                    page.current = pageNo;
+                    var startIdx = (page.current-1) * page.size;
+                    if (startIdx <= page.allItems.length) {
+                        page.items = page.allItems.slice(startIdx, startIdx + page.size);
                     }
                 };
 
-                scope.$watch('searchTerm', function (newVal) {
-                    if (newVal && newVal.length > 1) {
-                        var results = $filter('filter')(scope.data,
-                            function (val, idx) {
+                var orderPage = function(predicate, desc, page) {
+                    page.desc = desc;
+                    page.predicate = predicate;
+                    page.allItems = $filter('orderBy')(page.allItems, predicate, desc); // order filtered data
+                };
+
+                orderPage(scope.searchField, false, page);
+                setPage(1, page);
+
+                scope.page = page;
+
+                scope.selectPage = function () {
+                    setPage(page.current, page);
+                };
+
+                scope.order = function(predicate, desc) {
+                    orderPage(predicate, desc, page);
+                    setPage(1, page);
+                };
+
+                scope.$watch('searchTerm', function (newVal, oldVal) {
+
+                    if (!newVal && !oldVal) {
+                        return;
+                    }
+
+                    if (newVal.length > 1) {
+                        page.allItems = $filter('filter')(scope.data,
+                            function (val) {
                                 var expr = new RegExp(newVal, 'i');
                                 var fields = scope.searchField.split('.');
                                 var nestedField = val;
@@ -71,18 +91,14 @@ angular.module('fsAdmin.components')
                                 }
                                 return expr.test(nestedField);
                         });
-
-                        scope.page.allItems = results;
                     }
                     else {
-                        scope.page.allItems = scope.data;
+                        page.allItems = scope.data;
                     }
 
-                    scope.setPage(1);
+                    orderPage(page.predicate, page.desc, page);
+                    setPage(1, page);
                 });
-
-                scope.setPage(1);
-
             }
         };
     });
