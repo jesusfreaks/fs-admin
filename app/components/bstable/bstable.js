@@ -60,7 +60,7 @@ angular.module('fsAdmin.components')
                 };
 
                 scope.$watch('searchTerm', function (newVal) {
-                    if (newVal) {
+                    if (newVal && newVal.length > 1) {
                         var results = $filter('filter')(scope.data,
                             function (val, idx) {
                                 var expr = new RegExp(newVal, 'i');
