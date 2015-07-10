@@ -31,15 +31,20 @@ angular.module('fsAdmin')
 
 
         $stateProvider.state('index.news.update', {
-            url: 'update/:idx',
+            url: 'update/:id',
             templateUrl: 'states/index/news/edit.html',
             controller: function ($scope, news, $stateParams, initRo, $state,
                                   MessagesService, Helper, $modal, $log, DataHelper) {
 
                 $scope.initRo = initRo;
 
-                if ($stateParams.idx) {
-                    $scope.instance = angular.copy(news[$stateParams.idx]);
+                var lookup = {};
+                for (var i = 0, len = news.length; i < len; i++) {
+                    lookup[news[i].identifier] = news[i];
+                }
+
+                if ($stateParams.id) {
+                    $scope.instance = angular.copy(lookup[$stateParams.id]);
 
                     if (!$scope.instance) {
                         $state.go('^.list');
@@ -65,14 +70,12 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
-                            news[$stateParams.idx] = $scope.instance;
-                            $state.go('^.list');
+                            $state.go('^.list', {},  {reload:true});
                         });
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postNews({data:$scope.instance}).then(function (data) {
-                            news.push(data);
-                            $state.go('^.list');
+                            $state.go('^.list', {},  {reload:true});
                         });
                     }
 
@@ -92,9 +95,7 @@ angular.module('fsAdmin')
 
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
-                            // updated news list
-                            news.splice($stateParams.idx, 1);
-                            $state.go('^.list');
+                            $state.go('^.list', {},  {reload:true});
                         });
 
                         Helper.messages('deleted.success', call);

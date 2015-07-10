@@ -17,8 +17,8 @@ angular.module('fsAdmin.components')
             return scope.$eval('item.' + resolve);
         };
 
-        $scope.edit = function(index){
-            $state.go($scope.editable,{idx:index});
+        $scope.edit = function(id){
+            $state.go($scope.editable,{id:id});
         };
 
     })

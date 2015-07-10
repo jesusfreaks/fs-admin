@@ -25,7 +25,7 @@
                 <td ng-repeat="field in fields">
                     <span ng-bind-html="resolve(entry,field) | highlight:searchTerm:field:searchField"></span></td>
                 <td ng-if="editable">
-                    <button class="btn btn-default " ng-click="edit($index)">{{'app.general.edit'|translate}}</button>
+                    <button class="btn btn-default " ng-click="edit(entry.identifier)">{{'app.general.edit'|translate}}</button>
                 </td>
             </tr>
         </tbody>

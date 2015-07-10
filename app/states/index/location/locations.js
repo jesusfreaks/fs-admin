@@ -30,23 +30,25 @@ angular.module('fsAdmin')
         });
 
         $stateProvider.state('index.locations.update', {
-            url: 'update/:idx',
+            url: 'update/:id',
             templateUrl: 'states/index/location/edit.html',
             controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log, DataHelper ) {
                 $scope.initRo = initRo;
 
-                // locate entity to edit
-                if ($stateParams.idx) {
-                    $scope.instance = angular.copy(locations[$stateParams.idx]);
+                var lookup = {};
+                for (var i = 0, len = locations.length; i < len; i++) {
+                    lookup[locations[i].identifier] = locations[i];
+                }
+
+                if ($stateParams.id) {
+                    $scope.instance = angular.copy(lookup[$stateParams.id]);
 
                     if (!$scope.instance) {
                         $state.go('^.list');
                     }
                 }
                 else {
-                    $scope.instance = {
-                        geoCoordinate : {}
-                    };
+                    $scope.instance = {};
                 }
 
 
@@ -67,14 +69,12 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
-                            locations[$stateParams.idx] = $scope.instance;
-                            $state.go('^.list');
+                            $state.go('^.list', {},  {reload:true});
                         });
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
-                            locations.push(data);
-                            $state.go('^.list');
+                            $state.go('^.list', {},  {reload:true});
                         });
                     }
 
@@ -95,8 +95,7 @@ angular.module('fsAdmin')
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
                             // updated locations list
-                            locations.splice($stateParams.idx, 1);
-                            $state.go('^.list');
+                            $state.go('^.list', {},  {reload:true});
                         });
 
                         Helper.messages('deleted.success', call);
