@@ -6,7 +6,7 @@
             <input type="text" id="query" class="form-control" ng-model="searchTerm" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
         </div>
 
-        <div class="col-sm-3" ng-show="filterOptions">
+        <div class="col-sm-3">
             <label for="filter">Filter</label>
             <select id="filter" class="form-control" ng-model="filterBy" ng-options="option.label for option in filterOptions"></select>
         </div>
