@@ -1,8 +1,14 @@
 <div>
+
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-3">
             <label for="query">{{'app.general.search.filter.label'|translate}}</label>
             <input type="text" id="query" class="form-control" ng-model="searchTerm" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
+        </div>
+
+        <div class="col-sm-3" ng-show="filterOptions">
+            <label for="filter">Filter</label>
+            <select id="filter" class="form-control" ng-model="filterBy" ng-options="option.label for option in filterOptions"></select>
         </div>
     </div>
 
