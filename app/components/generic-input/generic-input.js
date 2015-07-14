@@ -22,17 +22,18 @@ angular.module('fsAdmin.components')
             this.fetchMethod = opts.method;
             this.labelEl = opts.label;
             this.valueEl = opts.value;
-            this.data = [];
+            this.data = [{
+                label: '', item: null, value: null
+            }];
             //TODO: optimize to exec only if rendered
-            console.log('init Referenced data:',this.initRo,initRo);
             var me = this, fetchFn = this.initRo[this.fetchMethod];
-            console.log('self', me);
             if(!angular.isFunction(fetchFn)){
                 return;
             }
+
             var prom = fetchFn();
             prom.then(function(result){
-                me.data =[];
+                //me.data =[];
                 angular.forEach(result,function(elem){
 
                     var scope = $rootScope.$new();
@@ -47,7 +48,6 @@ angular.module('fsAdmin.components')
                     });
                     scope.$destroy();
                 });
-                console.log('self.data',me.data);
             });
         }
         return Referenced;
@@ -81,7 +81,6 @@ angular.module('fsAdmin.components')
         }
 
         CropperOpts.prototype.removeImageAtIdx = function(idx){
-            console.log('removing ',idx);
            if(angular.isArray(this.dataTarget.instance[this.dataTarget.fieldName])){
                remove(this.dataTarget.instance[this.dataTarget.fieldName],idx);
            }else{
@@ -102,8 +101,6 @@ angular.module('fsAdmin.components')
         CropperOpts.prototype.ok = function(instance){
             var me = this;
             // append image to list
-            console.log('instance', instance);
-
             var fd = new FormData();
             var blob = dataURItoBlob(this.croppedImage, 'image/png'); // TODO wandelt der cropper alle Bilder nach png?
 
@@ -158,7 +155,6 @@ angular.module('fsAdmin.components')
                     }
                     var result =  res.format('YYYY-MM-DDTHH:mm');
                     ngModelController.$setValidity('date',true);
-                    console.log('view->model ', result);
                     return result;
                 });
                 ngModelController.$formatters.push(function (data) {
@@ -204,18 +200,15 @@ angular.module('fsAdmin.components')
                     //Model -> View
                     var res;
                     if(typeof data ==='string'){
-                        console.log('parsing a date str');
                         res = moment(data,'YYYY-MM-DDTHH:mm');
                     }
                     else if(data !== undefined && data !== null ){
-                        console.log('try to parse something');
                         res = moment(data);
                     }else{
                         console.log('use now ');
                         res = moment();
                     }
                     var result =  res.toDate();
-                    console.log('model->view',result);
                     return result;
                 });
             }
