@@ -240,7 +240,8 @@ module.exports = function (grunt) {
               'assets/images/**/*.{gif,webp}',
               'assets/fonts/**/*',
               'CNAME',
-              'package.json'
+              'package.json',
+              'lang/*'
             ]
           },
           {
@@ -316,7 +317,7 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
-    ngmin: {
+    ngAnnotate: {
       dist: {
         files: [
           {
@@ -347,6 +348,8 @@ module.exports = function (grunt) {
     },
     uglify: {
       options: {
+        beautify : false,
+        mangle   : true,
         banner: [
           '/**',
           ' * <%= pkg.description %>',
@@ -561,7 +564,7 @@ module.exports = function (grunt) {
         'clean',
         'concurrent:dist',
         'autoprefixer',
-        'ngmin',
+        'ngAnnotate',
         'uglify',
         'concat:js',
         'concat:css',

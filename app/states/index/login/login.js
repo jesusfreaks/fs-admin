@@ -41,8 +41,6 @@ angular.module('fsAdmin')
                 + btoa(credentials.username + ":" + credentials.password)
                 } : {};
 
-                console.log("AUTHENTICATE", credentials);
-
                 return initRo.$$getUser({headers: headers}).then(function (response) {
 
                     if (response.name) {

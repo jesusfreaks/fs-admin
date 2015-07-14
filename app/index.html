@@ -28,6 +28,7 @@
     <!--INJECT STYLES-->
     <link rel="stylesheet" href="styles/main.css">
     <!--/INJECT STYLES-->
+    <link rel="stylesheet" href="bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
 
   </head>
   <body>
@@ -44,7 +45,7 @@
 
     <div id="root">
 
-        <navbar-component></navbar-component>
+        <navbar></navbar>
         <messages></messages>
         <div ui-view="" class="view-change-animation"></div>
 
@@ -107,6 +108,8 @@
     <script src="scripts/restclient.js"></script>
     <!--/INJECT SCRIPTS-->
 
+    <script src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script src="bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
     <script src="bower_components/angular-img-cropper/dist/angular-img-cropper.min.js"></script>
   </body>
 </html>

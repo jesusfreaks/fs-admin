@@ -9,7 +9,7 @@ angular.module('fsAdmin')
         API: {
             protocol: window.location.protocol.split(':')[0], //Use the same protocol, host and port as the UI is hosted from bu default
             host: window.location.hostname,
-            port: String(window.location.port || 80),
+            port: String(window.location.port || 8080),
             path: '/'
         }
     }, angular._localConfig || {}))
@@ -139,8 +139,9 @@ angular.module('fsAdmin').config(function ($translateProvider, PossibleLanguages
         prefix: 'lang/',
         suffix: '.json'
     });
-    $translateProvider.determinePreferredLanguage();
+    $translateProvider.preferredLanguage('de');
     $translateProvider.registerAvailableLanguageKeys(PossibleLanguages, {'de*': 'de_DE', 'en*': 'en_EN'});
+    moment.locale('de');
 });
 
 

@@ -17,7 +17,7 @@ angular.module('fsAdmin.components')
             var resolvedItem = scope.$eval('item.' + resolve);
 
             if (name === 'start' || name === 'end') {
-                return moment(resolvedItem).format('D.MM. h:mm');
+                return moment(resolvedItem).format('DD.MM. hh:mm');
             }
 
             return resolvedItem;
@@ -28,8 +28,10 @@ angular.module('fsAdmin.components')
         };
 
     })
-    .component('bstable', function ($filter) {
+    .directive('bstable', function ($filter) {
         return {
+            restrict: 'E',
+            templateUrl:'components/bstable/bstable.html',
             scope: {
                 data: '=',
                 fields: '=',
