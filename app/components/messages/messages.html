@@ -1,6 +1,6 @@
 <div class="messages-drt">
     <span ng-repeat = "msg in messages">
-        <div class="alert alert-dismissible " ng-class="{'alert-info':msg.type=='INFO','alert-success':msg.type=='SUCCESS','alert-danger':msg.type=='ERROR','alert-warning':msg.type=='WARNING'}" role="alert">
+        <div class="alert alert-dismissible text-center" ng-class="{'alert-info':msg.type=='INFO','alert-success':msg.type=='SUCCESS','alert-danger':msg.type=='ERROR','alert-warning':msg.type=='WARNING'}" role="alert">
             <button type="button" class="close" data-dismiss="alert" ng-click="removeMessage(msg)">
                 <i>({{msg.removeInSec}}s)</i>
                 <span aria-hidden="true">&times;</span>
@@ -9,7 +9,7 @@
 
             <b>{{msg.message|translate}}</b>
 
-            <p ng-if="msg.description">{{msg.description}}</p>
+            <span ng-if="msg.description">{{msg.description|translate}}</span>
             <pre ng-if="msg.debug">{{msg.debug}}</pre>
         </div>
     </span>

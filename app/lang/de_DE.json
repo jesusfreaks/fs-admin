@@ -58,9 +58,10 @@
     "news.publishDate": "Veröffentlichen am",
     "news.image": "Bild",
 
-    "save.success":"Gespeichert",
-    "update.success":"Geändert",
-    "deleted.success":"Gelöscht",
+    "msg.success" : "Das hat geklappt.",
+    "save.success":"Element wurde gespeichert.",
+    "update.success":"Element wurde geändert.",
+    "deleted.success":"Element wurde gelöscht.",
 
     "login.success":"Anmeldung erfolgreich",
     "msg.error":"Es ist ein Fehler aufgetreten",

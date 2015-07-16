@@ -60,15 +60,15 @@ angular.module('fsAdmin')
                             locations[$scope.instance.idx] = $scope.instance;
                             $state.go('^.list', {},  {reload:false});
                         });
+                        Helper.messages('save.success', call);
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
                             locations.push(data);
                             $state.go('^.list', {},  {reload:false});
                         });
+                        Helper.messages('update.success', call);
                     }
-
-                    Helper.messages('update.success', call);
                 };
 
                 $scope.delete = function () {

@@ -31,16 +31,16 @@ angular.module('fsAdmin.components').service('MessagesService', function Message
             });
         },
         success: function (message, debug) {
-            _addMessage('Success:', message, debug, 'SUCCESS');
+            _addMessage('msg.success', message, debug, 'SUCCESS');
         },
         info: function (message, debug) {
-            _addMessage('Info:', message, debug, 'INFO');
+            _addMessage('msg.info', message, debug, 'INFO');
         },
         error: function (message, debug) {
-            _addMessage('Error:', message, debug, 'ERROR');
+            _addMessage('msg.error', message, debug, 'ERROR');
         },
         warning: function (message, debug) {
-            _addMessage('Warning', message, debug, 'WARNING');
+            _addMessage('msg.warning', message, debug, 'WARNING');
         },
         addRestError: function (message, error) {
             _addMessage(message, '(HTTP ' + error.status + ':' + error.statusText + ') ' + error.data.message, error.data.cause, 'ERROR');
@@ -55,7 +55,7 @@ angular.module('fsAdmin.components').service('MessagesService', function Message
             templateUrl:'components/messages/messages.html',
             controller: function($scope){
 
-                var maxAgeMs = 10000;
+                var maxAgeMs = 5000;
 
                 $scope.messages = MessagesService.getMessage();
 
@@ -66,6 +66,11 @@ angular.module('fsAdmin.components').service('MessagesService', function Message
 
                 function removeOlderThanAndUpdateTime(){
                     angular.forEach($scope.messages,function(msg){
+
+                        // do not remove warnings or error messages
+                        if (msg.type === 'WARNING' || msg.type === 'ERROR') {
+                            return;
+                        }
 
                         if (!angular.isDefined(msg.removeInSec)) {
                             msg.removeInSec = parseInt(maxAgeMs / 1000,10);

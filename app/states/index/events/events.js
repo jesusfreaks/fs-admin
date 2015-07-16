@@ -92,15 +92,17 @@ angular.module('fsAdmin')
                             events[$scope.instance.idx] = $scope.instance;
                             $state.go('^.list', {},  {reload:false});
                         });
+                        Helper.messages('update.success', call);
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postEvents({data:$scope.instance}).then(function (data) {
                             events.push(data);
                             $state.go('^.list', {},  {reload:false});
                         });
+                        Helper.messages('save.success', call);
                     }
 
-                    Helper.messages('update.success', call);
+
                 };
 
                 $scope.delete = function () {
