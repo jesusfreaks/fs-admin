@@ -43,21 +43,7 @@ angular.module('fsAdmin')
             controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log, DataHelper ) {
                 $scope.initRo = initRo;
 
-                var lookup = {};
-                for (var i = 0, len = locations.length; i < len; i++) {
-                    lookup[locations[i].identifier] = locations[i];
-                }
-
-                if ($stateParams.id) {
-                    $scope.instance = angular.copy(lookup[$stateParams.id]);
-
-                    if (!$scope.instance) {
-                        $state.go('^.list');
-                    }
-                }
-                else {
-                    $scope.instance = {};
-                }
+                $scope.instance = Helper.createInstance(locations, $stateParams.id);
 
                 $scope.save = function () {
 
@@ -67,12 +53,14 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
-                            $state.go('^.list', {},  {reload:true});
+                            locations[$scope.instance.idx] = $scope.instance;
+                            $state.go('^.list', {},  {reload:false});
                         });
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postLocations({data:$scope.instance}).then(function (data) {
-                            $state.go('^.list', {},  {reload:true});
+                            locations.push(data);
+                            $state.go('^.list', {},  {reload:false});
                         });
                     }
 
@@ -92,8 +80,9 @@ angular.module('fsAdmin')
 
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
-                            // updated locations list
-                            $state.go('^.list', {},  {reload:true});
+                            var idx = $scope.instance.idx;
+                            locations.splice(idx, 1);
+                            $state.go('^.list', {}, {reload:false});
                         });
 
                         Helper.messages('deleted.success', call);

@@ -27,7 +27,23 @@ angular.module('fsAdmin').service('Helper',function(MessagesService){
 
             instance.en.tags = [];
             instance.en.tags = angular.copy(transDe.tags);
-            console.log(instance.en.tags);
+        },
+
+        createInstance : function (data, paramId) {
+
+            var lookup = {};
+            for (var i = 0, len = data.length; i < len; i++) {
+                lookup[data[i].identifier] = data[i];
+                lookup[data[i].identifier].idx = i;
+            }
+
+            if (paramId) {
+                return angular.copy(lookup[paramId]);
+            }
+            else {
+                return {};
+            }
+
         }
     };
 

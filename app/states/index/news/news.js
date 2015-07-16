@@ -46,22 +46,10 @@ angular.module('fsAdmin')
 
                 $scope.initRo = initRo;
 
-                var lookup = {};
-                for (var i = 0, len = news.length; i < len; i++) {
-                    lookup[news[i].identifier] = news[i];
-                }
+                $scope.instance = Helper.createInstance(news, $stateParams.id);
 
-                if ($stateParams.id) {
-                    $scope.instance = angular.copy(lookup[$stateParams.id]);
-
-                    if (!$scope.instance) {
-                        $state.go('^.list');
-                    }
-                }
-                else {
-                    $scope.instance = {
-                        publishDate : moment().format('YYYY-MM-DDThh:mm:ss')
-                    };
+                if (!$scope.instance.identifier) {
+                    $scope.instance.publishDate = moment().format('YYYY-MM-DDThh:mm:ss');
                 }
 
                 $scope.save = function () {
@@ -71,12 +59,14 @@ angular.module('fsAdmin')
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {
                         call = $scope.instance.$$putSelf({data:$scope.instance}).then(function () {
-                            $state.go('^.list', {},  {reload:true});
+                            news[$scope.instance.idx] = $scope.instance;
+                            $state.go('^.list', {},  {reload:false});
                         });
                     } else { // must be a new object
                         DataHelper.prepareForSave($scope.instance);
                         call = initRo.$$postNews({data:$scope.instance}).then(function (data) {
-                            $state.go('^.list', {},  {reload:true});
+                            news.push(data);
+                            $state.go('^.list', {},  {reload:false});
                         });
                     }
 
@@ -96,7 +86,9 @@ angular.module('fsAdmin')
 
                     modalInstance.result.then(function () {
                         var call = $scope.instance.$$deleteSelf().then(function () {
-                            $state.go('^.list', {},  {reload:true});
+                            var idx = $scope.instance.idx;
+                            news.splice(idx, 1);
+                            $state.go('^.list', {}, {reload:false});
                         });
 
                         Helper.messages('deleted.success', call);
