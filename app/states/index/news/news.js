@@ -58,21 +58,14 @@ angular.module('fsAdmin')
                     }
                 }
                 else {
-                    $scope.instance = {};
+                    $scope.instance = {
+                        publishDate : moment().format('YYYY-MM-DDThh:mm:ss')
+                    };
                 }
 
                 $scope.save = function () {
 
-                    var translations = [$scope.instance.de, $scope.instance.en];
-
-                    // nasty directive does not allow angular to run $parsers
-                    angular.forEach(translations, function (trans) {
-                        if (trans.tags && trans.tags[0] && trans.tags[0].text) { // revert the nasty tag input format
-                            trans.tags = trans.tags.map(function (tag) {
-                                return tag.text;
-                            });
-                        }
-                    });
+                    Helper.copyTagsFromDeToEn($scope.instance);
 
                     var call;
                     if (angular.isFunction($scope.instance.$$putSelf)) {

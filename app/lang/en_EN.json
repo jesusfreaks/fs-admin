@@ -29,7 +29,7 @@
     "location.name":"Name",
     "location.code":"Code",
     "location.description":"Description",
-    "location.tags":"Category",
+    "location.tags":"Tags",
     "location.preview":"Intro",
     "location.markOnMap":"Mark on map",
     "location.images":"Images",

@@ -13,6 +13,21 @@ angular.module('fsAdmin').service('Helper',function(MessagesService){
             },function(err){
                 MessagesService.addRestError('msg.error', err);
             });
+        },
+
+        copyTagsFromDeToEn: function (instance) {
+
+            var transDe = instance.de;
+
+            if (transDe.tags && transDe.tags[0] && transDe.tags[0].text) { // revert the nasty tag input format
+                transDe.tags = transDe.tags.map(function (tag) {
+                    return tag.text;
+                });
+            }
+
+            instance.en.tags = [];
+            instance.en.tags = angular.copy(transDe.tags);
+            console.log(instance.en.tags);
         }
     };
 
