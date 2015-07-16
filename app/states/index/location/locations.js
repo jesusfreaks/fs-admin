@@ -45,6 +45,10 @@ angular.module('fsAdmin')
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);
 
+                if (!$scope.instance.identifier) {
+                    $scope.instance.geoCoordinate = {};
+                }
+
                 $scope.save = function () {
 
                     Helper.copyTagsFromDeToEn($scope.instance);
