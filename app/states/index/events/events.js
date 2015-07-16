@@ -21,14 +21,51 @@ angular.module('fsAdmin')
         $stateProvider.state('index.events.list', {
             url: 'list',
             templateUrl: 'states/index/events/list.html',
-            controller: function ($scope, events, $state) {
+            controller: function ($scope, initRo, events, $state, FieldDefinitions) {
+
                 $scope.events = events;
 
-                $scope.query = {
-                    de : {name: ''}
-                };
                 $scope.create = function () {
                     $state.go('index.events.update');
+                };
+
+                $scope.categoryOptions=[{label:'', value:''},
+                    {label:'CONCERT', value:'CONCERT'},
+                    {label:'WORKSHOP', value:'WORKSHOP'},
+                    {label:'SEMINAR', value:'SEMINAR'},
+                    {label:'WORSHIP', value:'WORSHIP'},
+                    {label:'PRAYER', value:'PRAYER'},
+                    {label:'MISC', value:'MISC'}];
+
+
+                $scope.locationOptions = [{label : '', value: ''}];
+
+                var methodName = FieldDefinitions['event'].commonProperties.locationRef.opts.method;
+                var fetchFn = initRo[methodName];
+
+                fetchFn().then(function (locations) {
+                    angular.forEach(locations, function (loc) {
+                        $scope.locationOptions.push({
+                            label: loc.de.name,
+                            value: loc.identifier
+                        });
+                    });
+                });
+
+
+                $scope.filter = {
+                    search: {
+                        field: 'de.name',
+                        value: ''
+                    },
+                    category : {
+                        field: 'eventCategory',
+                        value : ''
+                    },
+                    location : {
+                        field: 'locationRef',
+                        value : ''
+                    }
                 };
             }
         });

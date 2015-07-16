@@ -70,6 +70,11 @@
     "de.preview" : "Intro",
     "de.description" : "Beschreibung",
     "de.title" : "Titel",
+    "publishDate" : "Datum",
+    "author" : "Autor",
+    "eventCategory" : "Kategorie",
+    "start" : "Beginn",
+    "end" : "Ende",
 
     "event.category.null":"Bitte wählen",
     "event.category.":"Bitte wählen",
@@ -78,7 +83,9 @@
     "event.category.SEMINAR":"Seminar",
     "event.category.WORSHIP":"Worship",
     "event.category.PRAYER":"Gebet",
-    "event.category.MISC":"Verschiedenes"
+    "event.category.MISC":"Verschiedenes",
 
+    "events.filter.category.label" : "Kategorie",
+    "events.filter.location.label" : "Ort"
 
 }

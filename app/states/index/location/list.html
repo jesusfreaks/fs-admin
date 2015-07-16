@@ -7,10 +7,15 @@
     </div>
 </div>
 
+<div class="col-sm-3">
+    <label for="query">{{'app.general.search.filter.label'|translate}}</label>
+    <input type="text" id="query" class="form-control" ng-model="filter.search.value" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
+</div>
 
 <bstable data="locations"
-                   fields="['de.name','de.preview','de.description']"
-                   translation-key=".de." editable="index.locations.update"
-                    search-field="de.name">
+                    fields="['de.name','de.preview','de.description']"
+                    translation-key=".de." editable="index.locations.update"
+                    filters="filter"
+                    order-by="de.name">
 </bstable>
 

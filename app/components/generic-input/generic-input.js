@@ -23,7 +23,7 @@ angular.module('fsAdmin.components')
             this.labelEl = opts.label;
             this.valueEl = opts.value;
             this.data = [{
-                label: '', item: null, value: null
+                label: '', item: null, value: ''
             }];
             //TODO: optimize to exec only if rendered
             var me = this, fetchFn = this.initRo[this.fetchMethod];

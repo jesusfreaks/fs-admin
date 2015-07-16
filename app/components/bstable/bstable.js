@@ -16,7 +16,8 @@ angular.module('fsAdmin.components')
             }
             var resolvedItem = scope.$eval('item.' + resolve);
 
-            if (name === 'start' || name === 'end') {
+            // WTF ...
+            if (name === 'start' || name === 'end' || name ==='publishDate') {
                 return moment(resolvedItem).format('DD.MM. hh:mm');
             }
 
@@ -28,7 +29,7 @@ angular.module('fsAdmin.components')
         };
 
     })
-    .directive('bstable', function ($filter) {
+    .directive('bstable', function ($log, $filter) {
         return {
             restrict: 'E',
             templateUrl:'components/bstable/bstable.html',
@@ -37,21 +38,18 @@ angular.module('fsAdmin.components')
                 fields: '=',
                 translationKey: '@',
                 editable:'@',
-                searchField: '@',
-                filterField: '@',
-                filterOptions: '='
+                filters: '=',
+                orderBy: '@'
             },
 
             controller: 'bstableComponentCtrl',
 
-            link : function (scope) {
+            link : function (scope, elem, attr) {
 
                 var page = {
                     size : 25,
                     current : 1,
-                    allItems : scope.data,
-                    predicate : scope.searchField,
-                    desc : false
+                    allItems : scope.data
                 };
 
                 var setPage = function (pageNo, page) {
@@ -70,57 +68,12 @@ angular.module('fsAdmin.components')
                     page.allItems = $filter('orderBy')(page.allItems, predicate, desc); // order filtered data
                 };
 
-                orderPage(scope.searchField, false, page);
-                setPage(1, page);
-
-                scope.page = page;
-
-                scope.selectPage = function () {
-                    setPage(page.current, page);
-                };
-
-                scope.order = function(predicate, desc) {
-                    orderPage(predicate, desc, page);
-                    setPage(1, page);
-                };
-
-                var filterObj =  {};
-
-                scope.$watch('filterBy', function (newVal, oldVal) {
-
-                    if (!newVal && !oldVal) {
-                        return;
-                    }
-
-                    return filterBy(scope.filterField, newVal.value);
-                });
-
-                scope.$watch('searchTerm', function (newVal, oldVal) {
-
-                    if (!newVal && !oldVal) {
-                        return;
-                    }
-
-                    return filterBy(scope.searchField, newVal);
-                });
-
-                var filterBy = function (field, newVal)  {
-
-                    if (newVal.length > 1) {
-                        filterObj[field] = {field:field, value:newVal};
-                    }
-                    else {
-                        delete filterObj[field];
-                    }
-
-                    applyFilter();
-                };
-
-                var applyFilter = function () {
+                var applyFilter = function (filters) {
 
                     page.allItems = scope.data;
 
-                    angular.forEach(filterObj, function (filter) {
+                    angular.forEach(filters, function (filter) {
+
                         page.allItems = $filter('filter')(page.allItems, function (val) {
                             var expr = new RegExp(filter.value, 'i');
                             var fields = filter.field.split('.');
@@ -135,6 +88,42 @@ angular.module('fsAdmin.components')
                     orderPage(page.predicate, page.desc, page);
                     setPage(1, page);
                 };
+
+                if (scope.orderBy) {
+
+                    var orderField;
+
+                    for (var i=0;i<scope.fields.length; i++) {
+                        if (scope.fields[i] === scope.orderBy) {
+                            orderField = scope.fields[i];
+                            break;
+                        }
+                    }
+
+                    if (orderField) {
+                        orderPage(scope.fields[i], angular.isDefined(attr.orderByDesc), page);
+                    }
+                    else {
+                        $log.error('Cannot sort table because of unknown order-by field:', scope.orderBy);
+                    }
+
+                }
+
+                setPage(1, page);
+
+                scope.page = page;
+
+                scope.selectPage = function () {
+                    setPage(page.current, page);
+                };
+
+                scope.order = function(predicate, desc) {
+                    orderPage(predicate, desc, page);
+                    setPage(1, page);
+                };
+
+
+                scope.$watch('filters', applyFilter, true);
             }
         };
     });

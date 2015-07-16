@@ -26,6 +26,13 @@ angular.module('fsAdmin')
                 $scope.create = function () {
                     $state.go('index.locations.update');
                 };
+
+                $scope.filter = {
+                    search: {
+                        field: 'de.name',
+                        value: ''
+                    }
+                };
             }
         });
 
@@ -50,7 +57,6 @@ angular.module('fsAdmin')
                 else {
                     $scope.instance = {};
                 }
-
 
                 $scope.save = function () {
 

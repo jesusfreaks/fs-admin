@@ -23,6 +23,9 @@
     "app.general.confirm.delete.title" : "Really deleting?",
     "app.general.confirm.delete.text" : "Do you really want to delete it?",
 
+    "app.general.search.filter.label" : "Search",
+    "app.general.search.filter.placeholder" : "Search in name",
+
     "location.name":"Name",
     "location.code":"Code",
     "location.description":"Description",
@@ -67,6 +70,11 @@
     "de.preview" : "Intro",
     "de.description" : "Description",
     "de.title" : "Titel",
+    "publishDate" : "Date",
+    "author" : "Author",
+    "eventCategory" : "Category",
+    "start" : "Start",
+    "end" : "End",
 
     "event.category.null":"Choose category",
     "event.category.":"Choose category",
@@ -75,5 +83,8 @@
     "event.category.SEMINAR":"Seminar",
     "event.category.WORSHIP":"Worship",
     "event.category.PRAYER":"Prayer",
-    "event.category.MISC":"Misc"
+    "event.category.MISC":"Misc",
+
+    "events.filter.category.label" : "Category",
+    "events.filter.location.label" : "Location"
 }

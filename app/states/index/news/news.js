@@ -26,6 +26,13 @@ angular.module('fsAdmin')
                 $scope.create = function () {
                     $state.go('index.news.update');
                 };
+
+                $scope.filter = {
+                    search: {
+                        field: 'de.title',
+                        value: ''
+                    }
+                };
             }
         });
 
