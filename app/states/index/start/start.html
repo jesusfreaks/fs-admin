@@ -1,0 +1,8 @@
+<div class="container">
+    <div class="jumbotron">
+        <h1>Freakstock App</h1>
+        <p>Administration</p>
+        <a ng-show="!principal.enabled" ui-sref="index.login" class="btn btn-primary btn-lg">Login</a>
+        <p ng-show="principal.enabled"><br>Hallo {{principal.username}}!</p>
+    </div>
+</div>

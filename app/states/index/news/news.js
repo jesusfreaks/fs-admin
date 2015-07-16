@@ -8,7 +8,7 @@
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
         $stateProvider.state('index.news', {
-            url: 'news/',
+            url: '/news',
             template: '<div ui-view></div>',
             abstract: true,
             resolve: {
@@ -19,7 +19,7 @@ angular.module('fsAdmin')
         });
 
         $stateProvider.state('index.news.list', {
-            url: 'news',
+            url: '/list',
             templateUrl: 'states/index/news/list.html',
             controller: function ($scope, news, $state) {
                 $scope.news = news;
@@ -38,7 +38,7 @@ angular.module('fsAdmin')
 
 
         $stateProvider.state('index.news.update', {
-            url: 'update/:id',
+            url: '/update/:id',
             templateUrl: 'states/index/news/edit.html',
             controller: function ($scope, news, $stateParams, initRo, $state,
                                   MessagesService, Helper, $modal, $log, DataHelper) {

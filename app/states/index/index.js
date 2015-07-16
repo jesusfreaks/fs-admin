@@ -3,8 +3,8 @@
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
         $stateProvider.state('index', {
-            url: '/',
-            templateUrl: 'states/index/index.html',
+            abstract: true,
+            templateUrl: 'views/content.html',
             onEnter: function (initRo, UserServiceFactory) {
                 UserServiceFactory.create(initRo).authenticate();
             },

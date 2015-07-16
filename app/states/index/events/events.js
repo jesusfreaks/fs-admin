@@ -8,7 +8,7 @@
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
         $stateProvider.state('index.events', {
-            url: 'events/',
+            url: '/events',
             template: '<div ui-view></div>',
             abstract: true,
             resolve: {
@@ -19,7 +19,7 @@ angular.module('fsAdmin')
         });
 
         $stateProvider.state('index.events.list', {
-            url: 'list',
+            url: '/list',
             templateUrl: 'states/index/events/list.html',
             controller: function ($scope, initRo, events, $state, FieldDefinitions) {
 
@@ -71,7 +71,7 @@ angular.module('fsAdmin')
         });
 
         $stateProvider.state('index.events.update', {
-            url: 'update/:id',
+            url: '/update/:id',
             templateUrl: 'states/index/events/edit.html',
             controller: function ($scope, events, $stateParams, initRo, $state,
                                   MessagesService, Helper, $modal, $log, DataHelper) {

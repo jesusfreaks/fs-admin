@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('fsAdmin.components')
-    .directive('navbar', function (UserServiceFactory) {
+    .directive('navbar', function (UserServiceFactory, $state) {
         return {
             restrict: 'E',
             templateUrl:'components/navbar/navbar.html',
@@ -30,6 +30,7 @@ angular.module('fsAdmin.components')
 
                 scope.logout = function () {
                     UserServiceFactory.getInstance().logout();
+                    $state.go('index.start');
                 };
 
             }

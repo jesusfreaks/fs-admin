@@ -3,28 +3,27 @@
 angular.module('fsAdmin')
     .config(function ($stateProvider) {
         $stateProvider.state('index.login', {
-            url: 'login',
+            url: '/login',
             templateUrl: 'states/index/login/login.html',
             controllerAs: 'vm',
-            controller: function ($state, UserServiceFactory, initRo,MessagesService) {
+            controller: function ($state, UserServiceFactory, initRo) {
 
                 var vm = this;
 
                 vm.credentials = {};
-                vm.login = function() {
+                vm.login = function () {
 
                     var userService = UserServiceFactory.create(initRo);
 
-                    userService.authenticate(vm.credentials).then(function(authenticated) {
+                    userService.authenticate(vm.credentials).then(function (authenticated) {
                         if (authenticated) {
                             vm.error = false;
-                            MessagesService.success('login.success');
-                            $state.go('index');
+                            $state.go('index.start');
                         } else {
                             vm.error = true;
                         }
-                    },function(err){
-                        MessagesService.addRestError('msg.error',err);
+                    }, function (err) {
+                        MessagesService.addRestError('msg.error', err);
                     });
                 };
 
@@ -62,7 +61,6 @@ angular.module('fsAdmin')
             };
 
             this.logout = function () {
-                console.log("Logging out ...");
                 delete $rootScope.principal;
                 return initRo.$$postLogout();
             };
