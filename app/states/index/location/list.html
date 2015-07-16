@@ -9,9 +9,13 @@
 
 <br>
 
-<div class="col-sm-3">
-    <label for="query">{{'app.general.search.filter.label'|translate}}</label>
-    <input type="text" id="query" class="form-control" ng-model="filter.search.value" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
+<div class="row">
+
+    <div class="col-sm-3">
+        <label for="query">{{'app.general.search.filter.label'|translate}}</label>
+        <input type="text" id="query" class="form-control" ng-model="filter.search.value" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
+    </div>
+
 </div>
 
 <bstable data="locations"
