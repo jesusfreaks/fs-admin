@@ -15,6 +15,14 @@ angular.module('fsAdmin')
                 locations: function (initRo) {
                     return initRo.$$getLocations();
                 }
+            },
+            controller : function ($scope) {
+                $scope.filter = {
+                    search: {
+                        field: 'de.name',
+                        value: ''
+                    }
+                };
             }
         });
 
@@ -25,13 +33,6 @@ angular.module('fsAdmin')
                 $scope.locations = locations;
                 $scope.create = function () {
                     $state.go('index.locations.update');
-                };
-
-                $scope.filter = {
-                    search: {
-                        field: 'de.name',
-                        value: ''
-                    }
                 };
             }
         });

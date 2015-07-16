@@ -15,6 +15,14 @@ angular.module('fsAdmin')
                 news: function (initRo) {
                     return initRo.$$getNews();
                 }
+            },
+            controller: function ($scope) {
+                $scope.filter = {
+                    search: {
+                        field: 'de.title',
+                        value: ''
+                    }
+                };
             }
         });
 
@@ -25,13 +33,6 @@ angular.module('fsAdmin')
                 $scope.news = news;
                 $scope.create = function () {
                     $state.go('index.news.update');
-                };
-
-                $scope.filter = {
-                    search: {
-                        field: 'de.title',
-                        value: ''
-                    }
                 };
             }
         });

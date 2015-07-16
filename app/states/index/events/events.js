@@ -15,18 +15,22 @@ angular.module('fsAdmin')
                 events: function (initRo) {
                     return initRo.$$getEvents();
                 }
-            }
-        });
+            },
+            controller : function ($scope, FieldDefinitions, initRo) {
 
-        $stateProvider.state('index.events.list', {
-            url: '/list',
-            templateUrl: 'states/index/events/list.html',
-            controller: function ($scope, initRo, events, $state, FieldDefinitions) {
-
-                $scope.events = events;
-
-                $scope.create = function () {
-                    $state.go('index.events.update');
+                $scope.filter = {
+                    search: {
+                        field: 'de.name',
+                        value: ''
+                    },
+                    category : {
+                        field: 'eventCategory',
+                        value : ''
+                    },
+                    location : {
+                        field: 'locationRef',
+                        value : ''
+                    }
                 };
 
                 $scope.categoryOptions=[{label:'', value:''},
@@ -51,22 +55,20 @@ angular.module('fsAdmin')
                         });
                     });
                 });
+            }
+        });
 
+        $stateProvider.state('index.events.list', {
+            url: '/list',
+            templateUrl: 'states/index/events/list.html',
+            controller: function ($scope, initRo, events, $state) {
 
-                $scope.filter = {
-                    search: {
-                        field: 'de.name',
-                        value: ''
-                    },
-                    category : {
-                        field: 'eventCategory',
-                        value : ''
-                    },
-                    location : {
-                        field: 'locationRef',
-                        value : ''
-                    }
+                $scope.events = events;
+
+                $scope.create = function () {
+                    $state.go('index.events.update');
                 };
+
             }
         });
 
