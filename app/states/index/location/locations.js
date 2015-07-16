@@ -45,7 +45,7 @@ angular.module('fsAdmin')
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);
 
-                if (!$scope.instance.identifier) {
+                if (!$scope.instance.geoCoordinate) {
                     $scope.instance.geoCoordinate = {};
                 }
 
