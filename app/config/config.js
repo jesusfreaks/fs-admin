@@ -81,6 +81,7 @@ angular.module('fsAdmin')
                 },
                 'locationRef':{
                     type:'reference',
+                    required: true,
                     opts:{
                         method:'$$getLocationNames',
                         label:'item[language].name',
@@ -93,7 +94,7 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'text', required: true, maxLength: 500
+                    type: 'text', required: false, maxLength: 500
                 },
                 description: {
                     type: 'textarea', required: true, maxLength: 10000
