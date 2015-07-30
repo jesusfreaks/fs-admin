@@ -18,7 +18,7 @@ angular.module('fsAdmin.components')
 
             // WTF ...
             if (name === 'start' || name === 'end' || name ==='publishDate') {
-                return moment(resolvedItem).format('DD.MM. hh:mm');
+                return moment(resolvedItem).format('DD.MM. HH:mm');
             }
 
             return resolvedItem;
