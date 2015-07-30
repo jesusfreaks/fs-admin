@@ -49,7 +49,7 @@ angular.module('fsAdmin')
                 $scope.instance = Helper.createInstance(news, $stateParams.id);
 
                 if (!$scope.instance.identifier) {
-                    $scope.instance.publishDate = moment().format('YYYY-MM-DDThh:mm:ss');
+                    $scope.instance.publishDate = moment().format('YYYY-MM-DDTHH:mm:ss');
                 }
 
                 $scope.save = function () {
