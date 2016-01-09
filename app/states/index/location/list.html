@@ -16,10 +16,14 @@
         <input type="text" id="query" class="form-control" ng-model="filter.search.value" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
     </div>
 
+    <div class="col-sm-3">
+        <label for="archivedFilter">{{'filter.archived.label'|translate}}</label>
+        <select id="archivedFilter" class="form-control" ng-model="filter.archived.value" ng-options="option.value as option.label for option in archivedOptions"></select>
+    </div>
 </div>
 
 <bstable data="locations"
-                    fields="['de.name','de.preview','de.description']"
+                    fields="['de.name','de.preview','de.description', 'archived']"
                     translation-key=".de." editable="index.locations.update"
                     filters="filter"
                     order-by="de.name">

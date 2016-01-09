@@ -16,7 +16,7 @@ angular.module('fsAdmin')
                     return initRo.$$getEvents();
                 }
             },
-            controller : function ($scope, FieldDefinitions, initRo) {
+            controller : function ($scope, FieldDefinitions, initRo, $filter) {
 
                 $scope.filter = {
                     search: {
@@ -52,7 +52,7 @@ angular.module('fsAdmin')
                 var fetchFn = initRo[methodName];
 
                 fetchFn().then(function (locations) {
-                    angular.forEach(locations._embedded.locationRoList, function (loc) {
+                    angular.forEach(locations, function (loc) {
                         $scope.locationOptions.push({
                             label: loc.de.name,
                             value: loc.identifier
@@ -60,9 +60,10 @@ angular.module('fsAdmin')
                     });
                 });
 
-                $scope.archivedOptions = [{label : '', value: ''},
-                    {label : 'ARCHIVED', value: 'true'},
-                    {label : 'NOT_ARCHIVED', value: 'false'}];
+                $scope.archivedOptions = [{label : $filter('translate')('filter.archived.all.label'), value: ''},
+                    {label : $filter('translate')('filter.archived.yes.label'), value: 'true'},
+                    {label : $filter('translate')('filter.archived.no.label'), value: 'false'}
+                ];
             }
         });
 
@@ -71,7 +72,7 @@ angular.module('fsAdmin')
             templateUrl: 'states/index/events/list.html',
             controller: function ($scope, initRo, events, $state) {
 
-                $scope.events = events._embedded.eventRoList;
+                $scope.events = events;
 
                 $scope.create = function () {
                     $state.go('index.events.update');

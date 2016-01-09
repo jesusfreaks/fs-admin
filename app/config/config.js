@@ -39,6 +39,9 @@ angular.module('fsAdmin')
                 },
                 'markOnMap':{
                     type:'checkbox'
+                },
+                'archived' : {
+                    type: 'checkbox'
                 }
             },
             translatableProperties: {
@@ -118,6 +121,9 @@ angular.module('fsAdmin')
                 },
                 'author': {
                     type: 'text', maxLength: 80
+                },
+                'archived' : {
+                    type: 'checkbox'
                 }
             },
             translatableProperties: {

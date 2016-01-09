@@ -16,13 +16,21 @@ angular.module('fsAdmin')
                     return initRo.$$getLocations();
                 }
             },
-            controller : function ($scope) {
+            controller : function ($scope, $filter) {
                 $scope.filter = {
                     search: {
                         field: 'de.name',
                         value: ''
+                    },
+                    archived : {
+                        field: 'archived',
+                        value: 'false'
                     }
                 };
+
+                $scope.archivedOptions = [{label : '', value: ''},
+                    {label : $filter('translate')('filter.archived.yes.label'), value: 'true'},
+                    {label : $filter('translate')('filter.archived.no.label'), value: 'false'}];
             }
         });
 

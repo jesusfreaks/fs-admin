@@ -74,11 +74,17 @@
     "de.preview" : "Intro",
     "de.description" : "Beschreibung",
     "de.title" : "Titel",
+    "archived" : "Archiviert",
     "publishDate" : "Datum",
     "author" : "Autor",
     "eventCategory" : "Kategorie",
     "start" : "Beginn",
     "end" : "Ende",
+
+    "filter.archived.label" : "Archiviert",
+    "filter.archived.all.label" : "Alle",
+    "filter.archived.yes.label" : "nur archivierte",
+    "filter.archived.no.label" : "nur aktuelle",
 
     "event.category.null":"Bitte wählen",
     "event.category.":"Bitte wählen",
@@ -90,6 +96,8 @@
     "event.category.MISC":"Verschiedenes",
 
     "events.filter.category.label" : "Kategorie",
-    "events.filter.location.label" : "Ort"
+    "events.filter.location.label" : "Ort",
+    "events.filter.archived.label" : "Archiviert"
+
 
 }

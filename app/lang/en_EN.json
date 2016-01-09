@@ -73,11 +73,18 @@
     "de.preview" : "Intro",
     "de.description" : "Description",
     "de.title" : "Titel",
+    "archived" : "Archived",
     "publishDate" : "Date",
     "author" : "Author",
     "eventCategory" : "Category",
     "start" : "Start",
     "end" : "End",
+
+    "filter.archived.label" : "Archived",
+    "filter.archived.all.label" : "All",
+    "filter.archived.yes.label" : "only archived",
+    "filter.archived.no.label" : "only not archived",
+
 
     "event.category.null":"Choose category",
     "event.category.":"Choose category",

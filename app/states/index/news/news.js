@@ -16,13 +16,22 @@ angular.module('fsAdmin')
                     return initRo.$$getNews();
                 }
             },
-            controller: function ($scope) {
+            controller: function ($scope, $filter) {
                 $scope.filter = {
                     search: {
                         field: 'de.title',
                         value: ''
+                    },
+                    archived : {
+                        field: 'archived',
+                        value: 'false'
                     }
                 };
+
+                $scope.archivedOptions = [{label : '', value: ''},
+                    {label : $filter('translate')('filter.archived.yes.label'), value: 'true'},
+                    {label : $filter('translate')('filter.archived.no.label'), value: 'false'}
+                ];
             }
         });
 

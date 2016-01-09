@@ -19,10 +19,15 @@
                placeholder="{{'app.general.search.filter.placeholder'|translate}}"/>
     </div>
 
+    <div class="col-sm-3">
+        <label for="archivedFilter">{{'filter.archived.label'|translate}}</label>
+        <select id="archivedFilter" class="form-control" ng-model="filter.archived.value" ng-options="option.value as option.label for option in archivedOptions"></select>
+    </div>
+
 </div>
 
 <bstable data="news"
-         fields="['de.title','de.preview','publishDate','author']"
+         fields="['de.title','de.preview','publishDate','author', 'archived']"
          translation-key=".de." editable="index.news.update"
          filters="filter"
          order-by="publishDate"
