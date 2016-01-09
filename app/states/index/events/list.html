@@ -24,12 +24,17 @@
         <label for="locFilter">{{'events.filter.location.label'|translate}}</label>
         <select id="locFilter" class="form-control" ng-model="filter.location.value" ng-options="option.value as option.label for option in locationOptions"></select>
     </div>
+
+    <div class="col-sm-3">
+        <label for="archivedFilter">{{'events.filter.archived.label'|translate}}</label>
+        <select id="archivedFilter" class="form-control" ng-model="filter.archived.value" ng-options="option.value as option.label for option in archivedOptions"></select>
+    </div>
 </div>
 
 
 <bstable data="events"
             fields="['de.name','de.preview',
-                    'start', 'end','eventCategory']"
+                    'start', 'end','eventCategory', 'archived']"
             translation-key=".de."
             editable="index.events.update"
             filters="filter"

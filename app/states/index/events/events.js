@@ -30,6 +30,10 @@ angular.module('fsAdmin')
                     location : {
                         field: 'locationRef',
                         value : ''
+                    },
+                    archived : {
+                        field: 'archived',
+                        value: 'false'
                     }
                 };
 
@@ -48,13 +52,17 @@ angular.module('fsAdmin')
                 var fetchFn = initRo[methodName];
 
                 fetchFn().then(function (locations) {
-                    angular.forEach(locations, function (loc) {
+                    angular.forEach(locations._embedded.locationRoList, function (loc) {
                         $scope.locationOptions.push({
                             label: loc.de.name,
                             value: loc.identifier
                         });
                     });
                 });
+
+                $scope.archivedOptions = [{label : '', value: ''},
+                    {label : 'ARCHIVED', value: 'true'},
+                    {label : 'NOT_ARCHIVED', value: 'false'}];
             }
         });
 
@@ -63,7 +71,7 @@ angular.module('fsAdmin')
             templateUrl: 'states/index/events/list.html',
             controller: function ($scope, initRo, events, $state) {
 
-                $scope.events = events;
+                $scope.events = events._embedded.eventRoList;
 
                 $scope.create = function () {
                     $state.go('index.events.update');

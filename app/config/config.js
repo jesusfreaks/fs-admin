@@ -67,6 +67,9 @@ angular.module('fsAdmin')
                 'end': {
                     type: 'datetime'
                 },
+                'archived' : {
+                    type: 'checkbox'
+                },
                 'eventCategory': {
                     type: 'dropdown', required: true,
                     opts:{
