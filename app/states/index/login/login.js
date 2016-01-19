@@ -6,7 +6,7 @@ angular.module('fsAdmin')
             url: '/login',
             templateUrl: 'states/index/login/login.html',
             controllerAs: 'vm',
-            controller: function ($state, UserServiceFactory, initRo) {
+            controller: function ($state, UserServiceFactory, MessagesService, initRo) {
 
                 var vm = this;
 
@@ -36,10 +36,10 @@ angular.module('fsAdmin')
 
             this.authenticate = function(credentials) {
 
-                var headers = credentials ? {Authorization : "Basic "
-                + btoa(credentials.username + ":" + credentials.password)
+                var headers = credentials ? {Authorization : 'Basic ' +
+                btoa(credentials.username + ':' + credentials.password)
                 } : {};
-
+                console.log('initRo',initRo);
                 return initRo.$$getUser({headers: headers}).then(function (response) {
 
                     if (response.name) {
@@ -80,5 +80,5 @@ angular.module('fsAdmin')
                 return instance;
             }
 
-        }
+        };
     });
