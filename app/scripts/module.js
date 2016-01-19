@@ -20,6 +20,7 @@ var app = angular.module('fsAdmin', [
     'pascalprecht.translate',
     'ngTagsInput',
     'angular-img-cropper',
-    'ui.bootstrap.datetimepicker'
+    'ui.bootstrap.datetimepicker',
+    'ng-showdown'
 ]);
 angular.componentFactory.moduleDecorator(app);

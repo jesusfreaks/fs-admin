@@ -19,6 +19,7 @@
     "app.general.ok":"Ok",
     "app.general.cancel":"Abbrechen",
     "app.general.delete":"Löschen",
+    "app.general.preview":"Vorschau",
 
     "app.general.confirm.delete.title" : "Wirklich löschen?",
     "app.general.confirm.delete.text" : "endgültig löschen?",

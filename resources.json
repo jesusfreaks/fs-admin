@@ -20,7 +20,9 @@
             "bower_components/angular-ui-bootstrap-bower/ui-bootstrap.js",
             "bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js",
             "bower_components/bootstrap-sass/assets/javascripts/bootstrap.js",
-            "bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"
+            "bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js",
+            "bower_components/showdown/dist/showdown.js",
+            "bower_components/ng-showdown/dist/ng-showdown.js"
         ],
         "externalExcludeFromBuild": [
             "bower_components/angular-mocks/angular-mocks*.js",

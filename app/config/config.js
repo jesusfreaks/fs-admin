@@ -131,10 +131,10 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'text', required: true, maxLength: 500
+                    type: 'markdown', required: true, maxLength: 500
                 },
                 text:{
-                    type: 'textarea', required: true, maxLength: 10000
+                    type: 'markdown', required: true, maxLength: 10000
                 },
                 tags: {
                     type: 'tags'

@@ -1,0 +1,29 @@
+<textarea ng-if="def.translatable"
+          id="{{(language|langRef)}}_{{def.name}}"
+          ng-model="instance[(language|langRef)][def.name]"
+          ng-required="def.required"
+          ng-maxlength="def.maxLength"
+          rows="{{def.rows?def.rows:5}}"
+          class="form-control"></textarea>
+
+
+
+
+<textarea ng-if="!def.translatable"
+          id="{{(language|langRef)}}_{{def.name}}"
+          ng-model="instance[def.name]"
+          ng-required="def.required"
+          ng-maxlength="def.maxLength"
+          rows="{{def.rows?def.rows:5}}"
+          class="form-control"></textarea>
+
+
+<a class="pull-right glyphicon {{ mdPreviewStates['preview_'+(language|langRef)+'_'+def.name] ?'glyphicon-eye-close':'glyphicon-eye-open'  }} " ng-click="mdPreviewStates['preview_'+(language|langRef)+'_'+def.name]=!mdPreviewStates['preview_'+(language|langRef)+'_'+def.name]" ></a>
+<br>
+<a ng-if="mdPreviewStates['preview_'+(language|langRef)+'_'+def.name]" class="glyphicon glyphicon-question-sign pull-right" href="https://github.com/showdownjs/showdown" target="_blank"></a>
+
+<div ng-if="!def.translatable && mdPreviewStates['preview_'+(language|langRef)+'_'+def.name]" class="markdown-preview"
+     markdown-to-html="instance[def.name]"></div>
+<div ng-if="def.translatable && mdPreviewStates['preview_'+(language|langRef)+'_'+def.name]" class="markdown-preview"
+     markdown-to-html="instance[(language|langRef)][def.name]"></div>
+
