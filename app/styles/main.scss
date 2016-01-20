@@ -1,7 +1,7 @@
 @import 'font';
 @import 'config';
 @import 'bourbon/app/assets/stylesheets/bourbon';
-$icon-font-path: '/bower_components/bootstrap-sass/assets/fonts/bootstrap/';
+$icon-font-path: 'bower_components/bootstrap-sass/assets/fonts/bootstrap/';
 @import 'bootstrap-sass/assets/stylesheets/bootstrap';
 @import '/bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css';
 @import 'angular-xeditable';
