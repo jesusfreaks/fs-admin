@@ -20,6 +20,7 @@
     "app.general.cancel":"Abbrechen",
     "app.general.delete":"Löschen",
     "app.general.preview":"Vorschau",
+    "app.general.infos":"Festival Info",
 
     "app.general.confirm.delete.title" : "Wirklich löschen?",
     "app.general.confirm.delete.text" : "endgültig löschen?",
@@ -61,6 +62,11 @@
     "news.publishDate": "Veröffentlichen am",
     "news.image": "Bild",
     "news.archived": "Archiviert",
+
+    "info.title":"Titel",
+    "info.preview":"Intro",
+    "info.text":"Text",
+    "info.archived":"Archiviert",
 
     "msg.success" : "Das hat geklappt.",
     "save.success":"Element wurde gespeichert.",

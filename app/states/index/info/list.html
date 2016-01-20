@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col-md-6">
+        <h1>{{'app.general.infos'|translate}}</h1>
+    </div>
+    <div class="col-md-6">
+        <button class="btn btn-primary btn-lg btn-create pull-right" ng-click="create()">
+            {{'app.general.infos'|translate}}
+        </button>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+
+    <div class="col-sm-3">
+        <label for="query">{{'app.general.search.filter.label'|translate}}</label>
+        <input type="text" id="query" class="form-control" ng-model="filter.search.value"
+               placeholder="{{'app.general.search.filter.placeholder'|translate}}"/>
+    </div>
+
+    <div class="col-sm-3">
+        <label for="archivedFilter">{{'filter.archived.label'|translate}}</label>
+        <select id="archivedFilter" class="form-control" ng-model="filter.archived.value" ng-options="option.value as option.label for option in archivedOptions"></select>
+    </div>
+
+</div>
+
+<bstable data="infos"
+         fields="['de.title','de.preview','archived']"
+         translation-key=".de." editable="index.infos.update"
+         filters="filter"
+         order-by="de.title"
+         order-by-desc>
+</bstable>

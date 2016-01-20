@@ -23,6 +23,7 @@ angular.module('fsAdmin')
 
         $showdownProvider.setOption('parseImgDimension', true);
         $showdownProvider.setOption('strikethrough', true);
+        $showdownProvider.setOption('tables', true);
     })
     .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
     .factory('BaseUrl', function (Config) {
@@ -141,6 +142,24 @@ angular.module('fsAdmin')
                 },
                 tags: {
                     type: 'tags'
+                }
+            }
+        },
+        info:{
+            commonProperties:{
+                'archived' : {
+                    type: 'checkbox'
+                }
+            },
+            translatableProperties: {
+                title: {
+                    type: 'text', required: true, maxLength: 80
+                },
+                preview: {
+                    type: 'markdown', required: true, maxLength: 500
+                },
+                text:{
+                    type: 'markdown', required: true, maxLength: 10000
                 }
             }
         }
