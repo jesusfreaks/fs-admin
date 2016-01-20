@@ -153,7 +153,7 @@
         <div ng-if="def.type=='markdown'"
              ng-include="'components/generic-input/_markdown-input.html'">
         </div>
-
+{{def.typ}}
         <div ng-if="def.type=='markdown'">
             <textarea ng-if="def.translatable"
                       id="{{(language|langRef)}}_{{def.name}}"
