@@ -18,8 +18,11 @@ angular.module('fsAdmin')
             return 'components/' + componentSnakeName + '/' + componentSnakeName + '.html';
         });
     })
-    .config(function ($httpProvider) {
+    .config(function ($httpProvider, $showdownProvider) {
         $httpProvider.defaults.headers.common["X-Requested-With"] = 'XMLHttpRequest';
+
+        $showdownProvider.setOption('parseImgDimension', true);
+        $showdownProvider.setOption('strikethrough', true);
     })
     .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
     .factory('BaseUrl', function (Config) {
