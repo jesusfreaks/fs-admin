@@ -121,7 +121,13 @@ angular.module('fsAdmin')
             commonProperties: {
                 'image':{
                     isList: false,
-                    type: 'image'
+                    type: 'image',
+                    opts:{
+                        width: 1280,
+                        height:720,
+                        minWidth:320,
+                        minHeight:180
+                    }
                 },
                 'publishDate': {
                     type: 'datetime'

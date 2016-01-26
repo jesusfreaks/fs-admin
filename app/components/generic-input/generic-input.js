@@ -60,17 +60,18 @@ angular.module('fsAdmin.components')
             return array.push.apply(array, rest);
         }
 
-        function CropperOpts(instance, fieldName, appendToList, initResource){
+        function CropperOpts(instance, fieldName, appendToList, initResource, options){
+            console.log('instance',instance,fieldName);
             this.dataTarget = {
                 instance: instance,
                 fieldName : fieldName,
                 appendToList : appendToList,
                 initResource : initResource
             };
-            this.width = 320;
-            this.height = 113;
+            this.width = 1280;
+            this.height = 720;
             this.minWidth = 320;
-            this.minHeight = 113;
+            this.minHeight = 180;
             this.touchRadius = 30;
             this.keepAspect = true;
             this.sourceImage = undefined;
@@ -78,6 +79,7 @@ angular.module('fsAdmin.components')
             this.bounds = {
                 top:0, left:0,right:0,bottom:0
             };
+            angular.extend(this,options);
         }
 
         CropperOpts.prototype.removeImageAtIdx = function(idx){
@@ -274,8 +276,9 @@ angular.module('fsAdmin.components')
                     }
                     // initialize image upload
                     if(instance.type === 'image'){
+                        console.log('props',FieldDefinitions[scope.instanceType],'instance',instance.opts);
                         instance.opts = new CropperOpts(scope.instance, instance.name,
-                            instance.isList, scope.initResource);
+                            instance.isList, scope.initResource,instance.opts);
                     }
                     if(instance.type === 'reference'){
                         instance.opts = new Referenced(instance.opts,scope.initResource);
