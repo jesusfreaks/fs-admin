@@ -77,6 +77,9 @@ angular.module('fsAdmin')
                 'archived' : {
                     type: 'checkbox'
                 },
+                'artistWebsite' : {
+                    type: 'text'
+                },
                 'eventCategory': {
                     type: 'dropdown', required: true,
                     opts:{

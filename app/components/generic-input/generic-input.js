@@ -225,7 +225,7 @@ angular.module('fsAdmin.components')
             instanceType: '@',
             fields: '=',
             initResource:'='
-            // language as attrs
+            // language as attrs // The language is only relevant for fields that are defined as translateable in config.js
         },
         link: function (scope, elem, attrs) {
 

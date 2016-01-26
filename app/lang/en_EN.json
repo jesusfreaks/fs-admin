@@ -51,6 +51,7 @@
     "event.preview":"Intro",
     "event.images":"Images",
     "event.archived": "archived",
+    "event.artistWebsite":"Website",
 
     "news.title" : "Titel",
     "news.preview": "Intro",
@@ -60,6 +61,7 @@
     "news.publishDate": "publish on",
     "news.image": "Image",
     "news.archived": "archived",
+
 
     "save.success":"Saved",
     "update.success":"Changed",
