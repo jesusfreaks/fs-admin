@@ -125,8 +125,8 @@ angular.module('fsAdmin')
                     opts:{
                         width: 1280,
                         height:720,
-                        minWidth:320,
-                        minHeight:180
+                        minWidth:32,
+                        minHeight:18
                     }
                 },
                 'publishDate': {

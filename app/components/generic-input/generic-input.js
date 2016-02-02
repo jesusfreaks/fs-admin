@@ -68,10 +68,13 @@ angular.module('fsAdmin.components')
                 appendToList : appendToList,
                 initResource : initResource
             };
+
+            // width and height of the crop area used to define ratio and resulting image size
             this.width = 1280;
             this.height = 720;
-            this.minWidth = 320;
-            this.minHeight = 180;
+            // min values that the rect can be set to
+            this.minWidth = 32;
+            this.minHeight = 18;
             this.touchRadius = 30;
             this.keepAspect = true;
             this.sourceImage = undefined;
