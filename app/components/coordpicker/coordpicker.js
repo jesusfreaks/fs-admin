@@ -64,24 +64,25 @@ angular.module('fsAdmin.components').directive('coordpicker', function ($q, $tim
                     // need to gather calculate rendering positions
                     origSizeCall.then(function (origSize) {
                         var renderPos = scaleOriginalCoordsToRenderCoords(origSize,
-                            [viewValue.latitude, viewValue.longitude]);
+                            [viewValue.latitude, viewValue.longitude],viewValue.size);
                         scope.renderCoords.posX = renderPos[0];
                         scope.renderCoords.posY = renderPos[1];
-                        scope.renderCoords.size = viewValue.size;
+                        scope.renderCoords.size = renderPos[2];
                     });
                 }
             };
 
 
             // used when coord should be rendered to smaler image
-            function scaleOriginalCoordsToRenderCoords(origSize, coords) {
+            function scaleOriginalCoordsToRenderCoords(origSize, coords,size) {
                 var currentSize = currentImageSize();
 
                 var ratios = [currentSize[0] / origSize[0],
                     currentSize[1] / origSize[1]];
 
                 return [coords[0] * ratios[0],
-                    coords[1] * ratios[1]];
+                    coords[1] * ratios[1],
+                    (ratios[0] + ratios[1])/2 * size];
             }
 
             // used when coords picked from image must be scaled to orig image size
