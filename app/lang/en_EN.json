@@ -19,6 +19,7 @@
     "app.general.ok":"Ok",
     "app.general.cancel":"Cancel",
     "app.general.delete":"Delete",
+    "app.general.apply":"Apply",
 
     "app.general.confirm.delete.title" : "Really deleting?",
     "app.general.confirm.delete.text" : "Do you really want to delete it?",

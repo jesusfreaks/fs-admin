@@ -2,3 +2,14 @@
     max-width:100%;
     max-height:100%;
 }
+.coordpicker-top{
+    position: relative;
+}
+.selected-coord{
+    position: absolute;
+    background-color:#400;
+    opacity: 0.8;
+    // to see it on any background image style
+    border:1px solid #fff;
+
+}

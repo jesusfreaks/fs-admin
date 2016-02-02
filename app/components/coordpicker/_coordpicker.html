@@ -1,0 +1,20 @@
+<div class="coordpicker-top">
+    <a class="btn btn-primary" ng-show="!showPicker"
+       ng-click="showPicker=!showPicker">
+        <span class="glyphicon glyphicon-map-marker">{{'coordpicker.pick'|translate}}</span>
+    </a>
+    <img class="coordpicker" ng-if="showPicker" ng-src="{{imageUri}}">
+
+    <div ng-show="showPicker&&renderCoords" class="selected-coord" style="top:{{renderCoords.posY}}px; left:{{renderCoords.posX}}px;width:{{renderCoords.size}}px; height:{{renderCoords.size}}px;border-radius:{{renderCoords.size}}px;"></div>
+
+    <div class="row row-spacing-top">
+        <div class="col-md-12">
+
+            <a class="btn btn-primary" ng-show="showPicker"
+               ng-click="ok()">{{'app.general.ok'|translate}}</a>
+
+
+        </div>
+    </div>
+
+</div>

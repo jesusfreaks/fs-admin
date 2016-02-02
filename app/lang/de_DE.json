@@ -21,6 +21,7 @@
     "app.general.delete":"Löschen",
     "app.general.preview":"Vorschau",
     "app.general.infos":"Festival Info",
+    "app.general.apply":"Anwenden",
 
     "app.general.confirm.delete.title" : "Wirklich löschen?",
     "app.general.confirm.delete.text" : "endgültig löschen?",

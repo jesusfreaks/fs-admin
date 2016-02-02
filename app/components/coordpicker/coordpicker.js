@@ -6,17 +6,22 @@
  * © 2015 upSource GmbH, all rights reserved.
  */
 'use strict';
-angular.module('fsAdmin.components').directive('coordpicker', function ($q) {
+angular.module('fsAdmin.components').directive('coordpicker', function ($q, $timeout) {
     var imageUri = 'assets/images/plan.jpg';
     return {
-        template: '<a class="btn btn-primary" ng-show="!showPicker" ng-click="showPicker=!showPicker"><span class="glyphicon glyphicon-map-marker">{{\'coordpicker.pick\'|translate}}</a>' +
-        '<img class="coordpicker" ng-if="showPicker" ng-src="{{imageUri}}" >',
+        templateUrl: 'components/coordpicker/_coordpicker.html',
         require: 'ngModel',
         link: function (scope, elem, attrs, ctrl) {
+            var defaultSize = 30;
             scope.showPicker = false;
             scope.imageUri = imageUri;
+
+            scope.renderCoords = {};
+
+
             function getImageElem() {
-                return elem.children().eq(1);
+                var result = elem.children().eq(0).children().eq(1);
+                return result;
             }
 
             function origImageSize(uri) {
@@ -36,13 +41,50 @@ angular.module('fsAdmin.components').directive('coordpicker', function ($q) {
                 return deferred.promise;
             }
 
-            var origSizeCall = origImageSize(scope.imageUri);
-
             function currentImageSize() {
                 return [getImageElem()[0].offsetWidth,
                     getImageElem()[0].offsetHeight];
             }
 
+            var origSizeCall = origImageSize(scope.imageUri);
+
+
+            // init from view value,
+            scope.initFromData = function () {
+                var viewValue = ctrl.$viewValue;
+                // ensure instance
+                if (!viewValue) {
+                    viewValue = { size: defaultSize};
+                }
+                if (!viewValue.size || viewValue.size === null) {
+                    viewValue.size = defaultSize;
+                }
+
+                if (viewValue.longitude || viewValue.latitude) {
+                    // need to gather calculate rendering positions
+                    origSizeCall.then(function (origSize) {
+                        var renderPos = scaleOriginalCoordsToRenderCoords(origSize,
+                            [viewValue.latitude, viewValue.longitude]);
+                        scope.renderCoords.posX = renderPos[0];
+                        scope.renderCoords.posY = renderPos[1];
+                        scope.renderCoords.size = viewValue.size;
+                    });
+                }
+            };
+
+
+            // used when coord should be rendered to smaler image
+            function scaleOriginalCoordsToRenderCoords(origSize, coords) {
+                var currentSize = currentImageSize();
+
+                var ratios = [currentSize[0] / origSize[0],
+                    currentSize[1] / origSize[1]];
+
+                return [coords[0] * ratios[0],
+                    coords[1] * ratios[1]];
+            }
+
+            // used when coords picked from image must be scaled to orig image size
             function scaleCoordsToOrigSize(origSize, coords) {
                 var currentSize = currentImageSize();
 
@@ -86,26 +128,30 @@ angular.module('fsAdmin.components').directive('coordpicker', function ($q) {
                     posY = e.clientY + document.body.scrollTop +
                         document.documentElement.scrollTop;
                 }
-
                 posX = posX - imgPos[0];
                 posY = posY - imgPos[1];
 
                 scope.$apply(function () {
                     origSizeCall.then(function (origSize) {
+                       var viewValue =  ctrl.$viewValue;
                         var scaled = scaleCoordsToOrigSize(origSize, [posX, posY]),
                             result = {
-                                latitude: scaled[0],
-                                longitude: scaled[1]
+                                posX: posX,
+                                posY: posY,
+                                size: viewValue.size
                             };
-                        var oldvalue=ctrl.$modelValue;
-                        result.size=oldvalue.size;
-                        ctrl.$setViewValue(result);
-
-
-                        scope.showPicker = false;
+                        viewValue.latitude = scaled[0];
+                        viewValue.longitude = scaled[1];
+                        scope.renderCoords = result;
+                        ctrl.$setViewValue(viewValue);
                     });
                 });
             }
+
+            scope.ok = function () {
+
+                scope.showPicker = false;
+            };
 
             // register coord-picker listener if image is opened
             var lastBound;
@@ -114,10 +160,33 @@ angular.module('fsAdmin.components').directive('coordpicker', function ($q) {
                     // remove possibly old listeners on image
                     lastBound.unbind('mousedown');
                 }
-                if (newVal === true) {
+                if (newVal === true) { // SHOW
                     lastBound = getImageElem().bind('mousedown', findCoords);
+                    $timeout(function () {
+                        scope.initFromData();
+                    }, 1)
                 }
             });
+
+            scope.$watch(
+                function () {
+                    return JSON.stringify(ctrl.$viewValue);
+                },
+                function (newVal) {
+                    if (!newVal) {
+                        return;
+                    }
+                    if (scope.showPicker === true) {
+                        scope.initFromData();
+                    }
+                }
+            );
+
+            ctrl.$render = function () {
+                if (scope.showPicker === true) {
+                    scope.initFromData();
+                }
+            };
         }
     };
 });

@@ -23,6 +23,23 @@
                    class="form-control">
         </span>
 
+         <span ng-if="def.type=='number'">
+
+            <input ng-if="def.translatable" type="number"
+                   step="{{def.step}}"
+                   id="{{(language|langRef)}}_{{def.name}}"
+                   ng-required="def.required"
+                   ng-model="instance[(language|langRef)][def.name]"
+                   class="form-control">
+
+            <input ng-if="!def.translatable" type="number"
+                   step="{{def.step}}"
+                   id="{{(language|langRef)}}_{{def.name}}"
+                   ng-required="def.required"
+                   ng-model="instance[def.name]"
+                   class="form-control">
+        </span>
+
         <span ng-if="def.type=='textarea'">
             <textarea ng-if="def.translatable"
                       id="{{(language|langRef)}}_{{def.name}}"
