@@ -16,9 +16,11 @@ angular.module('fsAdmin.components')
             }
             var resolvedItem = scope.$eval('item.' + resolve);
 
-            // WTF ...
-            if (name === 'start' || name === 'end' || name ==='publishDate') {
+            // format some fields
+            if (name === 'start' || name === 'end' ) {
                 return moment(resolvedItem).format('DD.MM. HH:mm');
+            }else if (name ==='publishDate'){
+                return moment(resolvedItem).format('YYYY.DD.MM. HH:mm');
             }
 
             return resolvedItem;
