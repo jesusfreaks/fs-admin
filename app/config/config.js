@@ -167,7 +167,7 @@ angular.module('fsAdmin')
                 },
                 'publishDate': {
                     type: 'datetime'
-                },
+                }
             },
             translatableProperties: {
                 title: {
