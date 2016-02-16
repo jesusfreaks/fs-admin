@@ -6,18 +6,18 @@
  */
 'use strict';
 angular.module('fsAdmin.components')
-    .service('DataHelper',function(){
-        this.prepareForSave = function(instance){
-            if(instance.de) {
+    .service('DataHelper', function () {
+        this.prepareForSave = function (instance) {
+            if (instance.de) {
                 instance.de.lang = 'de';
             }
-            if(instance.en){
+            if (instance.en) {
                 instance.en.lang = 'en';
             }
         };
     })
-    .service('Referenced',function($rootScope, langRefFilter){
-        function Referenced(opts, initRo){
+    .service('Referenced', function ($rootScope, langRefFilter) {
+        function Referenced(opts, initRo) {
             this.initRo = initRo;
             this.fetchMethod = opts.method;
             this.labelEl = opts.label;
@@ -27,14 +27,14 @@ angular.module('fsAdmin.components')
             }];
             //TODO: optimize to exec only if rendered
             var me = this, fetchFn = this.initRo[this.fetchMethod];
-            if(!angular.isFunction(fetchFn)){
+            if (!angular.isFunction(fetchFn)) {
                 return;
             }
 
             var prom = fetchFn();
-            prom.then(function(result){
+            prom.then(function (result) {
                 //me.data =[];
-                angular.forEach(result,function(elem){
+                angular.forEach(result, function (elem) {
 
                     var scope = $rootScope.$new();
                     scope.item = elem;
@@ -42,9 +42,9 @@ angular.module('fsAdmin.components')
                     //console.log('valueEl ',me.valueEl,'evaled',scope.$eval(me.valueEl),'againstScope',scope);
 
                     me.data.push({
-                        label:scope.$eval(me.labelEl ),
+                        label: scope.$eval(me.labelEl),
                         item: elem,
-                        value: scope.$eval(me.valueEl )
+                        value: scope.$eval(me.valueEl)
                     });
                     scope.$destroy();
                 });
@@ -52,7 +52,7 @@ angular.module('fsAdmin.components')
         }
         return Referenced;
     })
-    .service('CropperOpts',function($http){
+    .service('CropperOpts', function ($http) {
 
         function remove(array, from, to) {
             var rest = array.slice((to || from) + 1 || array.length);
@@ -60,13 +60,13 @@ angular.module('fsAdmin.components')
             return array.push.apply(array, rest);
         }
 
-        function CropperOpts(instance, fieldName, appendToList, initResource, options){
-            console.log('instance',instance,fieldName);
+        function CropperOpts(instance, fieldName, appendToList, initResource, options) {
+            console.log('instance', instance, fieldName);
             this.dataTarget = {
                 instance: instance,
-                fieldName : fieldName,
-                appendToList : appendToList,
-                initResource : initResource
+                fieldName: fieldName,
+                appendToList: appendToList,
+                initResource: initResource
             };
 
             // width and height of the crop area used to define ratio and resulting image size
@@ -80,17 +80,17 @@ angular.module('fsAdmin.components')
             this.sourceImage = undefined;
             this.croppedImage = undefined;
             this.bounds = {
-                top:0, left:0,right:0,bottom:0
+                top: 0, left: 0, right: 0, bottom: 0
             };
-            angular.extend(this,options);
+            angular.extend(this, options);
         }
 
-        CropperOpts.prototype.removeImageAtIdx = function(idx){
-           if(angular.isArray(this.dataTarget.instance[this.dataTarget.fieldName])){
-               remove(this.dataTarget.instance[this.dataTarget.fieldName],idx);
-           }else{
-               this.dataTarget.instance[this.dataTarget.fieldName] = undefined;
-           }
+        CropperOpts.prototype.removeImageAtIdx = function (idx) {
+            if (angular.isArray(this.dataTarget.instance[this.dataTarget.fieldName])) {
+                remove(this.dataTarget.instance[this.dataTarget.fieldName], idx);
+            } else {
+                this.dataTarget.instance[this.dataTarget.fieldName] = undefined;
+            }
         };
 
         function dataURItoBlob(dataURI, mt) {
@@ -100,10 +100,10 @@ angular.module('fsAdmin.components')
             for (var i = 0; i < byteString.length; i++) {
                 ia[i] = byteString.charCodeAt(i);
             }
-            return new Blob([ab], { type: mt });
+            return new Blob([ab], {type: mt});
         }
 
-        CropperOpts.prototype.ok = function(instance){
+        CropperOpts.prototype.ok = function (instance) {
             var me = this;
             // append image to list
             var fd = new FormData();
@@ -114,29 +114,30 @@ angular.module('fsAdmin.components')
             fd.append('file', blob, filename);
 
             $http.post(this.dataTarget.initResource._links.upload.href, fd, {
-                transformRequest: angular.identity,
-                headers: {
-                    'Content-Type': undefined}
-            })
-            .success(function(res, status, headers){
+                    transformRequest: angular.identity,
+                    headers: {
+                        'Content-Type': undefined
+                    }
+                })
+                .success(function (res, status, headers) {
                     var url = headers('Location');
-                    if(me.dataTarget.appendToList===true){
-                        if(!angular.isArray(me.dataTarget.instance[me.dataTarget.fieldName])){
-                            me.dataTarget.instance[me.dataTarget.fieldName]=[];
+                    if (me.dataTarget.appendToList === true) {
+                        if (!angular.isArray(me.dataTarget.instance[me.dataTarget.fieldName])) {
+                            me.dataTarget.instance[me.dataTarget.fieldName] = [];
                         }
                         me.dataTarget.instance[me.dataTarget.fieldName].push(url);
-                    }else{
+                    } else {
                         me.dataTarget.instance[me.dataTarget.fieldName] = url;
                     }
                     me.sourceImage = undefined;
                     me.croppedImage = undefined;
-            })
-            .error(function(err){
-                    console.log('upload error',err);
-            });
+                })
+                .error(function (err) {
+                    console.log('upload error', err);
+                });
 
         };
-        CropperOpts.prototype.cancel = function(){
+        CropperOpts.prototype.cancel = function () {
             this.sourceImage = undefined;
             this.croppedImage = undefined;
         };
@@ -146,35 +147,36 @@ angular.module('fsAdmin.components')
     .directive('formatDateTime', function () {
         return {
             require: 'ngModel',
-            link: function(scope, element, attrs, ngModelController) {
+            link: function (scope, element, attrs, ngModelController) {
                 ngModelController.$parsers.push(function (data) {
                     //View -> Model
                     var res;
-                    if(typeof data ==='string'){
-                        res = moment(data,'YYYY-MM-DD HH:mm');
-                    }else if (data !== undefined && data !== null){
+                    if (typeof data === 'string') {
+                        res = moment(data, 'YYYY-MM-DD HH:mm');
+                    } else if (data !== undefined && data !== null) {
                         res = moment(data);
-                    }else{
-                        ngModelController.$setValidity('date',false);
+                    } else {
+                        ngModelController.$setValidity('date', false);
                         return;
                     }
-                    var result =  res.format('YYYY-MM-DDTHH:mm');
-                    ngModelController.$setValidity('date',true);
+                    var result = res.format('YYYY-MM-DDTHH:mm');
+                    ngModelController.$setValidity('date', true);
+                    console.log('DateConverter: view->model', result);
                     return result;
                 });
                 ngModelController.$formatters.push(function (data) {
                     //Model -> View
                     var res;
-                    if(typeof data ==='string'){
-                        res = moment(data,'YYYY-MM-DDTHH:mm');
+                    if (typeof data === 'string') {
+                        res = moment(data, 'YYYY-MM-DDTHH:mm');
                     }
-                    else if (data !== undefined && data !== null){
+                    else if (data !== undefined && data !== null) {
                         res = moment(data);
-                    }else{
+                    } else {
                         return undefined;
                     }
-                    var result =  res.format('YYYY-MM-DD HH:mm');
-                    //console.log('model->view',result);
+                    var result = res.format('YYYY-MM-DD HH:mm');
+                    console.log('DateConverter: model->view', result);
                     return result;
                 });
             }
@@ -183,37 +185,37 @@ angular.module('fsAdmin.components')
     .directive('datepickerformat', function () {
         return {
             require: 'ngModel',
-            link: function(scope, element, attrs, ngModelController) {
+            link: function (scope, element, attrs, ngModelController) {
                 ngModelController.$parsers.push(function (data) {
                     //View -> Model
                     // normally we should get a date as input here but we also support a string
                     var res;
-                    if(typeof data ==='string'){
-                        res = moment(data,'YYYY-MM-DD HH:mm');
-                    }else if (data !== undefined && data !== null){
+                    if (typeof data === 'string') {
+                        res = moment(data, 'YYYY-MM-DD HH:mm');
+                    } else if (data !== undefined && data !== null) {
                         res = moment(data);
-                    }else{
+                    } else {
                         // formater is undefined;
                         return undefined;
                     }
-                    var result =  res.format('YYYY-MM-DDTHH:mm');
+                    var result = res.format('YYYY-MM-DDTHH:mm');
                     console.log('view->model ', result);
                     return result;
                 });
                 ngModelController.$formatters.push(function (data) {
-                    console.log(' data input',data);
+                    console.log(' data input', data);
                     //Model -> View
                     var res;
-                    if(typeof data ==='string'){
-                        res = moment(data,'YYYY-MM-DDTHH:mm');
+                    if (typeof data === 'string') {
+                        res = moment(data, 'YYYY-MM-DDTHH:mm');
                     }
-                    else if(data !== undefined && data !== null ){
+                    else if (data !== undefined && data !== null) {
                         res = moment(data);
-                    }else{
+                    } else {
                         console.log('use now ');
                         res = moment();
                     }
-                    var result =  res.toDate();
+                    var result = res.toDate();
                     return result;
                 });
             }
@@ -222,74 +224,74 @@ angular.module('fsAdmin.components')
 
 
     .directive('genericInput', function ($translate, langRefFilter, FieldDefinitions, CropperOpts, Referenced, Config) {
-    return {
-        templateUrl: 'components/generic-input/generic-input.html',
-        restrict: 'EA',
-        scope: {
-            instance: '=',
-            instanceType: '@',
-            fields: '=',
-            initResource:'='
-            // language as attrs // The language is only relevant for fields that are defined as translateable in config.js
-        },
-        link: function (scope, elem, attrs) {
+        return {
+            templateUrl: 'components/generic-input/generic-input.html',
+            restrict: 'EA',
+            scope: {
+                instance: '=',
+                instanceType: '@',
+                fields: '=',
+                initResource: '='
+                // language as attrs // The language is only relevant for fields that are defined as translateable in config.js
+            },
+            link: function (scope, elem, attrs) {
 
 
-            scope.evalEl = function (item,expression){
-                var _scope = scope.$new();
-                _scope.item = item;
-                _scope.language = langRefFilter();
-                var result = _scope.$eval(expression);
-                _scope.$destroy();
-                return result;
-            };
+                scope.evalEl = function (item, expression) {
+                    var _scope = scope.$new();
+                    _scope.item = item;
+                    _scope.language = langRefFilter();
+                    var result = _scope.$eval(expression);
+                    _scope.$destroy();
+                    return result;
+                };
 
-            scope.apiUrl = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port;
+                scope.apiUrl = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port;
 
-            scope.language = attrs.language;
-            var definitions = [];
+                scope.language = attrs.language;
+                var definitions = [];
 
-            angular.forEach(FieldDefinitions[scope.instanceType].commonProperties, function (definition, name) {
-                if (scope.fields.indexOf(name) !== -1) {
-                    definitions.push(angular.extend({}, definition, {name: name}));
-                }
-            });
-            angular.forEach(FieldDefinitions[scope.instanceType].translatableProperties,
-                function (definition, name) {
+                angular.forEach(FieldDefinitions[scope.instanceType].commonProperties, function (definition, name) {
                     if (scope.fields.indexOf(name) !== -1) {
-                        definitions.push(angular.extend({}, definition, {name: name, translatable: true}));
+                        definitions.push(angular.extend({}, definition, {name: name}));
                     }
                 });
+                angular.forEach(FieldDefinitions[scope.instanceType].translatableProperties,
+                    function (definition, name) {
+                        if (scope.fields.indexOf(name) !== -1) {
+                            definitions.push(angular.extend({}, definition, {name: name, translatable: true}));
+                        }
+                    });
 
-            scope.prefix = scope.instanceType;
+                scope.prefix = scope.instanceType;
 
-            // sort depending on fields order given to directive
-            scope.definitions = [];
-            angular.forEach(scope.fields, function (name) {
-                if(name === ''){// add an empty definition that will render as space only
-                    scope.definitions.push({type:'empty',name:'empty'});
-                    return;
-                }
-
-                angular.forEach(definitions, function (instance) {
-                    if (name === instance.name) {
-                        scope.definitions.push(instance);
-                    }else{
+                // sort depending on fields order given to directive
+                scope.definitions = [];
+                angular.forEach(scope.fields, function (name) {
+                    if (name === '') {// add an empty definition that will render as space only
+                        scope.definitions.push({type: 'empty', name: 'empty'});
                         return;
                     }
-                    // initialize image upload
-                    if(instance.type === 'image'){
-                        console.log('props',FieldDefinitions[scope.instanceType],'instance',instance.opts);
-                        instance.opts = new CropperOpts(scope.instance, instance.name,
-                            instance.isList, scope.initResource,instance.opts);
-                    }
-                    if(instance.type === 'reference'){
-                        instance.opts = new Referenced(instance.opts,scope.initResource);
-                    }
-                });
 
-            });
-        }
-    };
-});
+                    angular.forEach(definitions, function (instance) {
+                        if (name === instance.name) {
+                            scope.definitions.push(instance);
+                        } else {
+                            return;
+                        }
+                        // initialize image upload
+                        if (instance.type === 'image') {
+                            console.log('props', FieldDefinitions[scope.instanceType], 'instance', instance.opts);
+                            instance.opts = new CropperOpts(scope.instance, instance.name,
+                                instance.isList, scope.initResource, instance.opts);
+                        }
+                        if (instance.type === 'reference') {
+                            instance.opts = new Referenced(instance.opts, scope.initResource);
+                        }
+                    });
+
+                });
+            }
+        };
+    });
 
