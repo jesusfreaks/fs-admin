@@ -19,6 +19,8 @@
     "app.general.ok":"Ok",
     "app.general.cancel":"Cancel",
     "app.general.delete":"Delete",
+    "app.general.preview":"Preview",
+    "app.general.infos":"Festival Info",
     "app.general.apply":"Apply",
 
     "app.general.confirm.delete.title" : "Really deleting?",
@@ -32,7 +34,8 @@
     "location.description":"Description",
     "location.tags":"Tags",
     "location.preview":"Intro",
-    "location.markOnMap":"Mark on map",
+    "location.publishDate":"publish at",
+    "location.markOnMap":"Quick-link to program-view",
     "location.images":"Images",
     "location.geoCoords":"Coordinates",
     "location.archived": "archived",
@@ -51,6 +54,7 @@
     "event.tags":"Tags",
     "event.preview":"Intro",
     "event.images":"Images",
+    "event.publishDate":"publish at",
     "event.archived": "archived",
     "event.artistWebsite":"Website",
 
@@ -64,6 +68,13 @@
     "news.archived": "archived",
 
 
+    "info.title":"Titel",
+    "info.preview":"Intro",
+    "info.text":"Text",
+    "info.publishDate":"Veröffentlichung am",
+    "info.archived":"Archiviert",
+
+    "msg.success" : "Successfully",
     "save.success":"Saved",
     "update.success":"Changed",
     "deleted.success":"Deleted",
@@ -88,7 +99,6 @@
     "filter.archived.yes.label" : "only archived",
     "filter.archived.no.label" : "only not archived",
 
-
     "event.category.null":"Choose category",
     "event.category.":"Choose category",
     "event.category.CONCERT":"Concert",
@@ -99,5 +109,6 @@
     "event.category.MISC":"Misc",
 
     "events.filter.category.label" : "Category",
-    "events.filter.location.label" : "Location"
+    "events.filter.location.label" : "Location",
+    "events.filter.archived.label" : "Archived"
 }

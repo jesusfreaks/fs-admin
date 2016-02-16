@@ -5,7 +5,7 @@
             <generic-input
                 instance="instance"
                 instance-type="location"
-                fields="['name','preview','description','tags']"
+                fields="['name','preview','description','tags','markOnMap']"
                 language="de_DE" init-resource="initRo">
             </generic-input>
         </div>
@@ -15,19 +15,20 @@
             <generic-input
                 instance="instance"
                 instance-type="location"
-                fields="['name','preview','description']"
+                fields="['name','preview','description','publishDate','archived']"
                 language="en_EN" init-resource="initRo">
             </generic-input>
         </div>
 
         <div class="row">
             <div class="col-md-offset-5 col-md-6">
+
                 <h3>{{ 'location.geoCoords'|translate}}
                 </h3>
 
             </div>
         </div>
-
+        <hr>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-2">
@@ -53,20 +54,10 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="col-md-push-2 col-md-8">
-                <generic-input
-                    instance="instance"
-                    instance-type="location"
-                    fields="['markOnMap']"
-                    language="en_EN"
-                    init-resource="initRo">
-                </generic-input>
-            </div>
-        </div>
+
     </div>
 
-
+    <hr>
     <div class="row">
         <div class="col-md-offset-5 col-md-6">
             <h3>{{ 'location.images'|translate}}
@@ -81,7 +72,7 @@
             <generic-input
                 instance="instance"
                 instance-type="location"
-                fields="['images','archived']"
+                fields="['','images']"
                 language="en_EN"
                 init-resource="initRo">
             </generic-input>

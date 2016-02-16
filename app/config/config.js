@@ -46,6 +46,9 @@ angular.module('fsAdmin')
                 },
                 'archived' : {
                     type: 'checkbox'
+                },
+                'publishDate': {
+                    type: 'datetime'
                 }
             },
             translatableProperties: {
@@ -100,6 +103,9 @@ angular.module('fsAdmin')
                         label:'item[language].name',
                         value:'item.identifier'
                     }
+                },
+                'publishDate': {
+                    type: 'datetime'
                 }
             },
             translatableProperties: {
@@ -158,7 +164,10 @@ angular.module('fsAdmin')
             commonProperties:{
                 'archived' : {
                     type: 'checkbox'
-                }
+                },
+                'publishDate': {
+                    type: 'datetime'
+                },
             },
             translatableProperties: {
                 title: {
