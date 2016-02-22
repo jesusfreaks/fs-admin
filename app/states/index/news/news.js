@@ -109,4 +109,20 @@ angular.module('fsAdmin')
                 };
             }
         });
+
+        $stateProvider.state('index.news.print', {
+            url: '/print/:id',
+            templateUrl: 'states/index/news/print.html',
+            controller: function ($scope, news, Helper, $stateParams, $window, $timeout, Config) {
+
+                $scope.news = Helper.createInstance(news, $stateParams.id);
+
+                $scope.apiUrl = Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port;
+
+                $timeout(function () {
+                    $window.print();
+                }, 1000, false);
+
+            }
+        });
     });

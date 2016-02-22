@@ -1,0 +1,28 @@
+<div>
+
+    <img ng-src="{{apiUrl + news.image}}">
+
+    <h1>{{news.de.title}} <br><small>{{news.publishDate | date : 'd. MMMM y'}} von {{news.author}}</small></h1>
+
+    <hr>
+
+    <p class="lead">
+        {{news.de.text}}
+    </p>
+
+</div>
+
+<div>
+
+    <img ng-src="{{apiUrl + news.image}}">
+
+    <h1>{{news.de.title}} <br><small>{{news.publishDate | date : 'MMMM d, y'}} by {{news.author}}</small></h1>
+
+    <hr>
+
+    <p class="lead">
+        {{news.en.text}}
+    </p>
+
+
+</div>
