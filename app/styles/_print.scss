@@ -1,0 +1,10 @@
+@media print {
+    .print-page {
+        page-break-before: always;
+    }
+
+    p {
+        font-family: "Times New Roman",times,serif;
+        font-size: 16pt;
+    }
+}

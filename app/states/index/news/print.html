@@ -1,28 +1,31 @@
-<div>
+<div class="row">
+    <div class="col-xs-12">
 
-    <img ng-src="{{apiUrl + news.image}}">
+    <img ng-src="{{apiUrl + news.image}}" class="img-responsive">
 
     <h1>{{news.de.title}} <br><small>{{news.publishDate | date : 'd. MMMM y'}} von {{news.author}}</small></h1>
 
     <hr>
 
-    <p class="lead">
+    <p>
         {{news.de.text}}
     </p>
 
+    </div>
 </div>
 
-<div>
+<div class="row print-page">
+    <div class="col-xs-12">
 
-    <img ng-src="{{apiUrl + news.image}}">
+    <img ng-src="{{apiUrl + news.image}}" class="img-responsive">
 
     <h1>{{news.de.title}} <br><small>{{news.publishDate | date : 'MMMM d, y'}} by {{news.author}}</small></h1>
 
     <hr>
 
-    <p class="lead">
+    <p>
         {{news.en.text}}
     </p>
 
-
+    </div>
 </div>
