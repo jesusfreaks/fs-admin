@@ -21,6 +21,7 @@ var app = angular.module('fsAdmin', [
     'ngTagsInput',
     'angular-img-cropper',
     'ui.bootstrap.datetimepicker',
-    'ng-showdown'
+    'ng-showdown',
+    'ngColorPicker'
 ]);
 angular.componentFactory.moduleDecorator(app);

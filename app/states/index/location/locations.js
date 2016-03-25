@@ -49,6 +49,9 @@ angular.module('fsAdmin')
             url: '/update/:id',
             templateUrl: 'states/index/location/edit.html',
             controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log, DataHelper ) {
+
+                $scope.colors = ['#33cc33', '#ffff00', '#ff9900', '#ff3300', '#996633', '#cc00cc', '#6699ff', '#66ffff'];
+
                 $scope.initRo = initRo;
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);

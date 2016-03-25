@@ -25,6 +25,41 @@ angular.module('fsAdmin')
         $showdownProvider.setOption('strikethrough', true);
         $showdownProvider.setOption('tables', true);
     })
+
+    // TODO wie und wo gehört das eigentlich hin? das template muss konfiguriert werden!
+    .provider('ngColorPickerConfig', function(){
+
+        var templateUrl = 'bower_components/ng-color-picker/color-picker.html';
+        var defaultColors =  [
+            '#7bd148',
+            '#5484ed',
+            '#a4bdfc',
+            '#46d6db',
+            '#7ae7bf',
+            '#51b749',
+            '#fbd75b',
+            '#ffb878',
+            '#ff887c',
+            '#dc2127',
+            '#dbadff',
+            '#e1e1e1'
+        ];
+        this.setTemplateUrl = function(url){
+            templateUrl = url;
+            return this;
+        };
+        this.setDefaultColors = function(colors){
+            defaultColors = colors;
+            return this;
+        };
+        this.$get = function(){
+            return {
+                templateUrl : templateUrl,
+                defaultColors: defaultColors
+            }
+        }
+    })
+
     .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
     .factory('BaseUrl', function (Config) {
         return (Config.API.protocol + '://' + Config.API.host + ':' + Config.API.port + '/');

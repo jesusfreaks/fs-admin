@@ -15,6 +15,9 @@
         <tbody>
 
             <tr ng-repeat="entry in page.items">
+                <td style="background-color: {{entry.color}}">
+                    &nbsp;
+                </td>
                 <td ng-repeat="field in fields">
                     <span ng-bind-html="resolve(entry,field) | highlight:filters.search.value:field:filters.search.field"></span></td>
                 <td ng-if="editable">

@@ -1,4 +1,11 @@
 <form name="editLocation" class="form-horizontal" ng-submit="editLocation.$valid?save():false">
+
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            COLOR: <ng-color-picker selected="instance.color" colors="colors"></ng-color-picker>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-offset-2 col-md-4">
             <h1>{{'app.general.location'|translate}}: {{instance.code}} {{'de_DE'|translate}}</h1>
