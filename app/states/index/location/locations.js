@@ -9,50 +9,91 @@ angular.module('fsAdmin')
 
     .config(function ($stateProvider) {
 
-        function hsb2rgb(hue, saturation, value) {
-            hue = (parseInt(hue, 10) || 0) % 360;
+        /**
+         * HSV to RGB color conversion
+         *
+         * H runs from 0 to 360 degrees
+         * S and V run from 0 to 100
+         *
+         * Ported from the excellent java algorithm by Eugene Vishnevsky at:
+         * http://www.cs.rit.edu/~ncs/color/t_convert.html
+         */
+        function hsb2rgb(h, s, v) {
+            var r, g, b;
+            var i;
+            var f, p, q, t;
 
-            saturation = /%/.test(saturation)
-                ? parseInt(saturation, 10) / 100
-                : parseFloat(saturation, 10);
+            // Make sure our arguments stay in-range
+            h = Math.max(0, Math.min(360, h));
+            s = Math.max(0, Math.min(100, s));
+            v = Math.max(0, Math.min(100, v));
 
-            value = /%/.test(value)
-                ? parseInt(value, 10) / 100
-                : parseFloat(value, 10);
+            // We accept saturation and value arguments from 0 to 100 because that's
+            // how Photoshop represents those values. Internally, however, the
+            // saturation and value are calculated from a range of 0 to 1. We make
+            // That conversion here.
+            s /= 100;
+            v /= 100;
 
-            saturation = Math.max(0, Math.min(saturation, 1));
-            value = Math.max(0, Math.min(value, 1));
-
-            var rgb;
-            if (saturation === 0) {
-                return [
-                    Math.round(255 * value),
-                    Math.round(255 * value),
-                    Math.round(255 * value)
-                ];
+            if(s == 0) {
+                // Achromatic (grey)
+                r = g = b = v;
+                return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
             }
 
-            var side = hue / 60;
-            var chroma = value * saturation;
-            var x = chroma * (1 - Math.abs(side % 2 - 1));
-            var match = value - chroma;
+            h /= 60; // sector 0 to 5
+            i = Math.floor(h);
+            f = h - i; // factorial part of h
+            p = v * (1 - s);
+            q = v * (1 - s * f);
+            t = v * (1 - s * (1 - f));
 
-            switch (Math.floor(side)) {
-                case 0: rgb = [ chroma, x, 0 ]; break;
-                case 1: rgb = [ x, chroma, 0 ]; break;
-                case 2: rgb = [ 0, chroma, x ]; break;
-                case 3: rgb = [ 0, x, chroma ]; break;
-                case 4: rgb = [ x, 0, chroma ]; break;
-                case 5: rgb = [ chroma, 0, x ]; break;
-                default: rgb = [ 0, 0, 0 ];
+            switch(i) {
+                case 0:
+                    r = v;
+                    g = t;
+                    b = p;
+                    break;
+
+                case 1:
+                    r = q;
+                    g = v;
+                    b = p;
+                    break;
+
+                case 2:
+                    r = p;
+                    g = v;
+                    b = t;
+                    break;
+
+                case 3:
+                    r = p;
+                    g = q;
+                    b = v;
+                    break;
+
+                case 4:
+                    r = t;
+                    g = p;
+                    b = v;
+                    break;
+
+                default: // case 5:
+                    r = v;
+                    g = p;
+                    b = q;
             }
 
-            rgb[0] = Math.round(255 * (rgb[0] + match));
-            rgb[1] = Math.round(255 * (rgb[1] + match));
-            rgb[2] = Math.round(255 * (rgb[2] + match));
-
+            var rgb = [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
             return '#' + pad(rgb[0].toString(16),2,0) + pad(rgb[1].toString(16),2,0) + pad(rgb[2].toString(16),2,0);
 
+        }
+
+        function pad(n, width, z) {
+            z = z || '0';
+            n = n + '';
+            return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
         }
 
 
@@ -98,9 +139,12 @@ angular.module('fsAdmin')
             url: '/update/:id',
             templateUrl: 'states/index/location/edit.html',
             controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log, DataHelper ) {
+                $scope.colors = $scope.colors1 =  $scope.colors2 = $scope.colors3 = [];
+                for (var i = 0; i <= 359; i = i + 10) {
+                    var color = hsb2rgb(i, 10, 100);
+                    console.log('color',color);
+                    $scope.colors.push( color );
 
-                for(var i=0; i <=255;i=i+10){
-                    $scope.colors.push(hsb2rgb(i,255,30));
                 }
 
                 //$scope.colors = ['#33cc33', '#ffff00', '#ff9900', '#ff3300', '#996633', '#cc00cc', '#6699ff', '#66ffff'];

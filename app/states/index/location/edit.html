@@ -2,11 +2,22 @@
 
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
+            <div class="form-group">
+                <div class="col-sm-12"><label for="color-choose">
+                    selected color
+                </label>
+                    <ng-color-picker id="color-choose"
+                                     name="color-choose"
+                                     selected="instance.color" colors="colors">
+                    </ng-color-picker>
+                </div>
+            </div>
             selected color
-            <div style="width:10px;height:10px; background-color:{{instance.color}};">
+            <div >
                 {{instance.color}}
             </div>
-            COLOR: <ng-color-picker selected="instance.color" colors="colors"></ng-color-picker>
+            COLOR:
+
         </div>
     </div>
 
