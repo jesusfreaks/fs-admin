@@ -82,13 +82,20 @@
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
             <div class="form-group">
-                <div class="col-sm-12"><label for="color-choose">
-                    {{'location.color'|translate}}
-                </label>
-                    <ng-color-picker id="color-choose"
-                                     name="color-choose"
-                                     selected="instance.color" colors="colors">
-                    </ng-color-picker>
+                <div class="col-sm-12">
+                    <label for="color-choose">
+                        {{'location.color'|translate}}
+                    </label>
+                    <div class="color-container">
+                        <div ng-repeat="col in colors">
+                            <div
+                                 class="color"
+                                 ng-class="{selected: view.selectedColor==col}"
+                                 style="background-color:{{col}}"
+                                 ng-click="location.color=col;view.selectedColor=col">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

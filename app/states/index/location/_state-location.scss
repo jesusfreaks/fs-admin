@@ -1,0 +1,11 @@
+.color-container{
+    .color {
+        width: 20px;
+        height: 20px;
+        float: left;
+        border: none;
+    }
+    .color.selected{
+        border: 1px solid black;
+    }
+}

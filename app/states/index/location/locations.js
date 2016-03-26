@@ -145,13 +145,15 @@ angular.module('fsAdmin')
                 for (var i = 0; i <= 359; i = i + 10) {
                     var color = hsb2rgb(i, 10, 100);
                     $scope.colors.push( color );
-
                 }
+
 
                 // init data
                 $scope.initRo = initRo;
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);
+
+                $scope.view = {selectedColor:$scope.instance.color};
 
                 if (!$scope.instance.geoCoordinate) {
                     $scope.instance.geoCoordinate = {};

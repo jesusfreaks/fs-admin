@@ -26,7 +26,7 @@ angular.module('fsAdmin')
         $showdownProvider.setOption('tables', true);
     })
 
-    // TODO wie und wo gehört das eigentlich hin? das template muss konfiguriert werden!
+   /* // TODO wie und wo gehört das eigentlich hin? das template muss konfiguriert werden!
     .provider('ngColorPickerConfig', function(){
         // passt schon hier ... nur das template ist eigenltich per js zu empbeddedn .. zumidnest it das üblich.
         var templateUrl = 'bower_components/ng-color-picker/color-picker.html';
@@ -58,7 +58,7 @@ angular.module('fsAdmin')
                 defaultColors: defaultColors
             }
         }
-    })
+    })*/
 
     .value('cgBusyTemplateName', 'views/angular-busy/default-spinner.html')
     .factory('BaseUrl', function (Config) {
