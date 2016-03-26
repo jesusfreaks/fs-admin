@@ -146,13 +146,18 @@ angular.module('fsAdmin')
                     var color = hsb2rgb(i, 10, 100);
                     $scope.colors.push( color );
                 }
-
+                $scope.selectColor = function (color) {
+                    // TODO: remove this use ng-click = instance.color = col in html
+                    $scope.instance.color = color;
+                    $scope.view.selectedColor = color;
+                };
 
                 // init data
                 $scope.initRo = initRo;
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);
 
+                // TODO remove this
                 $scope.view = {selectedColor:$scope.instance.color};
 
                 if (!$scope.instance.geoCoordinate) {

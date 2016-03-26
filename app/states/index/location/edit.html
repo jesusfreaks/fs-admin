@@ -87,13 +87,11 @@
                         {{'location.color'|translate}}
                     </label>
                     <div class="color-container">
-                        <div ng-repeat="col in colors">
-                            <div
-                                 class="color"
-                                 ng-class="{selected: view.selectedColor==col}"
-                                 style="background-color:{{col}}"
-                                 ng-click="location.color=col;view.selectedColor=col">
-                            </div>
+                        <div ng-repeat="col in colors"
+                             class="color"
+                             ng-class="{selected: view.selectedColor==col}"
+                             style="background-color:{{col}}"
+                             ng-click="selectColor(col)">
                         </div>
                     </div>
                 </div>
