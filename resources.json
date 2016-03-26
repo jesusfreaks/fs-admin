@@ -23,7 +23,8 @@
             "bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.js",
             "bower_components/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js",
             "bower_components/showdown/dist/showdown.js",
-            "bower_components/ng-showdown/dist/ng-showdown.js"
+            "bower_components/ng-showdown/dist/ng-showdown.js",
+            "bower_components/ng-color-picker/color-picker.js"
         ],
         "externalExcludeFromBuild": [
             "bower_components/angular-mocks/angular-mocks*.js",
