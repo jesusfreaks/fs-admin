@@ -2,6 +2,10 @@
 
     <div class="row">
         <div class="col-md-offset-2 col-md-8">
+            selected color
+            <div style="width:10px;height:10px; background-color:{{instance.color}};">
+                {{instance.color}}
+            </div>
             COLOR: <ng-color-picker selected="instance.color" colors="colors"></ng-color-picker>
         </div>
     </div>
