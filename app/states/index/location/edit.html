@@ -89,9 +89,9 @@
                     <div class="color-container">
                         <div ng-repeat="col in colors"
                              class="color"
-                             ng-class="{selected: view.selectedColor==col}"
+                             ng-class="{selected: instance.color == col}"
                              style="background-color:{{col}}"
-                             ng-click="selectColor(col)">
+                             ng-click="instance.color = col">
                         </div>
                     </div>
                 </div>

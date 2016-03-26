@@ -142,23 +142,16 @@ angular.module('fsAdmin')
 
                 // prepare selectable colors for color-picker
                 $scope.colors = [];
-                for (var i = 0; i <= 359; i = i + 10) {
-                    var color = hsb2rgb(i, 10, 100);
+                for (var i = 0; i <= 359; i = i + 5) {
+                    var color = hsb2rgb(i, 100, 100);
                     $scope.colors.push( color );
                 }
-                $scope.selectColor = function (color) {
-                    // TODO: remove this use ng-click = instance.color = col in html
-                    $scope.instance.color = color;
-                    $scope.view.selectedColor = color;
-                };
 
                 // init data
                 $scope.initRo = initRo;
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);
 
-                // TODO remove this
-                $scope.view = {selectedColor:$scope.instance.color};
 
                 if (!$scope.instance.geoCoordinate) {
                     $scope.instance.geoCoordinate = {};
@@ -208,7 +201,6 @@ angular.module('fsAdmin')
                     }, function () {
                         $log.info('Modal dismissed at: ' + new Date());
                     });
-
                 };
             }
         });
