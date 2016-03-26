@@ -1,27 +1,6 @@
 <form name="editLocation" class="form-horizontal" ng-submit="editLocation.$valid?save():false">
 
     <div class="row">
-        <div class="col-md-offset-2 col-md-8">
-            <div class="form-group">
-                <div class="col-sm-12"><label for="color-choose">
-                    selected color
-                </label>
-                    <ng-color-picker id="color-choose"
-                                     name="color-choose"
-                                     selected="instance.color" colors="colors">
-                    </ng-color-picker>
-                </div>
-            </div>
-            selected color
-            <div >
-                {{instance.color}}
-            </div>
-            COLOR:
-
-        </div>
-    </div>
-
-    <div class="row">
         <div class="col-md-offset-2 col-md-4">
             <h1>{{'app.general.location'|translate}}: {{instance.code}} {{'de_DE'|translate}}</h1>
             <generic-input
@@ -98,6 +77,20 @@
                 language="en_EN"
                 init-resource="initRo">
             </generic-input>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+            <div class="form-group">
+                <div class="col-sm-12"><label for="color-choose">
+                    {{'location.color'|translate}}
+                </label>
+                    <ng-color-picker id="color-choose"
+                                     name="color-choose"
+                                     selected="instance.color" colors="colors">
+                    </ng-color-picker>
+                </div>
+            </div>
         </div>
     </div>
 

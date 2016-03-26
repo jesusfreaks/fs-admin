@@ -30,6 +30,7 @@
     "app.general.search.filter.placeholder" : "Search in name",
 
     "location.name":"Name",
+    "location.color":"Color",
     "location.code":"Code",
     "location.description":"Description",
     "location.tags":"Tags",

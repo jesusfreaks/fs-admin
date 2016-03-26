@@ -30,6 +30,7 @@
     "app.general.search.filter.placeholder" : "Suche in Namen",
 
     "location.name":"Name",
+    "location.color":"Farbe",
     "location.code":"Kürzel",
     "location.description":"Beschreibung",
     "location.tags":"Tags",

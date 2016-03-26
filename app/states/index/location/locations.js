@@ -139,16 +139,16 @@ angular.module('fsAdmin')
             url: '/update/:id',
             templateUrl: 'states/index/location/edit.html',
             controller: function ($scope, locations, $stateParams, initRo, $state, MessagesService, Helper, $modal, $log, DataHelper ) {
-                $scope.colors = $scope.colors1 =  $scope.colors2 = $scope.colors3 = [];
+
+                // prepare selectable colors for color-picker
+                $scope.colors = [];
                 for (var i = 0; i <= 359; i = i + 10) {
                     var color = hsb2rgb(i, 10, 100);
-                    console.log('color',color);
                     $scope.colors.push( color );
 
                 }
 
-                //$scope.colors = ['#33cc33', '#ffff00', '#ff9900', '#ff3300', '#996633', '#cc00cc', '#6699ff', '#66ffff'];
-
+                // init data
                 $scope.initRo = initRo;
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);
