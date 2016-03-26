@@ -4,6 +4,7 @@
 $icon-font-path: '../bower_components/bootstrap-sass/assets/fonts/bootstrap/';
 @import 'bootstrap-sass/assets/stylesheets/bootstrap';
 @import '/bower_components/angular-bootstrap-datetimepicker/src/css/datetimepicker.css';
+
 @import 'angular-xeditable';
 @import 'globals';
 @import 'site-loading';
@@ -13,4 +14,4 @@ $icon-font-path: '../bower_components/bootstrap-sass/assets/fonts/bootstrap/';
 @import 'states';
 @import 'animations';
 @import 'print';
-
+@import '/bower_components/ng-color-picker/color-picker.css'
