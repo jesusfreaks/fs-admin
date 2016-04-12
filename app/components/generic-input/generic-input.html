@@ -94,8 +94,8 @@
                  <span class="glyphicon glyphicon-trash"></span>
              </a>
 
-            <input type="file" img-cropper-fileread image="def.opts.sourceImage"
-                    ng-if="!instance[def.name] && !def.isList || def.isList"/>
+            <input type="file" id="fileUpload" accept="image/*" img-cropper-fileread image="def.opts.sourceImage"
+                    ng-if="!instance[def.name] && !def.isList || def.isList" />
             <div ng-if="def.opts.sourceImage">
 
                  <canvas width="500" height="300" id="canvas"

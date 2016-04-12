@@ -70,8 +70,8 @@ angular.module('fsAdmin.components')
             };
 
             // width and height of the crop area used to define ratio and resulting image size
-            this.width = 1280;
-            this.height = 720;
+            this.width = 1024;
+            this.height = 567;
             // min values that the rect can be set to
             this.minWidth = 32;
             this.minHeight = 18;
@@ -107,11 +107,15 @@ angular.module('fsAdmin.components')
             var me = this;
             // append image to list
             var fd = new FormData();
-            var blob = dataURItoBlob(this.croppedImage, 'image/png'); // TODO wandelt der cropper alle Bilder nach png?
 
-            var filename = 'file.png'; // TODO wie bekomme ich den filenamen vom input field? (ist aber eigentlich auch egal)
+            // thats not the angular way... aber keine Ahnung, wie ich sonst an den Filenamen komme ...
+            var selectedFile = document.getElementById('fileUpload').files[0];
+            console.log('Filename:', selectedFile.name);
+            console.log('Type:', selectedFile.type);
 
-            fd.append('file', blob, filename);
+            var blob = dataURItoBlob(this.croppedImage, selectedFile.type);
+
+            fd.append('file', blob, selectedFile.name);
 
             $http.post(this.dataTarget.initResource._links.upload.href, fd, {
                     transformRequest: angular.identity,
