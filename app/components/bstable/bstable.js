@@ -20,7 +20,7 @@ angular.module('fsAdmin.components')
             if (name === 'start' || name === 'end' ) {
                 return moment(resolvedItem).format('DD.MM. HH:mm');
             }else if (name ==='publishDate'){
-                return moment(resolvedItem).format('YYYY.DD.MM. HH:mm');
+                return moment(resolvedItem).format('DD.MM.YYYY HH:mm');
             }
 
             return resolvedItem;

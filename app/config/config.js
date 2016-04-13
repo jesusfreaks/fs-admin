@@ -185,7 +185,7 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'markdown', required: true, maxLength: 500
+                    type: 'text', required: true, maxLength: 500
                 },
                 text:{
                     type: 'markdown', required: true, maxLength: 10000
@@ -209,7 +209,7 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'markdown', required: true, maxLength: 500
+                    type: 'text', required: true, maxLength: 500
                 },
                 text:{
                     type: 'markdown', required: true, maxLength: 10000

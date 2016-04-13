@@ -24,6 +24,11 @@
         <select id="archivedFilter" class="form-control" ng-model="filter.archived.value" ng-options="option.value as option.label for option in archivedOptions"></select>
     </div>
 
+    <div class="col-sm-1">
+        <label for="yearFilter">{{'filter.year.label'|translate}}</label>
+        <select id="yearFilter" class="form-control" ng-model="filter.year.value" ng-options="option.value as option.label for option in yearOptions"></select>
+    </div>
+
 </div>
 
 <bstable data="news"

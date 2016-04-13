@@ -89,7 +89,7 @@
     "de.description" : "Description",
     "de.title" : "Titel",
     "archived" : "Archived",
-    "publishDate" : "Date",
+    "publishDate" : "Published",
     "author" : "Author",
     "eventCategory" : "Category",
     "start" : "Start",
@@ -99,6 +99,7 @@
     "filter.archived.all.label" : "All",
     "filter.archived.yes.label" : "only archived",
     "filter.archived.no.label" : "only not archived",
+    "filter.year.label" : "Published",
 
     "event.category.null":"Choose category",
     "event.category.":"Choose category",

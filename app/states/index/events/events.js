@@ -34,6 +34,10 @@ angular.module('fsAdmin')
                     archived : {
                         field: 'archived',
                         value: 'false'
+                    },
+                    year : {
+                        field: 'publishDate',
+                        value: ''
                     }
                 };
 
@@ -64,6 +68,11 @@ angular.module('fsAdmin')
                     {label : $filter('translate')('filter.archived.yes.label'), value: 'true'},
                     {label : $filter('translate')('filter.archived.no.label'), value: 'false'}
                 ];
+
+                $scope.yearOptions = [
+                    {label : '', value: ''},
+                    {label : 2015, value : 2015},
+                    {label : 2016, value : 2016}];
             }
         });
 
@@ -90,6 +99,10 @@ angular.module('fsAdmin')
                 $scope.initRo = initRo;
 
                 $scope.instance = Helper.createInstance(events, $stateParams.id);
+
+                if (!$scope.instance.identifier) {
+                    $scope.instance.publishDate = moment().format('YYYY-MM-DDTHH:mm:ss');
+                }
 
                 $scope.save = function () {
 

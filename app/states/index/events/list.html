@@ -15,12 +15,12 @@
         <input type="text" id="query" class="form-control" ng-model="filter.search.value" placeholder="{{'app.general.search.filter.placeholder'|translate}}" />
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <label for="categoryFilter">{{'events.filter.category.label'|translate}}</label>
         <select id="categoryFilter" class="form-control" ng-model="filter.category.value" ng-options="option.value as option.label for option in categoryOptions"></select>
     </div>
 
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <label for="locFilter">{{'events.filter.location.label'|translate}}</label>
         <select id="locFilter" class="form-control" ng-model="filter.location.value" ng-options="option.value as option.label for option in locationOptions"></select>
     </div>
@@ -29,12 +29,17 @@
         <label for="archivedFilter">{{'filter.archived.label'|translate}}</label>
         <select id="archivedFilter" class="form-control" ng-model="filter.archived.value" ng-options="option.value as option.label for option in archivedOptions"></select>
     </div>
+
+    <div class="col-sm-1">
+        <label for="yearFilter">{{'filter.year.label'|translate}}</label>
+        <select id="yearFilter" class="form-control" ng-model="filter.year.value" ng-options="option.value as option.label for option in yearOptions"></select>
+    </div>
 </div>
 
 
 <bstable data="events"
             fields="['de.name','de.preview',
-                    'start', 'end','eventCategory', 'archived']"
+                    'start', 'end','eventCategory', 'publishDate', 'archived']"
             translation-key=".de."
             editable="index.events.update"
             filters="filter"

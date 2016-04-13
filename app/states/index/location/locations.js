@@ -115,12 +115,21 @@ angular.module('fsAdmin')
                     archived : {
                         field: 'archived',
                         value: 'false'
+                    },
+                    year : {
+                        field: 'publishDate',
+                        value: ''
                     }
                 };
 
                 $scope.archivedOptions = [{label : '', value: ''},
                     {label : $filter('translate')('filter.archived.yes.label'), value: 'true'},
                     {label : $filter('translate')('filter.archived.no.label'), value: 'false'}];
+
+                $scope.yearOptions = [
+                    {label : '', value: ''},
+                    {label : 2015, value : 2015},
+                    {label : 2016, value : 2016}];
             }
         });
 
@@ -152,6 +161,9 @@ angular.module('fsAdmin')
 
                 $scope.instance = Helper.createInstance(locations, $stateParams.id);
 
+                if (!$scope.instance.identifier) {
+                    $scope.instance.publishDate = moment().format('YYYY-MM-DDTHH:mm:ss');
+                }
 
                 if (!$scope.instance.geoCoordinate) {
                     $scope.instance.geoCoordinate = {};
