@@ -43,7 +43,16 @@ angular.module('fsAdmin.components').service('MessagesService', function Message
             _addMessage('msg.warning', message, debug, 'WARNING');
         },
         addRestError: function (message, error) {
-            _addMessage(message, '(HTTP ' + error.status + ':' + error.statusText + ') ' + error.data.message, error.data.cause, 'ERROR');
+            if (error.status === 400 && error.data && error.data.violations) {
+                for (var i=0; i<error.data.violations.length; i++) {
+                    var violation = error.data.violations[i];
+                    _addMessage(message, violation.object + (violation.field?'.'+violation.field:'') + ': ' + violation.message, null, 'ERROR');
+                }
+            }
+            else {
+                _addMessage(message, '(HTTP ' + error.status + ':' + error.statusText + ') ' + error.data.message, error.data.cause, 'ERROR');
+            }
+
         }
     };
     return svc;

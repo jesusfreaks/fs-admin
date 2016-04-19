@@ -7,9 +7,9 @@
                 <span class="sr-only">Close</span>
             </button>
 
-            <b>{{msg.message|translate}}</b>
+            <span>{{msg.message|translate}}</span>
 
-            <span ng-if="msg.description">{{msg.description|translate}}</span>
+            <span ng-if="msg.description"><strong>{{msg.description|translate}}</strong></span>
             <pre ng-if="msg.debug">{{msg.debug}}</pre>
         </div>
     </span>

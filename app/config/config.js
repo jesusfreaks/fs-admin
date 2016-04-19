@@ -107,10 +107,12 @@ angular.module('fsAdmin')
                     type: 'text', required: false, maxLength: 120
                 },
                 'start': {
-                    type: 'datetime'//, format:'yyyy-MM-ddTHH:mm:ss' not supported anymore as we would need 4 differnt formats here to convert between inputtext (view ,model) & (timepicker model and api) values
+                    type: 'datetime',//, format:'yyyy-MM-ddTHH:mm:ss' not supported anymore as we would need 4 differnt formats here to convert between inputtext (view ,model) & (timepicker model and api) values
+                    required: true
                 },
                 'end': {
-                    type: 'datetime'
+                    type: 'datetime',
+                    required: true
                 },
                 'archived' : {
                     type: 'checkbox'
@@ -140,7 +142,8 @@ angular.module('fsAdmin')
                     }
                 },
                 'publishDate': {
-                    type: 'datetime'
+                    type: 'datetime',
+                    required: true
                 }
             },
             translatableProperties: {

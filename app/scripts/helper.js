@@ -11,7 +11,7 @@ angular.module('fsAdmin').service('Helper',function(MessagesService){
             call.then(function(){
                 MessagesService.success(successKey);
             },function(err){
-                MessagesService.addRestError('msg.error', err);
+                MessagesService.addRestError('msg.validation.error', err);
             });
         },
 

@@ -82,6 +82,7 @@
 
     "login.success":"Anmeldung erfolgreich",
     "msg.error":"Es ist ein Fehler aufgetreten",
+    "msg.validation.error": "Bitte überprüfe deine Eingaben!",
     "event.locationRef":"Location",
 
     "de.name" : "Name",

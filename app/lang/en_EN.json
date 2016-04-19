@@ -82,6 +82,7 @@
 
     "login.success":"Login was successful",
     "msg.error":"An error has been occurred",
+    "msg.validation.error": "Invalid data!",
     "event.locationRef":"Location",
 
     "de.name" : "Name",
