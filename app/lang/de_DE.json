@@ -22,6 +22,7 @@
     "app.general.preview":"Vorschau",
     "app.general.infos":"Festival Info",
     "app.general.apply":"Anwenden",
+    "app.general.copy":"Kopieren",
 
     "app.general.confirm.delete.title" : "Wirklich löschen?",
     "app.general.confirm.delete.text" : "endgültig löschen?",
@@ -79,6 +80,7 @@
     "save.success":"Element wurde gespeichert.",
     "update.success":"Element wurde geändert.",
     "deleted.success":"Element wurde gelöscht.",
+    "copy.success":"Kopie gespeichert.",
 
     "login.success":"Anmeldung erfolgreich",
     "msg.error":"Es ist ein Fehler aufgetreten",

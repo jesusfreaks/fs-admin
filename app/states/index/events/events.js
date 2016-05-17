@@ -123,8 +123,33 @@ angular.module('fsAdmin')
                         });
                         Helper.messages('save.success', call);
                     }
+                };
 
+                $scope.copy = function () {
+                    Helper.copyTagsFromDeToEn($scope.instance);
+                    var copy = angular.copy($scope.instance);
+                    copy.de.name = replaceName(copy.de.name);
+                    copy.en.name = replaceName(copy.en.name);
+                    copy.identifier = null;
+                    delete copy.$$putSelf;
 
+                    DataHelper.prepareForSave(copy);
+                    var call = initRo.$$postEvents({data:copy}).then(function (data) {
+                        events.push(data);
+                        $state.go('^.update', {id:data.identifier},  {reload:false});
+                    });
+                    Helper.messages('copy.success', call);
+                };
+
+                var replaceName = function (name) {
+                    var regex = /\((\d)\)$/;
+                    var result = regex.exec(name);
+                    if (result === null) {
+                        return name + " (1)";
+                    }
+
+                    var copies = parseInt(result[1]) + 1;
+                    return name.replace(regex, '('+copies+')');
                 };
 
                 $scope.delete = function () {

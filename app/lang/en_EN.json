@@ -22,6 +22,7 @@
     "app.general.preview":"Preview",
     "app.general.infos":"Festival Info",
     "app.general.apply":"Apply",
+    "app.general.copy":"Copy",
 
     "app.general.confirm.delete.title" : "Really deleting?",
     "app.general.confirm.delete.text" : "Do you really want to delete it?",
@@ -79,6 +80,7 @@
     "save.success":"Saved",
     "update.success":"Changed",
     "deleted.success":"Deleted",
+    "copy.success":"Saved copy.",
 
     "login.success":"Login was successful",
     "msg.error":"An error has been occurred",

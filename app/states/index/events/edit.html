@@ -48,6 +48,9 @@
             <button ng-if="instance.$$deleteSelf" type="button" class="btn btn-danger" ng-click="delete()">
                 {{'app.general.delete'|translate}}
             </button>
+            <button ng-if="instance.$$deleteSelf" type="button" class="btn btn-default {{editEvent.$valid?'':'disabled'}}" ng-click="editEvent.$valid?copy():false">
+                {{'app.general.copy'|translate}}
+            </button>
         </div>
     </div>
 </form>
