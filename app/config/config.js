@@ -120,7 +120,7 @@ angular.module('fsAdmin')
                     type: 'text', required: false, maxLength: 500
                 },
                 description: {
-                    type: 'textarea', required: true, maxLength: 10000
+                    type: 'markdown', required: true, maxLength: 10000
                 },
                 tags: {
                     type: 'tags'
