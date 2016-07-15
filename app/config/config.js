@@ -117,7 +117,7 @@ angular.module('fsAdmin')
                     type: 'text', required: true, maxLength: 80
                 },
                 preview: {
-                    type: 'text', required: false, maxLength: 500
+                    type: 'text', required: true, maxLength: 500
                 },
                 description: {
                     type: 'markdown', required: true, maxLength: 10000
@@ -143,7 +143,7 @@ angular.module('fsAdmin')
                     type: 'datetime'
                 },
                 'author': {
-                    type: 'text', maxLength: 80
+                    type: 'text', maxLength: 80, required: true
                 },
                 'archived' : {
                     type: 'checkbox'
